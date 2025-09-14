@@ -217,8 +217,9 @@ def apply_scoring(symbol: str, df15: pd.DataFrame, df1h: pd.DataFrame,
         score -= 10.0  # 1H bias ≠ sinyal yönü
     
     # Trend çok zayıfsa eleriz.
+    # ADX çok düşükse agresif penaltı (0 yapmak yerine düşük puan ver)
     if adx_norm < 0.10:
-        score = 0.0
+        score = max(10.0, score * 0.3)  # En az 10 puan, yoksa %30'a düşür
     
     if cand.get("regime") == "RANGE" and bw_adv < 0.20:
         score -= 6.0
@@ -227,7 +228,7 @@ def apply_scoring(symbol: str, df15: pd.DataFrame, df1h: pd.DataFrame,
     if cand.get("regime") == "PREMO":
         score += float(cand.get("_early_bonus", 0.0))
     
-    score = max(0.0, score)
+    score = max(15.0, score)  # Minimum 15 puan garanti et
     
     prob = score_to_prob(score)
     cand["score"] = score

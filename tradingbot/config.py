@@ -16,14 +16,18 @@ SLEEP_SECONDS = 300
 SYMBOL_CONCURRENCY = 8
 SCAN_LIMIT = 1000  # Yüksek limit, pratikte tüm sembolleri tarar
 
-# Varsayılan değerler (balanced mod)
-MODE = "balanced"
+# Çalışma modu ve ayarlar
+MODE = "aggressive"
 MIN_VOLVALUE_USDT = 2_000_000
-BASE_MIN_SCORE = 68
-FALLBACK_MIN_SCORE = 62
-TOP_N_PER_SCAN = 2
+BASE_MIN_SCORE = 52  # Colab versiyonu ile eşitlendi
+FALLBACK_MIN_SCORE = 50  # Düşürüldü (62'den 50'ye)
+TOP_N_PER_SCAN = 3  # Artırıldı (2'den 3'e)
 COOLDOWN_SEC = 1800
 OPPOSITE_MIN_BARS = 2
+
+# Telegram ayarları
+TELEGRAM_BOT_TOKEN = "8484153893:AAEybdOXrMvpDEjAg-o2KiCFYWtDSL1PxH4"
+TELEGRAM_CHAT_ID = None  # Bot otomatik tespit edecek
 
 # Teknik analiz parametreleri
 ADX_TREND_MIN = 18
@@ -333,7 +337,7 @@ SCORING_WEIGHTS["rr_norm"] = 0.0
 TELEGRAM_TOKEN = "8484153893:AAEybdOXrMvpDEjAg-o2KiCFYWtDSL1PxH4"
 
 # ===== MOD AYARLARI =====
-MODE = "balanced"
+MODE = "aggressive"
 
 # ===== MINI AI (ONLINE LOGIT) =====
 AI_ENABLED   = True
@@ -382,9 +386,9 @@ MODE_CONFIGS = {
     },
     "balanced": {
         "MIN_VOLVALUE_USDT": 2_000_000,
-        "BASE_MIN_SCORE": 68,
-        "FALLBACK_MIN_SCORE": 62,
-        "TOP_N_PER_SCAN": 2,
+        "BASE_MIN_SCORE": 52,  # Colab ile aynı
+        "FALLBACK_MIN_SCORE": 50,
+        "TOP_N_PER_SCAN": 3,
         "COOLDOWN_SEC": 1800,
         "ADX_TREND_MIN": 18,
         "ONEH_DISP_BODY_MIN": 0.55,

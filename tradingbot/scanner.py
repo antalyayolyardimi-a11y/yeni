@@ -18,6 +18,7 @@ from .alerts import AlertManager
 from .scoring import pick_best_candidate
 from .ai import auto_tune_now, enrich_with_ai, reset_ai
 from .signal_validator import SignalValidator
+from .performance_tracker import PerformanceTracker
 
 class Scanner:
     """
@@ -31,6 +32,10 @@ class Scanner:
         self.exchange = Exchange()
         self.alert_manager = AlertManager()
         self.signal_validator = SignalValidator(self.exchange)  # Yeni doğrulama sistemi
+        self.performance_tracker = PerformanceTracker()  # Performans takip sistemi
+        
+        # Performance tracker'ı alert manager'a bağla
+        self.alert_manager.set_performance_tracker(self.performance_tracker)
         
         # Durum değişkenleri
         self.state = {
@@ -53,11 +58,15 @@ class Scanner:
         """
         Ana tarama döngüsünü başlat.
         """
-        # Telegram ve tarama işlemlerini paralel çalıştır
-        await asyncio.gather(
-            self.alert_manager.dp.start_polling(self.alert_manager.bot),
-            self.run_scanner()
-        )
+        # Telegram botu varsa onu da başlat
+        if self.alert_manager.dp and self.alert_manager.bot:
+            await asyncio.gather(
+                self.alert_manager.dp.start_polling(self.alert_manager.bot),
+                self.run_scanner()
+            )
+        else:
+            # Sadece tarama yap
+            await self.run_scanner()
     
     async def run_scanner(self):
         """
@@ -85,6 +94,17 @@ class Scanner:
             self.resolve_open_signals()
             self.state = auto_tune_now(self.state, self.state["signals_history"])
             
+            # Performance tracker güncellemelerini yap
+            self.performance_tracker.update_signal_statuses()
+            
+            # Auto-optimization kontrolü
+            optimization_result = self.performance_tracker.check_auto_optimization()
+            if optimization_result:
+                log(f"🔧 AUTO-OPTIMIZATION: {optimization_result}")
+                # Gerekirse config ayarlarını güncelle
+                if "ATR_STOP_MULT" in optimization_result:
+                    config.ATR_STOP_MULT = optimization_result["ATR_STOP_MULT"]
+            
             # Bekleyen sinyalleri doğrula (5 dakikalık analiz)
             confirmed_signals = self.signal_validator.validate_pending_signals()
             
@@ -99,6 +119,18 @@ class Scanner:
                     f"{confirmed['reason']}"
                 )
                 await self.alert_manager.send_signal(confirmed)
+                
+                # Performance tracker'a sinyali kaydet
+                signal_data = {
+                    "symbol": confirmed["symbol"],
+                    "side": confirmed["side"],
+                    "entry_price": confirmed["entry"],
+                    "take_profit": confirmed["tps"][0],
+                    "stop_loss": confirmed["sl"],
+                    "score": int(confirmed["score"]),
+                    "signal_reason": confirmed["reason"]
+                }
+                self.performance_tracker.add_signal(signal_data)
                 
                 # Durum bilgilerini güncelle
                 self.state["last_signal_ts"][confirmed["symbol"]] = time.time()

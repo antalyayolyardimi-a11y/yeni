@@ -24,23 +24,39 @@ from .indicators import (
 
 class AlertManager:
     def __init__(self):
-        """Telegram bot ve ilgili değişkenleri başlat."""
-        self.bot = Bot(token=config.TELEGRAM_TOKEN)
-        self.dp = Dispatcher()
-        self.cached_chat_id = None
-        self.signals_store = {}
-        self.sid_counter = 0
-        
-        # Komutları kaydet
-        self._register_commands()
+        """
+        AlertManager'ı başlat ve Telegram bot'u yapılandır.
+        """
+        # Telegram botunu sadece token varsa başlat
+        if config.TELEGRAM_BOT_TOKEN:
+            self.bot = Bot(token=config.TELEGRAM_BOT_TOKEN)
+            self.dp = Dispatcher()
+            self.setup_handlers()
+        else:
+            self.bot = None
+            self.dp = None
+            log("⚠️ Telegram token yok, sadece log çıktısı verilecek")
+            
+        self.performance_tracker = None  # Performans takip sistemi için
+        self.signals_store = {}  # Sinyal depolama
+        self.cached_chat_id = None  # Telegram chat ID
+        self.sid_counter = 1  # Sinyal ID sayacı
     
-    def _register_commands(self):
-        """Telegram komutlarını kaydet."""
+    def set_performance_tracker(self, performance_tracker):
+        """Performance tracker'ı ayarla."""
+        self.performance_tracker = performance_tracker
+    
+    def setup_handlers(self):
+        """Telegram komut handler'larını ayarla."""
+        if not self.dp:
+            return
+            
         self.dp.message(Command("start"))(self.start_handler)
         self.dp.message(Command("mode"))(self.mode_handler)
         self.dp.message(Command("aistats"))(self.ai_stats_cmd)
         self.dp.message(Command("aireset"))(self.ai_reset_cmd)
         self.dp.message(Command("analiz"))(self.analiz_cmd)
+        self.dp.message(Command("durum"))(self.durum_cmd)
     
     async def start_handler(self, m: Message):
         """
@@ -55,7 +71,7 @@ class AlertManager:
             "✅ Bot hazır.\n"
             f"Mode: *{config.MODE}* (ATR_STOP_MULT={config.ATR_STOP_MULT})\n"
             "• 5 dakikada bir tarar, sinyaller 15m grafiğe göre üretilir.\n"
-            "• Komutlar: /mode | /analiz <Sembol> | /aistats | /aireset",
+            "• Komutlar: /mode | /analiz <Sembol> | /durum | /aistats | /aireset",
             parse_mode="Markdown"
         )
         
@@ -165,6 +181,60 @@ class AlertManager:
             
         return None
     
+    async def durum_cmd(self, m: Message):
+        """
+        /durum komutuna yanıt ver - Performance raporu göster.
+        
+        Args:
+            m: Telegram mesajı
+        """
+        try:
+            # Bot durumu ve temel bilgiler
+            report = "📊 **TRADING BOT DURUMU**\n\n"
+            report += f"🤖 **Bot Bilgileri**\n"
+            report += f"• Mod: `{config.MODE}`\n"
+            report += f"• Min Skor: `{config.BASE_MIN_SCORE}`\n"
+            report += f"• ATR Stop: `{config.ATR_STOP_MULT}x`\n\n"
+            
+            # Signal store durumu
+            if hasattr(self, 'signals_store') and self.signals_store:
+                report += f"🔄 **Bekleyen Sinyaller ({len(self.signals_store)})**\n"
+                import time as time_module
+                current_time = time_module.time()
+                for sid, data in list(self.signals_store.items())[-5:]:  # Son 5
+                    sig = data['sig']
+                    age_min = (current_time - data['ts']) / 60
+                    report += f"• {sig['symbol']} {sig['side']} | Skor: {int(sig['score'])} | {age_min:.1f}dk\n"
+                report += "\n"
+            else:
+                report += "🔄 **Bekleyen Sinyaller**\n• Şu anda bekleyen sinyal yok\n\n"
+            
+            # Performance tracker durumu
+            if self.performance_tracker:
+                perf_report = self.performance_tracker.get_status_report()
+                if "Toplam Sinyal: `0`" in perf_report:
+                    report += "📈 **Performance**\n• Henüz tamamlanmış sinyal yok\n"
+                    report += "• İlk sinyaller tamamlandıktan sonra detaylı rapor gelecek\n\n"
+                else:
+                    report += perf_report + "\n\n"
+            else:
+                report += "� **Performance**\n• Performance tracker başlatılmadı\n\n"
+            
+            # Sistem durumu
+            import time
+            from datetime import datetime
+            now = datetime.now()
+            report += f"⏰ **Sistem**\n"
+            report += f"• Zaman: `{now.strftime('%H:%M:%S')}`\n"
+            report += f"• Durum: `Aktif ve taranıyor`\n"
+            
+            await m.answer(report, parse_mode="Markdown")
+                
+        except Exception as e:
+            error_msg = f"❌ Durum raporu hatası: {str(e)}"
+            await m.answer(error_msg)
+            log(f"Durum komutu hatası: {e}")
+    
     def human_reason_text(self, sig: Dict[str, Any]) -> str:
         """
         Sinyal için insan tarafından okunabilir bir neden metni oluştur.
@@ -251,7 +321,10 @@ class AlertManager:
         )
         
         try:
-            await self.bot.send_message(chat_id=self.cached_chat_id, text=text, parse_mode="Markdown")
+            if self.bot:
+                await self.bot.send_message(chat_id=self.cached_chat_id, text=text, parse_mode="Markdown")
+            else:
+                log(f"📱 SIGNAL: {sig['symbol']} {sig['side']} | Entry={sig['entry']:.6f} TP1={sig['tps'][0]:.6f} SL={sig['sl']:.6f}")
             return True
         except (TelegramBadRequest, TelegramForbiddenError) as e:
             log("Telegram:", e)
@@ -273,7 +346,10 @@ class AlertManager:
             return False
             
         try:
-            await self.bot.send_message(chat_id=self.cached_chat_id, text=text, parse_mode=parse_mode)
+            if self.bot:
+                await self.bot.send_message(chat_id=self.cached_chat_id, text=text, parse_mode=parse_mode)
+            else:
+                log(f"📱 MESSAGE: {text}")
             return True
         except (TelegramBadRequest, TelegramForbiddenError) as e:
             log("Telegram:", e)

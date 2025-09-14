@@ -14,21 +14,44 @@ from .utils import log, to_df_klines
 
 class Exchange:
     def __init__(self):
-        """Exchange sınıfını başlat ve KuCoin bağlantısını oluştur."""
-        self.client = Market(url="https://api.kucoin.com")
-        self._symbols_set: Optional[Set[str]] = None
+        """KuCoin API client'ını başlat"""
+        self.market_client = Market(url="https://api.kucoin.com")
+        self.client = self.market_client  # Geriye uyumluluk için alias
+        self._symbols_set = None
     
     def _load_symbols_set(self):
-        """KuCoin'deki tüm sembolleri yükle ve cache'e al."""
+        """Desteklenen sembollerin setini yükle."""
+        if self._symbols_set is not None:
+            return
         try:
-            syms = self.client.get_symbol_list()
-            if syms is not None:
-                self._symbols_set = set(s["symbol"].upper() for s in syms)
-            else:
-                self._symbols_set = set()
+            symbols = self._api_call_with_retry(self.client.get_symbol_list)
+            self._symbols_set = {sym.get("symbol", "") for sym in symbols or []}
         except Exception as e:
-            log("Sembol listesi alınamadı:", e)
+            log(f"Sembol listesi yüklenirken hata: {e}")
             self._symbols_set = set()
+    
+    def _api_call_with_retry(self, func, *args, **kwargs):
+        """API çağrısını retry logic ile gerçekleştir"""
+        return self._retry_request(func, *args, **kwargs)
+    
+    def _retry_request(self, func, *args, **kwargs):
+        """API isteğini retry logic ile gerçekleştir"""
+        max_retries = 3
+        retry_delays = [5, 15, 30]  # Her denemede daha uzun bekle
+        
+        for attempt in range(max_retries):
+            try:
+                return func(*args, **kwargs)
+            except Exception as e:
+                print(f"📟 API hatası (deneme {attempt + 1}/{max_retries}): {e}")
+                
+                if attempt < max_retries - 1:
+                    delay = retry_delays[attempt]
+                    print(f"📟 {delay} saniye bekleyip tekrar deneniyor...")
+                    time.sleep(delay)
+                else:
+                    print(f"📟 Tüm denemeler başarısız oldu: {e}")
+                    return None
     
     def normalize_symbol_to_kucoin(self, user_sym: str) -> Optional[str]:
         """
@@ -95,7 +118,7 @@ class Exchange:
             pd.DataFrame veya None: OHLCV verileri içeren DataFrame veya hata durumunda None
         """
         try:
-            raw = self.client.get_kline(symbol, interval, limit=limit)
+            raw = self._api_call_with_retry(self.client.get_kline, symbol, interval, limit=limit)
             return to_df_klines(raw)
         except Exception as e:
             msg = str(e)
@@ -112,12 +135,22 @@ class Exchange:
         Returns:
             List[str]: Hacim koşulunu sağlayan semboller listesi
         """
-        syms = self.client.get_symbol_list()
+        try:
+            syms = self._api_call_with_retry(self.client.get_symbol_list)
+        except Exception as e:
+            log(f"Sembol listesi alınamadı: {e}")
+            return []
+            
         if syms is None:
             return []
         pairs = [s["symbol"] for s in syms if s.get("quoteCurrency") == "USDT"]
         
-        tickers_response = self.client.get_all_tickers()
+        try:
+            tickers_response = self._api_call_with_retry(self.client.get_all_tickers)
+        except Exception as e:
+            log(f"Ticker verileri alınamadı: {e}")
+            return pairs[:50]  # Default fallback
+            
         if tickers_response is None:
             return pairs[:50]  # Default fallback
         tickers = tickers_response.get("ticker", [])
@@ -139,7 +172,12 @@ class Exchange:
         Returns:
             Dict: {sembol: hacim_yüzdelik} eşleşmesi
         """
-        tickers_response = self.client.get_all_tickers()
+        try:
+            tickers_response = self._api_call_with_retry(self.client.get_all_tickers)
+        except Exception as e:
+            log(f"Ticker verileri alınamadı: {e}")
+            return {sym: 0.0 for sym in symbols}
+            
         if tickers_response is None:
             return {s: 0.0 for s in symbols}
         tickers = tickers_response.get("ticker", [])

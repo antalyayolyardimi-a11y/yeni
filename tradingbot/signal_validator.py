@@ -97,8 +97,8 @@ class SignalValidator:
                 symbols_to_remove.append(symbol)
                 continue
                 
-            # Timeout kontrolü (20 dakika)
-            if time.time() - pending.created_at > 1200:  # 20 dakika
+            # Timeout kontrolü (30 dakika)
+            if time.time() - pending.created_at > 1800:  # 30 dakika
                 pending.cancelled = True
                 symbols_to_remove.append(symbol)
                 log(f"⏰ {symbol} sinyali zaman aşımı nedeniyle iptal edildi")
@@ -156,11 +156,24 @@ class SignalValidator:
         """
         symbol = pending.symbol
         
-        # 5 dakikalık veriyi al
-        df5m = self.exchange.get_ohlcv(symbol, "5min", 100)
-        
+        # 5 dakikalık veriyi al (retry logic ile)
+        df5m = None
+        for attempt in range(3):
+            try:
+                df5m = self.exchange.get_ohlcv(symbol, "5min", 100)
+                if df5m is not None and len(df5m) >= 10:
+                    break
+            except Exception as e:
+                log(f"{symbol} 5min veri hatası (deneme {attempt+1}/3): {e}")
+                if attempt < 2:
+                    import time
+                    time.sleep(3)  # 3 saniye bekle
+
         if df5m is None or len(df5m) < 10:
-            return {"action": "continue", "details": {"error": "Veri alınamadı"}}
+            # Veri yoksa iptal etme, devam et
+            log(f"⚠️ {symbol} 5min veri alınamadı, tekrar denenecek")
+            return {"action": "continue", "details": {"error": "Veri alınamadı, retry"}}
+        
         
         # Sinyal oluşturulduğu zamandaki bar'ı bul
         signal_time = pd.to_datetime(pending.created_at, unit="s", utc=True)
