@@ -48,7 +48,7 @@ class DataManager:
             start_time = end_time - timedelta(hours=limit)
             
             # Create time series
-            time_range = pd.date_range(start=start_time, end=end_time, freq='15T')[:limit]
+            time_range = pd.date_range(start=start_time, end=end_time, freq='15min')[:limit]
             
             # Generate realistic price data with some randomness
             base_price = 100.0

@@ -14,12 +14,15 @@ from typing import Dict, List, Optional, Any
 import threading
 import os
 
+# Add current directory to path for imports
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 # Import bot modules
-from trading_bot.config import Config
-from trading_bot.modules.signal_generator import SignalGenerator, SignalType, SignalStrength
-from trading_bot.modules.telegram_notifier import TelegramNotifier
-from trading_bot.modules.telegram_commands import TelegramCommandHandler
-from trading_bot.modules.data_manager import DataManager
+from config import Config
+from modules.signal_generator import SignalGenerator, SignalType, SignalStrength
+from modules.telegram_notifier import TelegramNotifier
+from modules.telegram_commands import TelegramCommandHandler
+from modules.data_manager import DataManager
 
 # Setup logging
 logging.basicConfig(

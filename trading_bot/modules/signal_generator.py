@@ -132,65 +132,95 @@ class SignalGenerator:
         bearish_signals = 0
         signal_strength_scores = []
         
-        # RSI Analysis
+        # RSI Analysis - More sensitive thresholds
         if rsi < self.rsi_oversold:
-            bullish_signals += 1
-            signal_strength_scores.append(0.8)
+            bullish_signals += 2  # Strong signal
+            signal_strength_scores.append(0.9)
         elif rsi > self.rsi_overbought:
-            bearish_signals += 1
-            signal_strength_scores.append(0.8)
+            bearish_signals += 2  # Strong signal
+            signal_strength_scores.append(0.9)
         elif 30 < rsi < 45:
-            bullish_signals += 0.5
-            signal_strength_scores.append(0.4)
+            bullish_signals += 1
+            signal_strength_scores.append(0.6)
         elif 55 < rsi < 70:
-            bearish_signals += 0.5
+            bearish_signals += 1
+            signal_strength_scores.append(0.6)
+        
+        # EMA Analysis - Enhanced weight
+        ema_diff_percent = ((ema_fast - ema_slow) / ema_slow) * 100
+        if ema_diff_percent > 0.5:  # Strong bullish trend
+            bullish_signals += 1.5
+            signal_strength_scores.append(0.8)
+        elif ema_diff_percent > 0:  # Weak bullish trend
+            bullish_signals += 0.8
+            signal_strength_scores.append(0.5)
+        elif ema_diff_percent < -0.5:  # Strong bearish trend
+            bearish_signals += 1.5
+            signal_strength_scores.append(0.8)
+        elif ema_diff_percent < 0:  # Weak bearish trend
+            bearish_signals += 0.8
+            signal_strength_scores.append(0.5)
+        
+        # MACD Analysis - Enhanced sensitivity
+        if macd > signal and histogram > 0:
+            bullish_signals += 1.2
+            signal_strength_scores.append(0.8)
+        elif macd < signal and histogram < 0:
+            bearish_signals += 1.2
+            signal_strength_scores.append(0.8)
+        elif macd > signal:  # MACD bullish but weakening
+            bullish_signals += 0.6
+            signal_strength_scores.append(0.4)
+        elif macd < signal:  # MACD bearish but weakening
+            bearish_signals += 0.6
             signal_strength_scores.append(0.4)
         
-        # EMA Analysis
-        if ema_fast > ema_slow:
-            bullish_signals += 1
-            signal_strength_scores.append(0.6)
-        else:
-            bearish_signals += 1
-            signal_strength_scores.append(0.6)
-        
-        # MACD Analysis
-        if macd > signal and histogram > 0:
-            bullish_signals += 1
+        # Stochastic Analysis - More sensitive
+        if stoch_k < 20 and stoch_d < 20 and stoch_k > stoch_d:  # Oversold with bullish divergence
+            bullish_signals += 1.5
             signal_strength_scores.append(0.7)
-        elif macd < signal and histogram < 0:
-            bearish_signals += 1
+        elif stoch_k > 80 and stoch_d > 80 and stoch_k < stoch_d:  # Overbought with bearish divergence
+            bearish_signals += 1.5
             signal_strength_scores.append(0.7)
+        elif stoch_k < 30:  # General oversold
+            bullish_signals += 0.8
+            signal_strength_scores.append(0.4)
+        elif stoch_k > 70:  # General overbought
+            bearish_signals += 0.8
+            signal_strength_scores.append(0.4)
         
-        # Stochastic Analysis
-        if stoch_k < 20 and stoch_d < 20:
-            bullish_signals += 1
-            signal_strength_scores.append(0.5)
-        elif stoch_k > 80 and stoch_d > 80:
-            bearish_signals += 1
-            signal_strength_scores.append(0.5)
-        
-        # Volume Analysis
-        if volume_ratio > 1.5:
-            signal_strength_scores.append(0.3)  # Volume confirms the signal
+        # Volume Analysis - Enhanced
+        if volume_ratio > 2.0:  # Very high volume
+            signal_strength_scores.append(0.6)
+        elif volume_ratio > 1.5:  # High volume
+            signal_strength_scores.append(0.4)
+        elif volume_ratio > 1.2:  # Above average volume
+            signal_strength_scores.append(0.2)
         
         # Determine signal type
-        if bullish_signals > bearish_signals:
+        signal_diff = bullish_signals - bearish_signals
+        if signal_diff > 0.5:
             signal_type = SignalType.LONG
             signal_count = bullish_signals
-        elif bearish_signals > bullish_signals:
+        elif signal_diff < -0.5:
             signal_type = SignalType.SHORT
             signal_count = bearish_signals
         else:
             signal_type = SignalType.NEUTRAL
             signal_count = 0
         
-        # Calculate confidence
-        max_possible_signals = 4.5  # Maximum possible signal count
+        # Calculate confidence with enhanced scoring
+        max_possible_signals = 6.0  # Increased max possible
         confidence = min(100.0, (signal_count / max_possible_signals) * 100)
         
-        # Determine strength
-        if confidence >= 75:
+        # Boost confidence if multiple indicators align
+        if len(signal_strength_scores) >= 3:
+            confidence *= 1.2  # 20% boost for multiple confirmations
+        
+        confidence = min(100.0, confidence)  # Cap at 100%
+        
+        # Determine strength with adjusted thresholds
+        if confidence >= 70:
             strength = SignalStrength.STRONG
         elif confidence >= 50:
             strength = SignalStrength.MODERATE
