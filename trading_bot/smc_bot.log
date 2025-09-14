@@ -1,0 +1,914 @@
+nohup: ignoring input
+2025-09-13 14:06:43,583 - modules.market_data - INFO - KuCoin exchange bağlantısı başarılı (keysiz)
+2025-09-13 14:06:43,584 - modules.trade_memory - INFO - Hafıza yüklendi: 4 işlem, 0.0% başarı
+2025-09-13 14:06:43,584 - modules.smc_analyzer - INFO - SMC Analyzer başlatıldı
+2025-09-13 14:06:43,584 - modules.signal_pool - INFO - Sinyal Havuzu başlatıldı: 3 mum, 5dk aralık
+2025-09-13 14:06:43,584 - modules.trade_tracker - INFO - Trade Tracker başlatıldı
+2025-09-13 14:06:43,584 - __main__ - INFO - KuCoin Hızlı Trading Bot başlatılıyor...
+2025-09-13 14:06:43,731 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8484153893:AAEybdOXrMvpDEjAg-o2KiCFYWtDSL1PxH4/getMe "HTTP/1.1 200 OK"
+2025-09-13 14:06:43,732 - modules.telegram_notifier - INFO - Telegram bot bağlantısı başarılı: @lowshortbot
+2025-09-13 14:06:43,764 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8484153893:AAEybdOXrMvpDEjAg-o2KiCFYWtDSL1PxH4/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 14:06:45,551 - modules.market_data - INFO - Veri çekildi: BTC/USDT - 10 adet 15m mum
+2025-09-13 14:06:45,840 - modules.market_data - INFO - KuCoin'den 15 adet top volume pair alındı
+2025-09-13 14:06:45,842 - __main__ - INFO - KuCoin top volume pairs eklendi: 20 coin
+2025-09-13 14:06:45,842 - __main__ - INFO - Bot başarıyla başlatıldı!
+2025-09-13 14:06:46,011 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8484153893:AAEybdOXrMvpDEjAg-o2KiCFYWtDSL1PxH4/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 14:06:46,012 - __main__ - INFO - 🤖 AI İşlem Takip Sistemi başlatıldı!
+2025-09-13 14:06:46,012 - modules.trade_tracker - INFO - İşlem takibi başlatılıyor...
+2025-09-13 14:06:46,137 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8484153893:AAEybdOXrMvpDEjAg-o2KiCFYWtDSL1PxH4/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 14:06:46,138 - __main__ - INFO - 🔄 Yeni havuz döngüsü başlıyor...
+2025-09-13 14:06:46,139 - __main__ - INFO - 📊 15dk tarama başlatılıyor: 20 coin...
+2025-09-13 14:06:46,139 - modules.market_data - INFO - Cache'den veri alındı: BTC/USDT
+2025-09-13 14:06:46,139 - __main__ - WARNING - Yetersiz veri: BTC/USDT
+2025-09-13 14:06:46,420 - modules.market_data - INFO - Veri çekildi: HYPE/USDT - 100 adet 15m mum
+2025-09-13 14:06:46,469 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi HYPE/USDT: 2 adet
+2025-09-13 14:06:46,482 - modules.smc_analyzer - INFO - Liquidity Hunt sinyali tespit edildi HYPE/USDT: 2 adet
+2025-09-13 14:06:46,483 - __main__ - INFO - ⚡ Hızlı sinyal: HYPE/USDT - SHORT - ORTA [SMC: 2, Güven: 70.5%]
+2025-09-13 14:06:46,737 - modules.market_data - INFO - Veri çekildi: ETH/USDT - 100 adet 15m mum
+2025-09-13 14:06:46,748 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi ETH/USDT: 1 adet
+2025-09-13 14:06:46,754 - modules.smc_analyzer - INFO - MSS/BOS sinyali tespit edildi ETH/USDT: 1 adet
+2025-09-13 14:06:46,756 - __main__ - INFO - ⚡ Hızlı sinyal: ETH/USDT - SHORT - GÜÇLÜ [SMC: 8, Güven: 82.5%]
+2025-09-13 14:06:47,019 - modules.market_data - INFO - Veri çekildi: SOMI/USDT - 100 adet 15m mum
+2025-09-13 14:06:47,035 - modules.smc_analyzer - INFO - MSS/BOS sinyali tespit edildi SOMI/USDT: 1 adet
+2025-09-13 14:06:47,037 - __main__ - INFO - ⚡ Hızlı sinyal: SOMI/USDT - LONG - GÜÇLÜ [SMC: 9, Güven: 95.0%]
+2025-09-13 14:06:47,311 - modules.market_data - INFO - Veri çekildi: HIFI/USDT - 100 adet 15m mum
+2025-09-13 14:06:47,612 - modules.market_data - INFO - Veri çekildi: LTC/USDT - 100 adet 15m mum
+2025-09-13 14:06:47,623 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi LTC/USDT: 1 adet
+2025-09-13 14:06:47,628 - modules.smc_analyzer - INFO - MSS/BOS sinyali tespit edildi LTC/USDT: 1 adet
+2025-09-13 14:06:47,631 - __main__ - INFO - ⚡ Hızlı sinyal: LTC/USDT - SHORT - ORTA [SMC: 7, Güven: 75.9%]
+2025-09-13 14:06:47,890 - modules.market_data - INFO - Veri çekildi: BCH/USDT - 100 adet 15m mum
+2025-09-13 14:06:47,900 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi BCH/USDT: 1 adet
+2025-09-13 14:06:47,906 - modules.smc_analyzer - INFO - MSS/BOS sinyali tespit edildi BCH/USDT: 1 adet
+2025-09-13 14:06:47,907 - modules.smc_analyzer - INFO - Liquidity Hunt sinyali tespit edildi BCH/USDT: 1 adet
+2025-09-13 14:06:47,908 - __main__ - INFO - ⚡ Hızlı sinyal: BCH/USDT - SHORT - GÜÇLÜ [SMC: 7, Güven: 76.2%]
+2025-09-13 14:06:48,188 - modules.market_data - INFO - Veri çekildi: LINK/USDT - 100 adet 15m mum
+2025-09-13 14:06:48,199 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi LINK/USDT: 1 adet
+2025-09-13 14:06:48,204 - modules.smc_analyzer - INFO - MSS/BOS sinyali tespit edildi LINK/USDT: 1 adet
+2025-09-13 14:06:48,206 - __main__ - INFO - ⚡ Hızlı sinyal: LINK/USDT - SHORT - GÜÇLÜ [SMC: 8, Güven: 86.3%]
+2025-09-13 14:06:48,207 - modules.market_data - ERROR - Veri çekme hatası MATIC/USDT: kucoin does not have market symbol MATIC/USDT
+2025-09-13 14:06:48,207 - modules.market_data - WARNING - Ana provider başarısız, alternatif deneniyor: MATIC/USDT
+2025-09-13 14:06:48,498 - modules.market_data - INFO - Veri çekildi: AVAX/USDT - 100 adet 15m mum
+2025-09-13 14:06:48,508 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi AVAX/USDT: 1 adet
+2025-09-13 14:06:48,513 - modules.smc_analyzer - INFO - MSS/BOS sinyali tespit edildi AVAX/USDT: 1 adet
+2025-09-13 14:06:48,517 - __main__ - INFO - ⚡ Hızlı sinyal: AVAX/USDT - SHORT - GÜÇLÜ [SMC: 8, Güven: 82.5%]
+2025-09-13 14:06:48,774 - modules.market_data - INFO - Veri çekildi: SHIB/USDT - 100 adet 15m mum
+2025-09-13 14:06:48,785 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi SHIB/USDT: 1 adet
+2025-09-13 14:06:49,083 - modules.market_data - INFO - Veri çekildi: HOLO/USDT - 100 adet 15m mum
+2025-09-13 14:06:49,094 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi HOLO/USDT: 1 adet
+2025-09-13 14:06:49,099 - modules.smc_analyzer - INFO - MSS/BOS sinyali tespit edildi HOLO/USDT: 1 adet
+2025-09-13 14:06:49,102 - __main__ - INFO - ⚡ Hızlı sinyal: HOLO/USDT - SHORT - ORTA [SMC: 7, Güven: 76.3%]
+2025-09-13 14:06:49,369 - modules.market_data - INFO - Veri çekildi: SUI/USDT - 100 adet 15m mum
+2025-09-13 14:06:49,379 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi SUI/USDT: 1 adet
+2025-09-13 14:06:49,384 - modules.smc_analyzer - INFO - MSS/BOS sinyali tespit edildi SUI/USDT: 1 adet
+2025-09-13 14:06:49,385 - modules.smc_analyzer - INFO - Order Block sinyali tespit edildi SUI/USDT: 1 adet
+2025-09-13 14:06:49,387 - __main__ - INFO - ⚡ Hızlı sinyal: SUI/USDT - SHORT - ORTA [SMC: 7, Güven: 76.4%]
+2025-09-13 14:06:49,653 - modules.market_data - INFO - Veri çekildi: ADA/USDT - 100 adet 15m mum
+2025-09-13 14:06:49,664 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi ADA/USDT: 1 adet
+2025-09-13 14:06:49,670 - modules.smc_analyzer - INFO - MSS/BOS sinyali tespit edildi ADA/USDT: 1 adet
+2025-09-13 14:06:49,672 - __main__ - INFO - ⚡ Hızlı sinyal: ADA/USDT - SHORT - ORTA [SMC: 8, Güven: 84.9%]
+2025-09-13 14:06:49,944 - modules.market_data - INFO - Veri çekildi: DOGE/USDT - 100 adet 15m mum
+2025-09-13 14:06:49,955 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi DOGE/USDT: 1 adet
+2025-09-13 14:06:49,962 - __main__ - INFO - ⚡ Hızlı sinyal: DOGE/USDT - SHORT - GÜÇLÜ [SMC: 2, Güven: 73.1%]
+2025-09-13 14:06:50,240 - modules.market_data - INFO - Veri çekildi: UB/USDT - 100 adet 15m mum
+2025-09-13 14:06:50,520 - modules.market_data - INFO - Veri çekildi: DOT/USDT - 100 adet 15m mum
+2025-09-13 14:06:50,530 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi DOT/USDT: 2 adet
+2025-09-13 14:06:50,536 - modules.smc_analyzer - INFO - MSS/BOS sinyali tespit edildi DOT/USDT: 1 adet
+2025-09-13 14:06:50,537 - modules.smc_analyzer - INFO - Order Block sinyali tespit edildi DOT/USDT: 1 adet
+2025-09-13 14:06:50,538 - __main__ - INFO - ⚡ Hızlı sinyal: DOT/USDT - SHORT - ORTA [SMC: 8, Güven: 82.0%]
+2025-09-13 14:06:50,856 - modules.market_data - INFO - Veri çekildi: PEPE/USDT - 100 adet 15m mum
+2025-09-13 14:06:50,868 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi PEPE/USDT: 1 adet
+2025-09-13 14:06:50,875 - modules.smc_analyzer - INFO - MSS/BOS sinyali tespit edildi PEPE/USDT: 1 adet
+2025-09-13 14:06:50,876 - modules.smc_analyzer - INFO - Order Block sinyali tespit edildi PEPE/USDT: 1 adet
+2025-09-13 14:06:50,877 - __main__ - INFO - ⚡ Hızlı sinyal: PEPE/USDT - SHORT - ORTA [SMC: 8, Güven: 89.2%]
+2025-09-13 14:06:51,136 - modules.market_data - INFO - Veri çekildi: UNI/USDT - 100 adet 15m mum
+2025-09-13 14:06:51,146 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi UNI/USDT: 1 adet
+2025-09-13 14:06:51,152 - modules.smc_analyzer - INFO - MSS/BOS sinyali tespit edildi UNI/USDT: 1 adet
+2025-09-13 14:06:51,153 - modules.smc_analyzer - INFO - Order Block sinyali tespit edildi UNI/USDT: 2 adet
+2025-09-13 14:06:51,154 - __main__ - INFO - ⚡ Hızlı sinyal: UNI/USDT - SHORT - GÜÇLÜ [SMC: 8, Güven: 84.8%]
+2025-09-13 14:06:51,501 - modules.market_data - INFO - Veri çekildi: XMR/USDT - 100 adet 15m mum
+2025-09-13 14:06:51,517 - modules.smc_analyzer - INFO - MSS/BOS sinyali tespit edildi XMR/USDT: 1 adet
+2025-09-13 14:06:51,773 - modules.market_data - ERROR - KuCoin API veri hatası: {'msg': 'Unsupported trading pair.', 'code': '400100'}
+2025-09-13 14:06:51,773 - __main__ - WARNING - Yetersiz veri: MATIC/USDT
+2025-09-13 14:06:51,773 - __main__ - INFO - 🎯 Havuz doğrulama döngüsü başlatılıyor...
+2025-09-13 14:06:51,774 - __main__ - INFO - 📊 Tarama tamamlandı: 14 yeni sinyal
+2025-09-13 14:06:51,774 - __main__ - INFO - 🎯 Havuz doğrulama: 0 onaylı sinyal
+2025-09-13 14:06:51,774 - modules.signal_pool - INFO - Havuza eklendi: HYPE/USDT - SHORT (ORTA)
+2025-09-13 14:06:51,774 - modules.signal_pool - INFO - Havuza eklendi: ETH/USDT - SHORT (GÜÇLÜ)
+2025-09-13 14:06:51,774 - modules.signal_pool - INFO - Havuza eklendi: SOMI/USDT - LONG (GÜÇLÜ)
+2025-09-13 14:06:51,774 - modules.signal_pool - INFO - Havuza eklendi: LTC/USDT - SHORT (ORTA)
+2025-09-13 14:06:51,774 - modules.signal_pool - INFO - Havuza eklendi: BCH/USDT - SHORT (GÜÇLÜ)
+2025-09-13 14:06:51,774 - modules.signal_pool - INFO - Havuza eklendi: LINK/USDT - SHORT (GÜÇLÜ)
+2025-09-13 14:06:51,774 - modules.signal_pool - INFO - Havuza eklendi: AVAX/USDT - SHORT (GÜÇLÜ)
+2025-09-13 14:06:51,774 - modules.signal_pool - INFO - Havuza eklendi: HOLO/USDT - SHORT (ORTA)
+2025-09-13 14:06:51,774 - modules.signal_pool - INFO - Havuza eklendi: SUI/USDT - SHORT (ORTA)
+2025-09-13 14:06:51,774 - modules.signal_pool - INFO - Havuza eklendi: ADA/USDT - SHORT (ORTA)
+2025-09-13 14:06:51,774 - modules.signal_pool - INFO - Havuza eklendi: DOGE/USDT - SHORT (GÜÇLÜ)
+2025-09-13 14:06:51,775 - modules.signal_pool - INFO - Havuza eklendi: DOT/USDT - SHORT (ORTA)
+2025-09-13 14:06:51,775 - modules.signal_pool - INFO - Havuza eklendi: PEPE/USDT - SHORT (ORTA)
+2025-09-13 14:06:51,775 - modules.signal_pool - INFO - Havuza eklendi: UNI/USDT - SHORT (GÜÇLÜ)
+2025-09-13 14:06:51,775 - __main__ - INFO - 📊 Yeni tarama: 14 sinyal
+2025-09-13 14:06:51,775 - __main__ - INFO - 🎯 Havuza eklenen: 14
+2025-09-13 14:06:51,775 - __main__ - INFO - ✅ Onaylı gönderilen: 0
+2025-09-13 14:06:51,775 - __main__ - INFO - 🔄 Havuzda bekleyen: 14
+2025-09-13 14:06:51,775 - __main__ - INFO - 📊 Havuz durumu: BEKLEMEDE: 14
+2025-09-13 14:06:51,775 - __main__ - INFO - 🕐 Döngü tamamlandı: 5.64s
+2025-09-13 14:06:51,775 - __main__ - INFO - Sonraki kontrol: 300 saniye...
+2025-09-13 14:11:51,782 - __main__ - INFO - 🔄 Yeni havuz döngüsü başlıyor...
+2025-09-13 14:11:51,782 - __main__ - INFO - 📊 15dk tarama başlatılıyor: 20 coin...
+2025-09-13 14:12:01,793 - modules.market_data - ERROR - Veri çekme hatası BTC/USDT: kucoin GET https://api.kucoin.com/api/v1/market/candles?symbol=BTC-USDT&type=15min&startAt=1757682711&endAt=1757772711
+2025-09-13 14:12:01,793 - modules.market_data - WARNING - Ana provider başarısız, alternatif deneniyor: BTC/USDT
+2025-09-13 14:12:02,086 - modules.market_data - INFO - Veri çekildi: HYPE/USDT - 100 adet 15m mum
+2025-09-13 14:12:02,097 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi HYPE/USDT: 2 adet
+2025-09-13 14:12:02,103 - modules.smc_analyzer - INFO - Liquidity Hunt sinyali tespit edildi HYPE/USDT: 2 adet
+2025-09-13 14:12:02,104 - __main__ - INFO - ⚡ Hızlı sinyal: HYPE/USDT - SHORT - ORTA [SMC: 2, Güven: 70.5%]
+2025-09-13 14:12:02,375 - modules.market_data - INFO - Veri çekildi: ETH/USDT - 100 adet 15m mum
+2025-09-13 14:12:02,389 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi ETH/USDT: 1 adet
+2025-09-13 14:12:02,394 - modules.smc_analyzer - INFO - MSS/BOS sinyali tespit edildi ETH/USDT: 1 adet
+2025-09-13 14:12:02,396 - modules.smc_analyzer - INFO - Liquidity Hunt sinyali tespit edildi ETH/USDT: 2 adet
+2025-09-13 14:12:02,397 - __main__ - INFO - ⚡ Hızlı sinyal: ETH/USDT - SHORT - ORTA [SMC: 8, Güven: 80.0%]
+2025-09-13 14:12:02,684 - modules.market_data - INFO - Veri çekildi: SOMI/USDT - 100 adet 15m mum
+2025-09-13 14:12:02,699 - modules.smc_analyzer - INFO - MSS/BOS sinyali tespit edildi SOMI/USDT: 1 adet
+2025-09-13 14:12:02,701 - __main__ - INFO - ⚡ Hızlı sinyal: SOMI/USDT - LONG - GÜÇLÜ [SMC: 9, Güven: 95.0%]
+2025-09-13 14:12:02,977 - modules.market_data - INFO - Veri çekildi: HIFI/USDT - 100 adet 15m mum
+2025-09-13 14:12:03,278 - modules.market_data - INFO - Veri çekildi: LTC/USDT - 100 adet 15m mum
+2025-09-13 14:12:03,288 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi LTC/USDT: 1 adet
+2025-09-13 14:12:03,559 - modules.market_data - INFO - Veri çekildi: BCH/USDT - 100 adet 15m mum
+2025-09-13 14:12:03,570 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi BCH/USDT: 1 adet
+2025-09-13 14:12:03,580 - modules.smc_analyzer - INFO - Liquidity Hunt sinyali tespit edildi BCH/USDT: 2 adet
+2025-09-13 14:12:03,842 - modules.market_data - INFO - Veri çekildi: LINK/USDT - 100 adet 15m mum
+2025-09-13 14:12:03,852 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi LINK/USDT: 1 adet
+2025-09-13 14:12:03,857 - modules.smc_analyzer - INFO - MSS/BOS sinyali tespit edildi LINK/USDT: 1 adet
+2025-09-13 14:12:03,859 - __main__ - INFO - ⚡ Hızlı sinyal: LINK/USDT - SHORT - GÜÇLÜ [SMC: 8, Güven: 84.6%]
+2025-09-13 14:12:03,859 - modules.market_data - ERROR - Veri çekme hatası MATIC/USDT: kucoin does not have market symbol MATIC/USDT
+2025-09-13 14:12:03,859 - modules.market_data - WARNING - Ana provider başarısız, alternatif deneniyor: MATIC/USDT
+2025-09-13 14:12:04,109 - modules.market_data - INFO - Veri çekildi: AVAX/USDT - 100 adet 15m mum
+2025-09-13 14:12:04,119 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi AVAX/USDT: 1 adet
+2025-09-13 14:12:04,124 - modules.smc_analyzer - INFO - MSS/BOS sinyali tespit edildi AVAX/USDT: 1 adet
+2025-09-13 14:12:04,126 - __main__ - INFO - ⚡ Hızlı sinyal: AVAX/USDT - SHORT - ORTA [SMC: 7, Güven: 79.0%]
+2025-09-13 14:12:04,393 - modules.market_data - INFO - Veri çekildi: SHIB/USDT - 100 adet 15m mum
+2025-09-13 14:12:04,403 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi SHIB/USDT: 1 adet
+2025-09-13 14:12:04,699 - modules.market_data - INFO - Veri çekildi: HOLO/USDT - 100 adet 15m mum
+2025-09-13 14:12:04,709 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi HOLO/USDT: 1 adet
+2025-09-13 14:12:04,977 - modules.market_data - INFO - Veri çekildi: SUI/USDT - 100 adet 15m mum
+2025-09-13 14:12:04,987 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi SUI/USDT: 1 adet
+2025-09-13 14:12:04,992 - modules.smc_analyzer - INFO - Order Block sinyali tespit edildi SUI/USDT: 1 adet
+2025-09-13 14:12:04,994 - __main__ - INFO - ⚡ Hızlı sinyal: SUI/USDT - SHORT - ORTA [SMC: 2, Güven: 72.5%]
+2025-09-13 14:12:05,255 - modules.market_data - INFO - Veri çekildi: ADA/USDT - 100 adet 15m mum
+2025-09-13 14:12:05,265 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi ADA/USDT: 1 adet
+2025-09-13 14:12:05,270 - modules.smc_analyzer - INFO - MSS/BOS sinyali tespit edildi ADA/USDT: 1 adet
+2025-09-13 14:12:05,272 - modules.smc_analyzer - INFO - Liquidity Hunt sinyali tespit edildi ADA/USDT: 2 adet
+2025-09-13 14:12:05,273 - __main__ - INFO - ⚡ Hızlı sinyal: ADA/USDT - SHORT - ORTA [SMC: 8, Güven: 81.4%]
+2025-09-13 14:12:05,536 - modules.market_data - INFO - Veri çekildi: DOGE/USDT - 100 adet 15m mum
+2025-09-13 14:12:05,546 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi DOGE/USDT: 1 adet
+2025-09-13 14:12:05,553 - __main__ - INFO - ⚡ Hızlı sinyal: DOGE/USDT - SHORT - GÜÇLÜ [SMC: 2, Güven: 73.1%]
+2025-09-13 14:12:05,812 - modules.market_data - INFO - Veri çekildi: UB/USDT - 100 adet 15m mum
+2025-09-13 14:12:06,099 - modules.market_data - INFO - Veri çekildi: DOT/USDT - 100 adet 15m mum
+2025-09-13 14:12:06,109 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi DOT/USDT: 2 adet
+2025-09-13 14:12:06,115 - modules.smc_analyzer - INFO - MSS/BOS sinyali tespit edildi DOT/USDT: 1 adet
+2025-09-13 14:12:06,116 - modules.smc_analyzer - INFO - Order Block sinyali tespit edildi DOT/USDT: 1 adet
+2025-09-13 14:12:06,117 - __main__ - INFO - ⚡ Hızlı sinyal: DOT/USDT - SHORT - ORTA [SMC: 7, Güven: 78.1%]
+2025-09-13 14:12:06,386 - modules.market_data - INFO - Veri çekildi: PEPE/USDT - 100 adet 15m mum
+2025-09-13 14:12:06,396 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi PEPE/USDT: 1 adet
+2025-09-13 14:12:06,401 - modules.smc_analyzer - INFO - MSS/BOS sinyali tespit edildi PEPE/USDT: 1 adet
+2025-09-13 14:12:06,402 - modules.smc_analyzer - INFO - Order Block sinyali tespit edildi PEPE/USDT: 1 adet
+2025-09-13 14:12:06,404 - __main__ - INFO - ⚡ Hızlı sinyal: PEPE/USDT - SHORT - ORTA [SMC: 8, Güven: 86.8%]
+2025-09-13 14:12:06,668 - modules.market_data - INFO - Veri çekildi: UNI/USDT - 100 adet 15m mum
+2025-09-13 14:12:06,678 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi UNI/USDT: 1 adet
+2025-09-13 14:12:06,684 - modules.smc_analyzer - INFO - MSS/BOS sinyali tespit edildi UNI/USDT: 1 adet
+2025-09-13 14:12:06,685 - modules.smc_analyzer - INFO - Order Block sinyali tespit edildi UNI/USDT: 2 adet
+2025-09-13 14:12:06,686 - __main__ - INFO - ⚡ Hızlı sinyal: UNI/USDT - SHORT - GÜÇLÜ [SMC: 8, Güven: 83.7%]
+2025-09-13 14:12:06,969 - modules.market_data - INFO - Veri çekildi: XMR/USDT - 100 adet 15m mum
+2025-09-13 14:12:06,985 - modules.smc_analyzer - INFO - MSS/BOS sinyali tespit edildi XMR/USDT: 1 adet
+2025-09-13 14:12:07,262 - modules.market_data - ERROR - KuCoin API veri hatası: {'msg': 'Unsupported trading pair.', 'code': '400100'}
+2025-09-13 14:12:07,262 - __main__ - WARNING - Yetersiz veri: MATIC/USDT
+2025-09-13 14:12:07,268 - modules.market_data - INFO - KuCoin API'den veri çekildi: BTC/USDT - 100 adet
+2025-09-13 14:12:07,279 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi BTC/USDT: 2 adet
+2025-09-13 14:12:07,285 - modules.smc_analyzer - INFO - MSS/BOS sinyali tespit edildi BTC/USDT: 1 adet
+2025-09-13 14:12:07,286 - modules.smc_analyzer - INFO - Order Block sinyali tespit edildi BTC/USDT: 1 adet
+2025-09-13 14:12:07,287 - modules.smc_analyzer - INFO - Liquidity Hunt sinyali tespit edildi BTC/USDT: 1 adet
+2025-09-13 14:12:07,287 - __main__ - INFO - ⚡ Hızlı sinyal: BTC/USDT - SHORT - GÜÇLÜ [SMC: 7, Güven: 76.2%]
+2025-09-13 14:12:07,287 - __main__ - INFO - 🎯 Havuz doğrulama döngüsü başlatılıyor...
+2025-09-13 14:12:07,557 - modules.market_data - INFO - Veri çekildi: HYPE/USDT - 20 adet 5m mum
+2025-09-13 14:12:07,567 - modules.signal_pool - INFO - Doğrulama sonucu HYPE/USDT: Skor=3, Onay=True
+2025-09-13 14:12:07,568 - modules.signal_pool - INFO - Sebepler: Negatif momentum (-0.13%) | RSI doğruluyor (30.8, trend: -2.6)
+2025-09-13 14:12:07,568 - modules.signal_pool - INFO - ⏳ Doğrulama devam: HYPE/USDT (1/3)
+2025-09-13 14:12:07,829 - modules.market_data - INFO - Veri çekildi: ETH/USDT - 20 adet 5m mum
+2025-09-13 14:12:07,839 - modules.signal_pool - INFO - Doğrulama sonucu ETH/USDT: Skor=1, Onay=True
+2025-09-13 14:12:07,839 - modules.signal_pool - INFO - Sebepler: Volume desteği (1.06x)
+2025-09-13 14:12:07,839 - modules.signal_pool - INFO - ⏳ Doğrulama devam: ETH/USDT (1/3)
+2025-09-13 14:12:08,135 - modules.market_data - INFO - Veri çekildi: SOMI/USDT - 20 adet 5m mum
+2025-09-13 14:12:08,145 - modules.signal_pool - INFO - Doğrulama sonucu SOMI/USDT: Skor=3, Onay=True
+2025-09-13 14:12:08,145 - modules.signal_pool - INFO - Sebepler: Pozitif momentum (0.19%) | Volume desteği (1.06x) | Orta volatilite (4.62%)
+2025-09-13 14:12:08,145 - modules.signal_pool - INFO - ⏳ Doğrulama devam: SOMI/USDT (1/3)
+2025-09-13 14:12:08,446 - modules.market_data - INFO - Veri çekildi: LTC/USDT - 20 adet 5m mum
+2025-09-13 14:12:08,456 - modules.signal_pool - INFO - Doğrulama sonucu LTC/USDT: Skor=0, Onay=True
+2025-09-13 14:12:08,456 - modules.signal_pool - INFO - Sebepler: 
+2025-09-13 14:12:08,456 - modules.signal_pool - INFO - ⏳ Doğrulama devam: LTC/USDT (1/3)
+2025-09-13 14:12:08,714 - modules.market_data - INFO - Veri çekildi: BCH/USDT - 20 adet 5m mum
+2025-09-13 14:12:08,726 - modules.signal_pool - INFO - Doğrulama sonucu BCH/USDT: Skor=1, Onay=True
+2025-09-13 14:12:08,726 - modules.signal_pool - INFO - Sebepler: Volume desteği (2.35x)
+2025-09-13 14:12:08,727 - modules.signal_pool - INFO - ⏳ Doğrulama devam: BCH/USDT (1/3)
+2025-09-13 14:12:08,986 - modules.market_data - INFO - Veri çekildi: LINK/USDT - 20 adet 5m mum
+2025-09-13 14:12:08,996 - modules.signal_pool - INFO - Doğrulama sonucu LINK/USDT: Skor=1, Onay=True
+2025-09-13 14:12:08,997 - modules.signal_pool - INFO - Sebepler: Volume desteği (0.58x)
+2025-09-13 14:12:08,997 - modules.signal_pool - INFO - ⏳ Doğrulama devam: LINK/USDT (1/3)
+2025-09-13 14:12:09,263 - modules.market_data - INFO - Veri çekildi: AVAX/USDT - 20 adet 5m mum
+2025-09-13 14:12:09,273 - modules.signal_pool - INFO - Doğrulama sonucu AVAX/USDT: Skor=1, Onay=True
+2025-09-13 14:12:09,273 - modules.signal_pool - INFO - Sebepler: Volume desteği (0.57x)
+2025-09-13 14:12:09,273 - modules.signal_pool - INFO - ⏳ Doğrulama devam: AVAX/USDT (1/3)
+2025-09-13 14:12:09,544 - modules.market_data - INFO - Veri çekildi: HOLO/USDT - 20 adet 5m mum
+2025-09-13 14:12:09,553 - modules.signal_pool - INFO - Doğrulama sonucu HOLO/USDT: Skor=1, Onay=True
+2025-09-13 14:12:09,554 - modules.signal_pool - INFO - Sebepler: Volume desteği (0.40x)
+2025-09-13 14:12:09,554 - modules.signal_pool - INFO - ⏳ Doğrulama devam: HOLO/USDT (1/3)
+2025-09-13 14:12:09,821 - modules.market_data - INFO - Veri çekildi: SUI/USDT - 20 adet 5m mum
+2025-09-13 14:12:09,831 - modules.signal_pool - INFO - Doğrulama sonucu SUI/USDT: Skor=0, Onay=True
+2025-09-13 14:12:09,831 - modules.signal_pool - INFO - Sebepler: 
+2025-09-13 14:12:09,831 - modules.signal_pool - INFO - ⏳ Doğrulama devam: SUI/USDT (1/3)
+2025-09-13 14:12:10,091 - modules.market_data - INFO - Veri çekildi: ADA/USDT - 20 adet 5m mum
+2025-09-13 14:12:10,101 - modules.signal_pool - INFO - Doğrulama sonucu ADA/USDT: Skor=1, Onay=True
+2025-09-13 14:12:10,101 - modules.signal_pool - INFO - Sebepler: Volume desteği (0.43x)
+2025-09-13 14:12:10,101 - modules.signal_pool - INFO - ⏳ Doğrulama devam: ADA/USDT (1/3)
+2025-09-13 14:12:10,357 - modules.market_data - INFO - Veri çekildi: DOGE/USDT - 20 adet 5m mum
+2025-09-13 14:12:10,367 - modules.signal_pool - INFO - Doğrulama sonucu DOGE/USDT: Skor=0, Onay=True
+2025-09-13 14:12:10,367 - modules.signal_pool - INFO - Sebepler: 
+2025-09-13 14:12:10,367 - modules.signal_pool - INFO - ⏳ Doğrulama devam: DOGE/USDT (1/3)
+2025-09-13 14:12:10,626 - modules.market_data - INFO - Veri çekildi: DOT/USDT - 20 adet 5m mum
+2025-09-13 14:12:10,636 - modules.signal_pool - INFO - Doğrulama sonucu DOT/USDT: Skor=0, Onay=True
+2025-09-13 14:12:10,636 - modules.signal_pool - INFO - Sebepler: 
+2025-09-13 14:12:10,636 - modules.signal_pool - INFO - ⏳ Doğrulama devam: DOT/USDT (1/3)
+2025-09-13 14:12:10,900 - modules.market_data - INFO - Veri çekildi: PEPE/USDT - 20 adet 5m mum
+2025-09-13 14:12:10,910 - modules.signal_pool - INFO - Doğrulama sonucu PEPE/USDT: Skor=0, Onay=True
+2025-09-13 14:12:10,911 - modules.signal_pool - INFO - Sebepler: 
+2025-09-13 14:12:10,911 - modules.signal_pool - INFO - ⏳ Doğrulama devam: PEPE/USDT (1/3)
+2025-09-13 14:12:11,172 - modules.market_data - INFO - Veri çekildi: UNI/USDT - 20 adet 5m mum
+2025-09-13 14:12:11,187 - modules.signal_pool - INFO - Doğrulama sonucu UNI/USDT: Skor=0, Onay=True
+2025-09-13 14:12:11,187 - modules.signal_pool - INFO - Sebepler: 
+2025-09-13 14:12:11,188 - modules.signal_pool - INFO - ⏳ Doğrulama devam: UNI/USDT (1/3)
+2025-09-13 14:12:11,188 - __main__ - INFO - 📊 Tarama tamamlandı: 12 yeni sinyal
+2025-09-13 14:12:11,188 - __main__ - INFO - 🎯 Havuz doğrulama: 0 onaylı sinyal
+2025-09-13 14:12:11,188 - modules.signal_pool - INFO - Havuza eklendi: BTC/USDT - SHORT (GÜÇLÜ)
+2025-09-13 14:12:11,188 - modules.signal_pool - INFO - Havuzda güncellendi: HYPE/USDT - SHORT
+2025-09-13 14:12:11,189 - modules.signal_pool - INFO - Havuzda güncellendi: ETH/USDT - SHORT
+2025-09-13 14:12:11,189 - modules.signal_pool - INFO - Havuzda güncellendi: SOMI/USDT - LONG
+2025-09-13 14:12:11,189 - modules.signal_pool - INFO - Havuzda güncellendi: LINK/USDT - SHORT
+2025-09-13 14:12:11,189 - modules.signal_pool - INFO - Havuzda güncellendi: AVAX/USDT - SHORT
+2025-09-13 14:12:11,189 - modules.signal_pool - INFO - Havuzda güncellendi: SUI/USDT - SHORT
+2025-09-13 14:12:11,189 - modules.signal_pool - INFO - Havuzda güncellendi: ADA/USDT - SHORT
+2025-09-13 14:12:11,190 - modules.signal_pool - INFO - Havuzda güncellendi: DOGE/USDT - SHORT
+2025-09-13 14:12:11,190 - modules.signal_pool - INFO - Havuzda güncellendi: DOT/USDT - SHORT
+2025-09-13 14:12:11,190 - modules.signal_pool - INFO - Havuzda güncellendi: PEPE/USDT - SHORT
+2025-09-13 14:12:11,190 - modules.signal_pool - INFO - Havuzda güncellendi: UNI/USDT - SHORT
+2025-09-13 14:12:11,190 - __main__ - INFO - 📊 Yeni tarama: 12 sinyal
+2025-09-13 14:12:11,190 - __main__ - INFO - 🎯 Havuza eklenen: 12
+2025-09-13 14:12:11,191 - __main__ - INFO - ✅ Onaylı gönderilen: 0
+2025-09-13 14:12:11,191 - __main__ - INFO - 🔄 Havuzda bekleyen: 15
+2025-09-13 14:12:11,191 - __main__ - INFO - 📊 Havuz durumu: BEKLEMEDE: 15
+2025-09-13 14:12:11,191 - __main__ - INFO - 🕐 Döngü tamamlandı: 19.41s
+2025-09-13 14:12:11,191 - __main__ - INFO - Sonraki kontrol: 300 saniye...
+2025-09-13 14:17:11,196 - __main__ - INFO - 🔄 Yeni havuz döngüsü başlıyor...
+2025-09-13 14:17:11,196 - __main__ - INFO - 📊 15dk tarama başlatılıyor: 20 coin...
+2025-09-13 14:17:21,208 - modules.market_data - ERROR - Veri çekme hatası BTC/USDT: kucoin GET https://api.kucoin.com/api/v1/market/candles?symbol=BTC-USDT&type=15min&startAt=1757683031&endAt=1757773031
+2025-09-13 14:17:21,208 - modules.market_data - WARNING - Ana provider başarısız, alternatif deneniyor: BTC/USDT
+2025-09-13 14:17:21,499 - modules.market_data - INFO - Veri çekildi: HYPE/USDT - 100 adet 15m mum
+2025-09-13 14:17:21,509 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi HYPE/USDT: 1 adet
+2025-09-13 14:17:21,785 - modules.market_data - INFO - Veri çekildi: ETH/USDT - 100 adet 15m mum
+2025-09-13 14:17:21,795 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi ETH/USDT: 1 adet
+2025-09-13 14:17:21,803 - modules.smc_analyzer - INFO - Liquidity Hunt sinyali tespit edildi ETH/USDT: 2 adet
+2025-09-13 14:17:21,803 - __main__ - INFO - ⚡ Hızlı sinyal: ETH/USDT - SHORT - ORTA [SMC: 4, Güven: 76.7%]
+2025-09-13 14:17:22,064 - modules.market_data - INFO - Veri çekildi: SOMI/USDT - 100 adet 15m mum
+2025-09-13 14:17:22,074 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi SOMI/USDT: 1 adet
+2025-09-13 14:17:22,079 - modules.smc_analyzer - INFO - MSS/BOS sinyali tespit edildi SOMI/USDT: 1 adet
+2025-09-13 14:17:22,081 - __main__ - INFO - ⚡ Hızlı sinyal: SOMI/USDT - LONG - ORTA [SMC: 9, Güven: 95.0%]
+2025-09-13 14:17:22,349 - modules.market_data - INFO - Veri çekildi: HIFI/USDT - 100 adet 15m mum
+2025-09-13 14:17:22,640 - modules.market_data - INFO - Veri çekildi: LTC/USDT - 100 adet 15m mum
+2025-09-13 14:17:22,650 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi LTC/USDT: 1 adet
+2025-09-13 14:17:22,923 - modules.market_data - INFO - Veri çekildi: BCH/USDT - 100 adet 15m mum
+2025-09-13 14:17:22,933 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi BCH/USDT: 1 adet
+2025-09-13 14:17:22,946 - modules.smc_analyzer - INFO - Liquidity Hunt sinyali tespit edildi BCH/USDT: 2 adet
+2025-09-13 14:17:23,214 - modules.market_data - INFO - Veri çekildi: LINK/USDT - 100 adet 15m mum
+2025-09-13 14:17:23,224 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi LINK/USDT: 1 adet
+2025-09-13 14:17:23,231 - __main__ - INFO - ⚡ Hızlı sinyal: LINK/USDT - SHORT - ORTA [SMC: 4, Güven: 78.7%]
+2025-09-13 14:17:23,232 - modules.market_data - ERROR - Veri çekme hatası MATIC/USDT: kucoin does not have market symbol MATIC/USDT
+2025-09-13 14:17:23,232 - modules.market_data - WARNING - Ana provider başarısız, alternatif deneniyor: MATIC/USDT
+2025-09-13 14:17:23,514 - modules.market_data - INFO - Veri çekildi: AVAX/USDT - 100 adet 15m mum
+2025-09-13 14:17:23,527 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi AVAX/USDT: 1 adet
+2025-09-13 14:17:23,804 - modules.market_data - INFO - Veri çekildi: SHIB/USDT - 100 adet 15m mum
+2025-09-13 14:17:23,815 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi SHIB/USDT: 1 adet
+2025-09-13 14:17:24,104 - modules.market_data - INFO - Veri çekildi: HOLO/USDT - 100 adet 15m mum
+2025-09-13 14:17:24,114 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi HOLO/USDT: 1 adet
+2025-09-13 14:17:24,381 - modules.market_data - INFO - Veri çekildi: SUI/USDT - 100 adet 15m mum
+2025-09-13 14:17:24,391 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi SUI/USDT: 1 adet
+2025-09-13 14:17:24,675 - modules.market_data - INFO - Veri çekildi: ADA/USDT - 100 adet 15m mum
+2025-09-13 14:17:24,685 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi ADA/USDT: 1 adet
+2025-09-13 14:17:24,692 - modules.smc_analyzer - INFO - Liquidity Hunt sinyali tespit edildi ADA/USDT: 2 adet
+2025-09-13 14:17:24,960 - modules.market_data - INFO - Veri çekildi: DOGE/USDT - 100 adet 15m mum
+2025-09-13 14:17:24,970 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi DOGE/USDT: 1 adet
+2025-09-13 14:17:25,245 - modules.market_data - INFO - Veri çekildi: UB/USDT - 100 adet 15m mum
+2025-09-13 14:17:25,533 - modules.market_data - INFO - Veri çekildi: DOT/USDT - 100 adet 15m mum
+2025-09-13 14:17:25,543 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi DOT/USDT: 1 adet
+2025-09-13 14:17:25,549 - modules.smc_analyzer - INFO - Order Block sinyali tespit edildi DOT/USDT: 1 adet
+2025-09-13 14:17:25,830 - modules.market_data - INFO - Veri çekildi: PEPE/USDT - 100 adet 15m mum
+2025-09-13 14:17:25,840 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi PEPE/USDT: 1 adet
+2025-09-13 14:17:25,846 - modules.smc_analyzer - INFO - Order Block sinyali tespit edildi PEPE/USDT: 1 adet
+2025-09-13 14:17:25,847 - __main__ - INFO - ⚡ Hızlı sinyal: PEPE/USDT - SHORT - GÜÇLÜ [SMC: 4, Güven: 79.6%]
+2025-09-13 14:17:26,121 - modules.market_data - INFO - Veri çekildi: UNI/USDT - 100 adet 15m mum
+2025-09-13 14:17:26,131 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi UNI/USDT: 1 adet
+2025-09-13 14:17:26,137 - modules.smc_analyzer - INFO - Order Block sinyali tespit edildi UNI/USDT: 2 adet
+2025-09-13 14:17:26,139 - __main__ - INFO - ⚡ Hızlı sinyal: UNI/USDT - SHORT - ORTA [SMC: 4, Güven: 77.4%]
+2025-09-13 14:17:26,407 - modules.market_data - INFO - Veri çekildi: XMR/USDT - 100 adet 15m mum
+2025-09-13 14:17:26,679 - modules.market_data - INFO - KuCoin API'den veri çekildi: BTC/USDT - 100 adet
+2025-09-13 14:17:26,689 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi BTC/USDT: 1 adet
+2025-09-13 14:17:26,695 - modules.smc_analyzer - INFO - MSS/BOS sinyali tespit edildi BTC/USDT: 1 adet
+2025-09-13 14:17:26,696 - modules.smc_analyzer - INFO - Order Block sinyali tespit edildi BTC/USDT: 1 adet
+2025-09-13 14:17:26,698 - modules.market_data - ERROR - KuCoin API veri hatası: {'msg': 'Unsupported trading pair.', 'code': '400100'}
+2025-09-13 14:17:26,698 - __main__ - WARNING - Yetersiz veri: MATIC/USDT
+2025-09-13 14:17:26,699 - __main__ - INFO - 🎯 Havuz doğrulama döngüsü başlatılıyor...
+2025-09-13 14:17:26,959 - modules.market_data - INFO - Veri çekildi: HYPE/USDT - 20 adet 5m mum
+2025-09-13 14:17:26,970 - modules.signal_pool - INFO - Doğrulama sonucu HYPE/USDT: Skor=0, Onay=True
+2025-09-13 14:17:26,970 - modules.signal_pool - INFO - Sebepler: 
+2025-09-13 14:17:26,970 - modules.signal_pool - INFO - ⏳ Doğrulama devam: HYPE/USDT (1/3)
+2025-09-13 14:17:27,224 - modules.market_data - INFO - Veri çekildi: ETH/USDT - 20 adet 5m mum
+2025-09-13 14:17:27,234 - modules.signal_pool - INFO - Doğrulama sonucu ETH/USDT: Skor=1, Onay=True
+2025-09-13 14:17:27,234 - modules.signal_pool - INFO - Sebepler: Volume desteği (0.79x)
+2025-09-13 14:17:27,235 - modules.signal_pool - INFO - ⏳ Doğrulama devam: ETH/USDT (1/3)
+2025-09-13 14:17:27,501 - modules.market_data - INFO - Veri çekildi: SOMI/USDT - 20 adet 5m mum
+2025-09-13 14:17:27,514 - modules.signal_pool - INFO - Doğrulama sonucu SOMI/USDT: Skor=-2, Onay=False
+2025-09-13 14:17:27,514 - modules.signal_pool - INFO - Sebepler: Negatif momentum (-1.40%) | Orta volatilite (4.26%)
+2025-09-13 14:17:27,514 - modules.signal_pool - INFO - ⏳ Doğrulama devam: SOMI/USDT (1/3)
+2025-09-13 14:17:27,769 - modules.market_data - INFO - Veri çekildi: LTC/USDT - 20 adet 5m mum
+2025-09-13 14:17:27,779 - modules.signal_pool - INFO - Doğrulama sonucu LTC/USDT: Skor=1, Onay=True
+2025-09-13 14:17:27,779 - modules.signal_pool - INFO - Sebepler: RSI doğruluyor (45.8, trend: -0.4)
+2025-09-13 14:17:27,779 - modules.signal_pool - INFO - ⏳ Doğrulama devam: LTC/USDT (2/3)
+2025-09-13 14:17:28,042 - modules.market_data - INFO - Veri çekildi: BCH/USDT - 20 adet 5m mum
+2025-09-13 14:17:28,057 - modules.signal_pool - INFO - Doğrulama sonucu BCH/USDT: Skor=0, Onay=True
+2025-09-13 14:17:28,057 - modules.signal_pool - INFO - Sebepler: 
+2025-09-13 14:17:28,057 - modules.signal_pool - INFO - ⏳ Doğrulama devam: BCH/USDT (2/3)
+2025-09-13 14:17:28,324 - modules.market_data - INFO - Veri çekildi: LINK/USDT - 20 adet 5m mum
+2025-09-13 14:17:28,334 - modules.signal_pool - INFO - Doğrulama sonucu LINK/USDT: Skor=1, Onay=True
+2025-09-13 14:17:28,334 - modules.signal_pool - INFO - Sebepler: Volume desteği (0.42x)
+2025-09-13 14:17:28,334 - modules.signal_pool - INFO - ⏳ Doğrulama devam: LINK/USDT (1/3)
+2025-09-13 14:17:28,603 - modules.market_data - INFO - Veri çekildi: AVAX/USDT - 20 adet 5m mum
+2025-09-13 14:17:28,614 - modules.signal_pool - INFO - Doğrulama sonucu AVAX/USDT: Skor=0, Onay=True
+2025-09-13 14:17:28,614 - modules.signal_pool - INFO - Sebepler: 
+2025-09-13 14:17:28,614 - modules.signal_pool - INFO - ⏳ Doğrulama devam: AVAX/USDT (1/3)
+2025-09-13 14:17:28,880 - modules.market_data - INFO - Veri çekildi: HOLO/USDT - 20 adet 5m mum
+2025-09-13 14:17:28,890 - modules.signal_pool - INFO - Doğrulama sonucu HOLO/USDT: Skor=1, Onay=True
+2025-09-13 14:17:28,890 - modules.signal_pool - INFO - Sebepler: Volume desteği (0.45x)
+2025-09-13 14:17:28,890 - modules.signal_pool - INFO - ⏳ Doğrulama devam: HOLO/USDT (2/3)
+2025-09-13 14:17:29,208 - modules.market_data - INFO - Veri çekildi: SUI/USDT - 20 adet 5m mum
+2025-09-13 14:17:29,218 - modules.signal_pool - INFO - Doğrulama sonucu SUI/USDT: Skor=-1, Onay=False
+2025-09-13 14:17:29,218 - modules.signal_pool - INFO - Sebepler: Volume çok zayıf (0.10x)
+2025-09-13 14:17:29,219 - modules.signal_pool - INFO - ⏳ Doğrulama devam: SUI/USDT (1/3)
+2025-09-13 14:17:29,483 - modules.market_data - INFO - Veri çekildi: ADA/USDT - 20 adet 5m mum
+2025-09-13 14:17:29,494 - modules.signal_pool - INFO - Doğrulama sonucu ADA/USDT: Skor=1, Onay=True
+2025-09-13 14:17:29,494 - modules.signal_pool - INFO - Sebepler: Volume desteği (0.52x)
+2025-09-13 14:17:29,494 - modules.signal_pool - INFO - ⏳ Doğrulama devam: ADA/USDT (1/3)
+2025-09-13 14:17:29,754 - modules.market_data - INFO - Veri çekildi: DOGE/USDT - 20 adet 5m mum
+2025-09-13 14:17:29,764 - modules.signal_pool - INFO - Doğrulama sonucu DOGE/USDT: Skor=-1, Onay=False
+2025-09-13 14:17:29,764 - modules.signal_pool - INFO - Sebepler: Pozitif momentum (0.32%) | Volume desteği (0.40x)
+2025-09-13 14:17:29,765 - modules.signal_pool - INFO - ⏳ Doğrulama devam: DOGE/USDT (1/3)
+2025-09-13 14:17:30,025 - modules.market_data - INFO - Veri çekildi: DOT/USDT - 20 adet 5m mum
+2025-09-13 14:17:30,035 - modules.signal_pool - INFO - Doğrulama sonucu DOT/USDT: Skor=0, Onay=True
+2025-09-13 14:17:30,035 - modules.signal_pool - INFO - Sebepler: 
+2025-09-13 14:17:30,035 - modules.signal_pool - INFO - ⏳ Doğrulama devam: DOT/USDT (1/3)
+2025-09-13 14:17:30,303 - modules.market_data - INFO - Veri çekildi: PEPE/USDT - 20 adet 5m mum
+2025-09-13 14:17:30,313 - modules.signal_pool - INFO - Doğrulama sonucu PEPE/USDT: Skor=0, Onay=True
+2025-09-13 14:17:30,313 - modules.signal_pool - INFO - Sebepler: 
+2025-09-13 14:17:30,313 - modules.signal_pool - INFO - ⏳ Doğrulama devam: PEPE/USDT (1/3)
+2025-09-13 14:17:30,583 - modules.market_data - INFO - Veri çekildi: UNI/USDT - 20 adet 5m mum
+2025-09-13 14:17:30,593 - modules.signal_pool - INFO - Doğrulama sonucu UNI/USDT: Skor=0, Onay=True
+2025-09-13 14:17:30,593 - modules.signal_pool - INFO - Sebepler: 
+2025-09-13 14:17:30,593 - modules.signal_pool - INFO - ⏳ Doğrulama devam: UNI/USDT (1/3)
+2025-09-13 14:17:30,850 - modules.market_data - INFO - Veri çekildi: BTC/USDT - 20 adet 5m mum
+2025-09-13 14:17:30,860 - modules.signal_pool - INFO - Doğrulama sonucu BTC/USDT: Skor=1, Onay=True
+2025-09-13 14:17:30,860 - modules.signal_pool - INFO - Sebepler: Volume desteği (1.41x)
+2025-09-13 14:17:30,860 - modules.signal_pool - INFO - ⏳ Doğrulama devam: BTC/USDT (1/3)
+2025-09-13 14:17:30,860 - __main__ - INFO - 📊 Tarama tamamlandı: 5 yeni sinyal
+2025-09-13 14:17:30,861 - __main__ - INFO - 🎯 Havuz doğrulama: 0 onaylı sinyal
+2025-09-13 14:17:30,861 - modules.signal_pool - INFO - Havuzda güncellendi: ETH/USDT - SHORT
+2025-09-13 14:17:30,861 - modules.signal_pool - INFO - Havuzda güncellendi: SOMI/USDT - LONG
+2025-09-13 14:17:30,861 - modules.signal_pool - INFO - Havuzda güncellendi: LINK/USDT - SHORT
+2025-09-13 14:17:30,861 - modules.signal_pool - INFO - Havuzda güncellendi: PEPE/USDT - SHORT
+2025-09-13 14:17:30,861 - modules.signal_pool - INFO - Havuzda güncellendi: UNI/USDT - SHORT
+2025-09-13 14:17:30,861 - __main__ - INFO - 📊 Yeni tarama: 5 sinyal
+2025-09-13 14:17:30,861 - __main__ - INFO - 🎯 Havuza eklenen: 5
+2025-09-13 14:17:30,861 - __main__ - INFO - ✅ Onaylı gönderilen: 0
+2025-09-13 14:17:30,861 - __main__ - INFO - 🔄 Havuzda bekleyen: 15
+2025-09-13 14:17:30,861 - __main__ - INFO - 📊 Havuz durumu: BEKLEMEDE: 15
+2025-09-13 14:17:30,861 - __main__ - INFO - 🕐 Döngü tamamlandı: 19.67s
+2025-09-13 14:17:30,861 - __main__ - INFO - Sonraki kontrol: 300 saniye...
+2025-09-13 14:22:30,900 - __main__ - INFO - 🔄 Yeni havuz döngüsü başlıyor...
+2025-09-13 14:22:30,901 - __main__ - INFO - 📊 15dk tarama başlatılıyor: 20 coin...
+2025-09-13 14:22:40,912 - modules.market_data - ERROR - Veri çekme hatası BTC/USDT: kucoin GET https://api.kucoin.com/api/v1/market/candles?symbol=BTC-USDT&type=15min&startAt=1757683350&endAt=1757773350
+2025-09-13 14:22:40,912 - modules.market_data - WARNING - Ana provider başarısız, alternatif deneniyor: BTC/USDT
+2025-09-13 14:22:41,209 - modules.market_data - INFO - Veri çekildi: HYPE/USDT - 100 adet 15m mum
+2025-09-13 14:22:41,219 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi HYPE/USDT: 1 adet
+2025-09-13 14:22:41,500 - modules.market_data - INFO - Veri çekildi: ETH/USDT - 100 adet 15m mum
+2025-09-13 14:22:41,510 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi ETH/USDT: 1 adet
+2025-09-13 14:22:41,517 - modules.smc_analyzer - INFO - Liquidity Hunt sinyali tespit edildi ETH/USDT: 2 adet
+2025-09-13 14:22:41,518 - __main__ - INFO - ⚡ Hızlı sinyal: ETH/USDT - SHORT - ORTA [SMC: 4, Güven: 76.6%]
+2025-09-13 14:22:41,778 - modules.market_data - INFO - Veri çekildi: SOMI/USDT - 100 adet 15m mum
+2025-09-13 14:22:41,789 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi SOMI/USDT: 1 adet
+2025-09-13 14:22:41,794 - modules.smc_analyzer - INFO - MSS/BOS sinyali tespit edildi SOMI/USDT: 1 adet
+2025-09-13 14:22:42,156 - modules.market_data - INFO - Veri çekildi: HIFI/USDT - 100 adet 15m mum
+2025-09-13 14:22:42,435 - modules.market_data - INFO - Veri çekildi: LTC/USDT - 100 adet 15m mum
+2025-09-13 14:22:42,445 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi LTC/USDT: 1 adet
+2025-09-13 14:22:42,799 - modules.market_data - INFO - Veri çekildi: BCH/USDT - 100 adet 15m mum
+2025-09-13 14:22:42,810 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi BCH/USDT: 1 adet
+2025-09-13 14:22:42,817 - modules.smc_analyzer - INFO - Liquidity Hunt sinyali tespit edildi BCH/USDT: 2 adet
+2025-09-13 14:22:43,072 - modules.market_data - INFO - Veri çekildi: LINK/USDT - 100 adet 15m mum
+2025-09-13 14:22:43,082 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi LINK/USDT: 1 adet
+2025-09-13 14:22:43,089 - __main__ - INFO - ⚡ Hızlı sinyal: LINK/USDT - SHORT - ORTA [SMC: 4, Güven: 78.3%]
+2025-09-13 14:22:43,089 - modules.market_data - ERROR - Veri çekme hatası MATIC/USDT: kucoin does not have market symbol MATIC/USDT
+2025-09-13 14:22:43,090 - modules.market_data - WARNING - Ana provider başarısız, alternatif deneniyor: MATIC/USDT
+2025-09-13 14:22:43,356 - modules.market_data - INFO - Veri çekildi: AVAX/USDT - 100 adet 15m mum
+2025-09-13 14:22:43,366 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi AVAX/USDT: 1 adet
+2025-09-13 14:22:43,635 - modules.market_data - INFO - Veri çekildi: SHIB/USDT - 100 adet 15m mum
+2025-09-13 14:22:43,645 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi SHIB/USDT: 1 adet
+2025-09-13 14:22:43,909 - modules.market_data - INFO - Veri çekildi: HOLO/USDT - 100 adet 15m mum
+2025-09-13 14:22:43,919 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi HOLO/USDT: 1 adet
+2025-09-13 14:22:44,202 - modules.market_data - INFO - Veri çekildi: SUI/USDT - 100 adet 15m mum
+2025-09-13 14:22:44,212 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi SUI/USDT: 1 adet
+2025-09-13 14:22:44,484 - modules.market_data - INFO - Veri çekildi: ADA/USDT - 100 adet 15m mum
+2025-09-13 14:22:44,494 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi ADA/USDT: 1 adet
+2025-09-13 14:22:44,501 - modules.smc_analyzer - INFO - Liquidity Hunt sinyali tespit edildi ADA/USDT: 2 adet
+2025-09-13 14:22:44,760 - modules.market_data - INFO - Veri çekildi: DOGE/USDT - 100 adet 15m mum
+2025-09-13 14:22:44,770 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi DOGE/USDT: 1 adet
+2025-09-13 14:22:45,057 - modules.market_data - INFO - Veri çekildi: UB/USDT - 100 adet 15m mum
+2025-09-13 14:22:45,332 - modules.market_data - INFO - Veri çekildi: DOT/USDT - 100 adet 15m mum
+2025-09-13 14:22:45,342 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi DOT/USDT: 1 adet
+2025-09-13 14:22:45,348 - modules.smc_analyzer - INFO - Order Block sinyali tespit edildi DOT/USDT: 1 adet
+2025-09-13 14:22:45,621 - modules.market_data - INFO - Veri çekildi: PEPE/USDT - 100 adet 15m mum
+2025-09-13 14:22:45,631 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi PEPE/USDT: 1 adet
+2025-09-13 14:22:45,637 - modules.smc_analyzer - INFO - Order Block sinyali tespit edildi PEPE/USDT: 1 adet
+2025-09-13 14:22:45,639 - __main__ - INFO - ⚡ Hızlı sinyal: PEPE/USDT - SHORT - ORTA [SMC: 4, Güven: 79.3%]
+2025-09-13 14:22:45,894 - modules.market_data - INFO - Veri çekildi: UNI/USDT - 100 adet 15m mum
+2025-09-13 14:22:45,911 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi UNI/USDT: 1 adet
+2025-09-13 14:22:45,918 - modules.smc_analyzer - INFO - Order Block sinyali tespit edildi UNI/USDT: 2 adet
+2025-09-13 14:22:45,919 - __main__ - INFO - ⚡ Hızlı sinyal: UNI/USDT - SHORT - ORTA [SMC: 4, Güven: 77.1%]
+2025-09-13 14:22:46,198 - modules.market_data - INFO - Veri çekildi: XMR/USDT - 100 adet 15m mum
+2025-09-13 14:22:46,479 - modules.market_data - INFO - KuCoin API'den veri çekildi: BTC/USDT - 100 adet
+2025-09-13 14:22:46,490 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi BTC/USDT: 1 adet
+2025-09-13 14:22:46,496 - modules.smc_analyzer - INFO - Order Block sinyali tespit edildi BTC/USDT: 1 adet
+2025-09-13 14:22:46,500 - modules.market_data - ERROR - KuCoin API veri hatası: {'msg': 'Unsupported trading pair.', 'code': '400100'}
+2025-09-13 14:22:46,501 - __main__ - WARNING - Yetersiz veri: MATIC/USDT
+2025-09-13 14:22:46,501 - __main__ - INFO - 🎯 Havuz doğrulama döngüsü başlatılıyor...
+2025-09-13 14:22:46,781 - modules.market_data - INFO - Veri çekildi: HYPE/USDT - 20 adet 5m mum
+2025-09-13 14:22:46,791 - modules.signal_pool - INFO - Doğrulama sonucu HYPE/USDT: Skor=1, Onay=True
+2025-09-13 14:22:46,791 - modules.signal_pool - INFO - Sebepler: Volume desteği (0.45x)
+2025-09-13 14:22:46,791 - modules.signal_pool - INFO - ⏳ Doğrulama devam: HYPE/USDT (2/3)
+2025-09-13 14:22:47,044 - modules.market_data - INFO - Veri çekildi: ETH/USDT - 20 adet 5m mum
+2025-09-13 14:22:47,054 - modules.signal_pool - INFO - Doğrulama sonucu ETH/USDT: Skor=1, Onay=True
+2025-09-13 14:22:47,054 - modules.signal_pool - INFO - Sebepler: Volume desteği (0.58x)
+2025-09-13 14:22:47,055 - modules.signal_pool - INFO - ⏳ Doğrulama devam: ETH/USDT (1/3)
+2025-09-13 14:22:47,310 - modules.market_data - INFO - Veri çekildi: SOMI/USDT - 20 adet 5m mum
+2025-09-13 14:22:47,320 - modules.signal_pool - INFO - Doğrulama sonucu SOMI/USDT: Skor=0, Onay=True
+2025-09-13 14:22:47,320 - modules.signal_pool - INFO - Sebepler: Orta volatilite (3.20%)
+2025-09-13 14:22:47,320 - modules.signal_pool - INFO - ⏳ Doğrulama devam: SOMI/USDT (1/3)
+2025-09-13 14:22:47,594 - modules.market_data - INFO - Veri çekildi: LTC/USDT - 20 adet 5m mum
+2025-09-13 14:22:47,604 - modules.signal_pool - INFO - Doğrulama sonucu LTC/USDT: Skor=1, Onay=True
+2025-09-13 14:22:47,604 - modules.signal_pool - INFO - Sebepler: Volume desteği (0.50x)
+2025-09-13 14:22:47,604 - modules.signal_pool - INFO - ✅ Havuz onayı: LTC/USDT - SHORT (Onay: 100%)
+2025-09-13 14:22:47,857 - modules.market_data - INFO - Veri çekildi: BCH/USDT - 20 adet 5m mum
+2025-09-13 14:22:47,874 - modules.signal_pool - INFO - Doğrulama sonucu BCH/USDT: Skor=-1, Onay=False
+2025-09-13 14:22:47,874 - modules.signal_pool - INFO - Sebepler: Volume çok zayıf (0.04x)
+2025-09-13 14:22:47,875 - modules.signal_pool - INFO - ✅ Havuz onayı: BCH/USDT - SHORT (Onay: 67%)
+2025-09-13 14:22:48,224 - modules.market_data - INFO - Veri çekildi: LINK/USDT - 20 adet 5m mum
+2025-09-13 14:22:48,234 - modules.signal_pool - INFO - Doğrulama sonucu LINK/USDT: Skor=1, Onay=True
+2025-09-13 14:22:48,234 - modules.signal_pool - INFO - Sebepler: Volume desteği (1.11x)
+2025-09-13 14:22:48,234 - modules.signal_pool - INFO - ⏳ Doğrulama devam: LINK/USDT (1/3)
+2025-09-13 14:22:48,499 - modules.market_data - INFO - Veri çekildi: AVAX/USDT - 20 adet 5m mum
+2025-09-13 14:22:48,509 - modules.signal_pool - INFO - Doğrulama sonucu AVAX/USDT: Skor=1, Onay=True
+2025-09-13 14:22:48,509 - modules.signal_pool - INFO - Sebepler: Volume desteği (0.50x)
+2025-09-13 14:22:48,509 - modules.signal_pool - INFO - ⏳ Doğrulama devam: AVAX/USDT (2/3)
+2025-09-13 14:22:48,764 - modules.market_data - INFO - Veri çekildi: HOLO/USDT - 20 adet 5m mum
+2025-09-13 14:22:48,774 - modules.signal_pool - INFO - Doğrulama sonucu HOLO/USDT: Skor=0, Onay=True
+2025-09-13 14:22:48,775 - modules.signal_pool - INFO - Sebepler: 
+2025-09-13 14:22:48,775 - modules.signal_pool - INFO - ✅ Havuz onayı: HOLO/USDT - SHORT (Onay: 100%)
+2025-09-13 14:22:49,039 - modules.market_data - INFO - Veri çekildi: SUI/USDT - 20 adet 5m mum
+2025-09-13 14:22:49,049 - modules.signal_pool - INFO - Doğrulama sonucu SUI/USDT: Skor=0, Onay=True
+2025-09-13 14:22:49,049 - modules.signal_pool - INFO - Sebepler: 
+2025-09-13 14:22:49,049 - modules.signal_pool - INFO - ⏳ Doğrulama devam: SUI/USDT (2/3)
+2025-09-13 14:22:49,316 - modules.market_data - INFO - Veri çekildi: ADA/USDT - 20 adet 5m mum
+2025-09-13 14:22:49,326 - modules.signal_pool - INFO - Doğrulama sonucu ADA/USDT: Skor=-1, Onay=False
+2025-09-13 14:22:49,326 - modules.signal_pool - INFO - Sebepler: Pozitif momentum (0.31%) | Volume desteği (0.47x)
+2025-09-13 14:22:49,327 - modules.signal_pool - INFO - ⏳ Doğrulama devam: ADA/USDT (2/3)
+2025-09-13 14:22:49,582 - modules.market_data - INFO - Veri çekildi: DOGE/USDT - 20 adet 5m mum
+2025-09-13 14:22:49,593 - modules.signal_pool - INFO - Doğrulama sonucu DOGE/USDT: Skor=-2, Onay=False
+2025-09-13 14:22:49,593 - modules.signal_pool - INFO - Sebepler: Pozitif momentum (0.44%)
+2025-09-13 14:22:49,593 - modules.signal_pool - INFO - ⏳ Doğrulama devam: DOGE/USDT (2/3)
+2025-09-13 14:22:49,860 - modules.market_data - INFO - Veri çekildi: DOT/USDT - 20 adet 5m mum
+2025-09-13 14:22:49,873 - modules.signal_pool - INFO - Doğrulama sonucu DOT/USDT: Skor=1, Onay=True
+2025-09-13 14:22:49,874 - modules.signal_pool - INFO - Sebepler: Volume desteği (0.53x)
+2025-09-13 14:22:49,874 - modules.signal_pool - INFO - ⏳ Doğrulama devam: DOT/USDT (2/3)
+2025-09-13 14:22:50,181 - modules.market_data - INFO - Veri çekildi: PEPE/USDT - 20 adet 5m mum
+2025-09-13 14:22:50,191 - modules.signal_pool - INFO - Doğrulama sonucu PEPE/USDT: Skor=0, Onay=True
+2025-09-13 14:22:50,191 - modules.signal_pool - INFO - Sebepler: 
+2025-09-13 14:22:50,191 - modules.signal_pool - INFO - ⏳ Doğrulama devam: PEPE/USDT (1/3)
+2025-09-13 14:22:50,450 - modules.market_data - INFO - Veri çekildi: UNI/USDT - 20 adet 5m mum
+2025-09-13 14:22:50,460 - modules.signal_pool - INFO - Doğrulama sonucu UNI/USDT: Skor=1, Onay=True
+2025-09-13 14:22:50,460 - modules.signal_pool - INFO - Sebepler: Volume desteği (0.60x)
+2025-09-13 14:22:50,461 - modules.signal_pool - INFO - ⏳ Doğrulama devam: UNI/USDT (1/3)
+2025-09-13 14:22:50,714 - modules.market_data - INFO - Veri çekildi: BTC/USDT - 20 adet 5m mum
+2025-09-13 14:22:50,724 - modules.signal_pool - INFO - Doğrulama sonucu BTC/USDT: Skor=1, Onay=True
+2025-09-13 14:22:50,724 - modules.signal_pool - INFO - Sebepler: Volume desteği (0.66x)
+2025-09-13 14:22:50,724 - modules.signal_pool - INFO - ⏳ Doğrulama devam: BTC/USDT (2/3)
+2025-09-13 14:22:50,724 - modules.signal_pool - INFO - 🎯 Havuzdan 3 onaylı sinyal çıktı
+2025-09-13 14:22:50,724 - __main__ - INFO - 📊 Tarama tamamlandı: 4 yeni sinyal
+2025-09-13 14:22:50,724 - __main__ - INFO - 🎯 Havuz doğrulama: 3 onaylı sinyal
+2025-09-13 14:22:50,724 - modules.signal_pool - INFO - Havuzda güncellendi: ETH/USDT - SHORT
+2025-09-13 14:22:50,724 - modules.signal_pool - INFO - Havuzda güncellendi: LINK/USDT - SHORT
+2025-09-13 14:22:50,724 - modules.signal_pool - INFO - Havuzda güncellendi: PEPE/USDT - SHORT
+2025-09-13 14:22:50,724 - modules.signal_pool - INFO - Havuzda güncellendi: UNI/USDT - SHORT
+2025-09-13 14:22:50,791 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8484153893:AAEybdOXrMvpDEjAg-o2KiCFYWtDSL1PxH4/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 14:22:50,792 - modules.telegram_notifier - INFO - Sinyal gönderildi: LTC/USDT - SHORT
+2025-09-13 14:22:50,792 - modules.market_data - INFO - Cache'den veri alındı: LTC/USDT
+2025-09-13 14:22:50,794 - modules.trade_memory - INFO - Trade kaydı oluşturuldu: LTC/USDT_1757773366
+2025-09-13 14:22:50,794 - modules.trade_memory - INFO - TP/SL Seviyeleri: TP1=118.120000, TP2=117.485000, TP3=116.850000, SL=120.660000
+2025-09-13 14:22:50,795 - modules.trade_memory - INFO - Trade hafızaya eklendi: LTC/USDT_1757773366
+2025-09-13 14:22:50,795 - modules.trade_tracker - INFO - İşlem takibe eklendi: LTC/USDT_1757773366 - LTC/USDT SHORT
+2025-09-13 14:22:50,795 - modules.trade_tracker - INFO - Seviyeler: TP1=118.120000, TP2=117.485000, TP3=116.850000, SL=120.660000
+2025-09-13 14:22:50,795 - __main__ - INFO - 🤖 AI sistemi: LTC/USDT işlemi takibe alındı!
+2025-09-13 14:22:50,833 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8484153893:AAEybdOXrMvpDEjAg-o2KiCFYWtDSL1PxH4/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 14:22:50,876 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8484153893:AAEybdOXrMvpDEjAg-o2KiCFYWtDSL1PxH4/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 14:22:50,877 - modules.telegram_notifier - INFO - Sinyal gönderildi: BCH/USDT - SHORT
+2025-09-13 14:22:50,877 - modules.market_data - INFO - Cache'den veri alındı: BCH/USDT
+2025-09-13 14:22:50,879 - modules.trade_memory - INFO - Trade kaydı oluşturuldu: BCH/USDT_1757773366
+2025-09-13 14:22:50,879 - modules.trade_memory - INFO - TP/SL Seviyeleri: TP1=595.021429, TP2=593.072143, TP3=591.122857, SL=602.818571
+2025-09-13 14:22:50,880 - modules.trade_memory - INFO - Trade hafızaya eklendi: BCH/USDT_1757773366
+2025-09-13 14:22:50,880 - modules.trade_tracker - INFO - İşlem takibe eklendi: BCH/USDT_1757773366 - BCH/USDT SHORT
+2025-09-13 14:22:50,880 - modules.trade_tracker - INFO - Seviyeler: TP1=595.021429, TP2=593.072143, TP3=591.122857, SL=602.818571
+2025-09-13 14:22:50,880 - __main__ - INFO - 🤖 AI sistemi: BCH/USDT işlemi takibe alındı!
+2025-09-13 14:22:50,922 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8484153893:AAEybdOXrMvpDEjAg-o2KiCFYWtDSL1PxH4/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 14:22:50,999 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8484153893:AAEybdOXrMvpDEjAg-o2KiCFYWtDSL1PxH4/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 14:22:51,000 - modules.telegram_notifier - INFO - Sinyal gönderildi: HOLO/USDT - SHORT
+2025-09-13 14:22:51,000 - modules.market_data - INFO - Cache'den veri alındı: HOLO/USDT
+2025-09-13 14:22:51,002 - modules.trade_memory - INFO - Trade kaydı oluşturuldu: HOLO/USDT_1757773366
+2025-09-13 14:22:51,002 - modules.trade_memory - INFO - TP/SL Seviyeleri: TP1=0.404221, TP2=0.397717, TP3=0.391213, SL=0.430239
+2025-09-13 14:22:51,002 - modules.trade_memory - INFO - Trade hafızaya eklendi: HOLO/USDT_1757773366
+2025-09-13 14:22:51,003 - modules.trade_tracker - INFO - İşlem takibe eklendi: HOLO/USDT_1757773366 - HOLO/USDT SHORT
+2025-09-13 14:22:51,003 - modules.trade_tracker - INFO - Seviyeler: TP1=0.404221, TP2=0.397717, TP3=0.391213, SL=0.430239
+2025-09-13 14:22:51,003 - __main__ - INFO - 🤖 AI sistemi: HOLO/USDT işlemi takibe alındı!
+2025-09-13 14:22:51,050 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8484153893:AAEybdOXrMvpDEjAg-o2KiCFYWtDSL1PxH4/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 14:22:51,081 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8484153893:AAEybdOXrMvpDEjAg-o2KiCFYWtDSL1PxH4/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 14:22:51,082 - __main__ - INFO - 📊 Yeni tarama: 4 sinyal
+2025-09-13 14:22:51,082 - __main__ - INFO - 🎯 Havuza eklenen: 4
+2025-09-13 14:22:51,082 - __main__ - INFO - ✅ Onaylı gönderilen: 3
+2025-09-13 14:22:51,082 - __main__ - INFO - 🔄 Havuzda bekleyen: 12
+2025-09-13 14:22:51,082 - __main__ - INFO - 📊 Havuz durumu: BEKLEMEDE: 12
+2025-09-13 14:22:51,082 - __main__ - INFO - 🕐 Döngü tamamlandı: 20.18s
+2025-09-13 14:22:51,082 - __main__ - INFO - Sonraki kontrol: 300 saniye...
+2025-09-13 14:23:51,041 - modules.market_data - INFO - Veri çekildi: LTC/USDT - 1 adet 1m mum
+2025-09-13 14:23:51,308 - modules.market_data - INFO - Veri çekildi: BCH/USDT - 1 adet 1m mum
+2025-09-13 14:23:51,564 - modules.market_data - INFO - Veri çekildi: HOLO/USDT - 1 adet 1m mum
+2025-09-13 14:24:51,860 - modules.market_data - INFO - Veri çekildi: LTC/USDT - 1 adet 1m mum
+2025-09-13 14:24:52,162 - modules.market_data - WARNING - Veri bulunamadı: BCH/USDT
+2025-09-13 14:24:52,162 - modules.market_data - WARNING - Ana provider başarısız, alternatif deneniyor: BCH/USDT
+2025-09-13 14:24:52,455 - modules.market_data - INFO - KuCoin API'den veri çekildi: BCH/USDT - 1 adet
+2025-09-13 14:24:52,707 - modules.market_data - INFO - Veri çekildi: HOLO/USDT - 1 adet 1m mum
+2025-09-13 14:25:53,020 - modules.market_data - INFO - Veri çekildi: LTC/USDT - 1 adet 1m mum
+2025-09-13 14:25:53,275 - modules.market_data - INFO - Veri çekildi: BCH/USDT - 1 adet 1m mum
+2025-09-13 14:25:53,528 - modules.market_data - INFO - Veri çekildi: HOLO/USDT - 1 adet 1m mum
+2025-09-13 14:26:53,819 - modules.market_data - INFO - Veri çekildi: LTC/USDT - 1 adet 1m mum
+2025-09-13 14:26:54,076 - modules.market_data - INFO - Veri çekildi: BCH/USDT - 1 adet 1m mum
+2025-09-13 14:26:54,337 - modules.market_data - INFO - Veri çekildi: HOLO/USDT - 1 adet 1m mum
+2025-09-13 14:27:51,140 - __main__ - INFO - 🔄 Yeni havuz döngüsü başlıyor...
+2025-09-13 14:27:51,140 - __main__ - INFO - 📊 15dk tarama başlatılıyor: 20 coin...
+2025-09-13 14:27:51,412 - modules.market_data - INFO - Veri çekildi: BTC/USDT - 100 adet 15m mum
+2025-09-13 14:27:51,422 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi BTC/USDT: 1 adet
+2025-09-13 14:27:51,429 - modules.smc_analyzer - INFO - Order Block sinyali tespit edildi BTC/USDT: 1 adet
+2025-09-13 14:27:51,687 - modules.market_data - INFO - Veri çekildi: HYPE/USDT - 100 adet 15m mum
+2025-09-13 14:27:51,697 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi HYPE/USDT: 1 adet
+2025-09-13 14:27:51,971 - modules.market_data - INFO - Veri çekildi: ETH/USDT - 100 adet 15m mum
+2025-09-13 14:27:51,981 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi ETH/USDT: 1 adet
+2025-09-13 14:27:51,988 - modules.smc_analyzer - INFO - Liquidity Hunt sinyali tespit edildi ETH/USDT: 2 adet
+2025-09-13 14:27:51,989 - __main__ - INFO - ⚡ Hızlı sinyal: ETH/USDT - SHORT - GÜÇLÜ [SMC: 4, Güven: 76.3%]
+2025-09-13 14:27:52,254 - modules.market_data - INFO - Veri çekildi: SOMI/USDT - 100 adet 15m mum
+2025-09-13 14:27:52,264 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi SOMI/USDT: 1 adet
+2025-09-13 14:27:52,269 - modules.smc_analyzer - INFO - MSS/BOS sinyali tespit edildi SOMI/USDT: 1 adet
+2025-09-13 14:27:52,271 - __main__ - INFO - ⚡ Hızlı sinyal: SOMI/USDT - LONG - ORTA [SMC: 9, Güven: 95.0%]
+2025-09-13 14:27:52,539 - modules.market_data - INFO - Veri çekildi: HIFI/USDT - 100 adet 15m mum
+2025-09-13 14:27:52,816 - modules.market_data - INFO - Veri çekildi: LTC/USDT - 100 adet 15m mum
+2025-09-13 14:27:52,826 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi LTC/USDT: 1 adet
+2025-09-13 14:27:53,088 - modules.market_data - INFO - Veri çekildi: BCH/USDT - 100 adet 15m mum
+2025-09-13 14:27:53,098 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi BCH/USDT: 1 adet
+2025-09-13 14:27:53,105 - modules.smc_analyzer - INFO - Liquidity Hunt sinyali tespit edildi BCH/USDT: 2 adet
+2025-09-13 14:27:53,375 - modules.market_data - INFO - Veri çekildi: LINK/USDT - 100 adet 15m mum
+2025-09-13 14:27:53,385 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi LINK/USDT: 1 adet
+2025-09-13 14:27:53,393 - __main__ - INFO - ⚡ Hızlı sinyal: LINK/USDT - SHORT - ORTA [SMC: 4, Güven: 78.0%]
+2025-09-13 14:27:53,393 - modules.market_data - ERROR - Veri çekme hatası MATIC/USDT: kucoin does not have market symbol MATIC/USDT
+2025-09-13 14:27:53,393 - modules.market_data - WARNING - Ana provider başarısız, alternatif deneniyor: MATIC/USDT
+2025-09-13 14:27:53,725 - modules.market_data - INFO - Veri çekildi: AVAX/USDT - 100 adet 15m mum
+2025-09-13 14:27:53,740 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi AVAX/USDT: 1 adet
+2025-09-13 14:27:54,015 - modules.market_data - INFO - Veri çekildi: SHIB/USDT - 100 adet 15m mum
+2025-09-13 14:27:54,025 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi SHIB/USDT: 1 adet
+2025-09-13 14:27:54,300 - modules.market_data - INFO - Veri çekildi: HOLO/USDT - 100 adet 15m mum
+2025-09-13 14:27:54,310 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi HOLO/USDT: 1 adet
+2025-09-13 14:27:54,586 - modules.market_data - INFO - Veri çekildi: SUI/USDT - 100 adet 15m mum
+2025-09-13 14:27:54,596 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi SUI/USDT: 1 adet
+2025-09-13 14:27:54,872 - modules.market_data - INFO - Veri çekildi: ADA/USDT - 100 adet 15m mum
+2025-09-13 14:27:54,882 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi ADA/USDT: 1 adet
+2025-09-13 14:27:54,889 - modules.smc_analyzer - INFO - Liquidity Hunt sinyali tespit edildi ADA/USDT: 2 adet
+2025-09-13 14:27:55,144 - modules.market_data - INFO - Veri çekildi: DOGE/USDT - 100 adet 15m mum
+2025-09-13 14:27:55,154 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi DOGE/USDT: 1 adet
+2025-09-13 14:27:55,427 - modules.market_data - INFO - Veri çekildi: UB/USDT - 100 adet 15m mum
+2025-09-13 14:27:55,704 - modules.market_data - INFO - Veri çekildi: DOT/USDT - 100 adet 15m mum
+2025-09-13 14:27:55,714 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi DOT/USDT: 1 adet
+2025-09-13 14:27:55,720 - modules.smc_analyzer - INFO - Order Block sinyali tespit edildi DOT/USDT: 1 adet
+2025-09-13 14:27:55,986 - modules.market_data - INFO - Veri çekildi: PEPE/USDT - 100 adet 15m mum
+2025-09-13 14:27:55,996 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi PEPE/USDT: 1 adet
+2025-09-13 14:27:56,002 - modules.smc_analyzer - INFO - Order Block sinyali tespit edildi PEPE/USDT: 1 adet
+2025-09-13 14:27:56,003 - __main__ - INFO - ⚡ Hızlı sinyal: PEPE/USDT - SHORT - ORTA [SMC: 4, Güven: 79.2%]
+2025-09-13 14:27:56,278 - modules.market_data - INFO - Veri çekildi: UNI/USDT - 100 adet 15m mum
+2025-09-13 14:27:56,289 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi UNI/USDT: 1 adet
+2025-09-13 14:27:56,295 - modules.smc_analyzer - INFO - Order Block sinyali tespit edildi UNI/USDT: 2 adet
+2025-09-13 14:27:56,297 - __main__ - INFO - ⚡ Hızlı sinyal: UNI/USDT - SHORT - ORTA [SMC: 4, Güven: 76.8%]
+2025-09-13 14:27:56,560 - modules.market_data - INFO - Veri çekildi: XMR/USDT - 100 adet 15m mum
+2025-09-13 14:27:56,845 - modules.market_data - INFO - Veri çekildi: LTC/USDT - 1 adet 1m mum
+2025-09-13 14:27:57,109 - modules.market_data - INFO - Veri çekildi: BCH/USDT - 1 adet 1m mum
+2025-09-13 14:27:57,395 - modules.market_data - INFO - Veri çekildi: HOLO/USDT - 1 adet 1m mum
+2025-09-13 14:27:57,747 - modules.market_data - ERROR - KuCoin API veri hatası: {'msg': 'Unsupported trading pair.', 'code': '400100'}
+2025-09-13 14:27:57,748 - __main__ - WARNING - Yetersiz veri: MATIC/USDT
+2025-09-13 14:27:57,748 - __main__ - INFO - 🎯 Havuz doğrulama döngüsü başlatılıyor...
+2025-09-13 14:27:58,001 - modules.market_data - INFO - Veri çekildi: HYPE/USDT - 20 adet 5m mum
+2025-09-13 14:27:58,012 - modules.signal_pool - INFO - Doğrulama sonucu HYPE/USDT: Skor=1, Onay=True
+2025-09-13 14:27:58,012 - modules.signal_pool - INFO - Sebepler: Volume desteği (0.43x)
+2025-09-13 14:27:58,012 - modules.signal_pool - INFO - ✅ Havuz onayı: HYPE/USDT - SHORT (Onay: 100%)
+2025-09-13 14:27:58,268 - modules.market_data - INFO - Veri çekildi: ETH/USDT - 20 adet 5m mum
+2025-09-13 14:27:58,278 - modules.signal_pool - INFO - Doğrulama sonucu ETH/USDT: Skor=0, Onay=True
+2025-09-13 14:27:58,278 - modules.signal_pool - INFO - Sebepler: 
+2025-09-13 14:27:58,278 - modules.signal_pool - INFO - ⏳ Doğrulama devam: ETH/USDT (1/3)
+2025-09-13 14:27:58,531 - modules.market_data - INFO - Veri çekildi: SOMI/USDT - 20 adet 5m mum
+2025-09-13 14:27:58,541 - modules.signal_pool - INFO - Doğrulama sonucu SOMI/USDT: Skor=3, Onay=True
+2025-09-13 14:27:58,541 - modules.signal_pool - INFO - Sebepler: Pozitif momentum (0.33%) | Volume desteği (0.63x) | Orta volatilite (2.34%)
+2025-09-13 14:27:58,541 - modules.signal_pool - INFO - ⏳ Doğrulama devam: SOMI/USDT (2/3)
+2025-09-13 14:27:58,794 - modules.market_data - INFO - Veri çekildi: LINK/USDT - 20 adet 5m mum
+2025-09-13 14:27:58,812 - modules.signal_pool - INFO - Doğrulama sonucu LINK/USDT: Skor=0, Onay=True
+2025-09-13 14:27:58,812 - modules.signal_pool - INFO - Sebepler: 
+2025-09-13 14:27:58,812 - modules.signal_pool - INFO - ⏳ Doğrulama devam: LINK/USDT (1/3)
+2025-09-13 14:27:59,083 - modules.market_data - INFO - Veri çekildi: AVAX/USDT - 20 adet 5m mum
+2025-09-13 14:27:59,093 - modules.signal_pool - INFO - Doğrulama sonucu AVAX/USDT: Skor=1, Onay=True
+2025-09-13 14:27:59,093 - modules.signal_pool - INFO - Sebepler: Volume desteği (0.57x)
+2025-09-13 14:27:59,093 - modules.signal_pool - INFO - ✅ Havuz onayı: AVAX/USDT - SHORT (Onay: 100%)
+2025-09-13 14:27:59,348 - modules.market_data - INFO - Veri çekildi: SUI/USDT - 20 adet 5m mum
+2025-09-13 14:27:59,358 - modules.signal_pool - INFO - Doğrulama sonucu SUI/USDT: Skor=0, Onay=True
+2025-09-13 14:27:59,358 - modules.signal_pool - INFO - Sebepler: 
+2025-09-13 14:27:59,359 - modules.signal_pool - INFO - ✅ Havuz onayı: SUI/USDT - SHORT (Onay: 67%)
+2025-09-13 14:27:59,625 - modules.market_data - INFO - Veri çekildi: ADA/USDT - 20 adet 5m mum
+2025-09-13 14:27:59,635 - modules.signal_pool - INFO - Doğrulama sonucu ADA/USDT: Skor=1, Onay=True
+2025-09-13 14:27:59,635 - modules.signal_pool - INFO - Sebepler: Volume desteği (0.70x)
+2025-09-13 14:27:59,635 - modules.signal_pool - INFO - ✅ Havuz onayı: ADA/USDT - SHORT (Onay: 67%)
+2025-09-13 14:27:59,906 - modules.market_data - INFO - Veri çekildi: DOGE/USDT - 20 adet 5m mum
+2025-09-13 14:27:59,921 - modules.signal_pool - INFO - Doğrulama sonucu DOGE/USDT: Skor=1, Onay=True
+2025-09-13 14:27:59,921 - modules.signal_pool - INFO - Sebepler: Volume desteği (0.42x)
+2025-09-13 14:27:59,922 - modules.signal_pool - INFO - ❌ Havuz reddi: DOGE/USDT (Onay: 33%)
+2025-09-13 14:28:00,197 - modules.market_data - INFO - Veri çekildi: DOT/USDT - 20 adet 5m mum
+2025-09-13 14:28:00,208 - modules.signal_pool - INFO - Doğrulama sonucu DOT/USDT: Skor=1, Onay=True
+2025-09-13 14:28:00,208 - modules.signal_pool - INFO - Sebepler: Volume desteği (0.56x)
+2025-09-13 14:28:00,208 - modules.signal_pool - INFO - ✅ Havuz onayı: DOT/USDT - SHORT (Onay: 100%)
+2025-09-13 14:28:00,470 - modules.market_data - INFO - Veri çekildi: PEPE/USDT - 20 adet 5m mum
+2025-09-13 14:28:00,480 - modules.signal_pool - INFO - Doğrulama sonucu PEPE/USDT: Skor=0, Onay=True
+2025-09-13 14:28:00,480 - modules.signal_pool - INFO - Sebepler: 
+2025-09-13 14:28:00,480 - modules.signal_pool - INFO - ⏳ Doğrulama devam: PEPE/USDT (1/3)
+2025-09-13 14:28:00,746 - modules.market_data - INFO - Veri çekildi: UNI/USDT - 20 adet 5m mum
+2025-09-13 14:28:00,756 - modules.signal_pool - INFO - Doğrulama sonucu UNI/USDT: Skor=0, Onay=True
+2025-09-13 14:28:00,756 - modules.signal_pool - INFO - Sebepler: 
+2025-09-13 14:28:00,757 - modules.signal_pool - INFO - ⏳ Doğrulama devam: UNI/USDT (1/3)
+2025-09-13 14:28:01,028 - modules.market_data - INFO - Veri çekildi: BTC/USDT - 20 adet 5m mum
+2025-09-13 14:28:01,038 - modules.signal_pool - INFO - Doğrulama sonucu BTC/USDT: Skor=1, Onay=True
+2025-09-13 14:28:01,038 - modules.signal_pool - INFO - Sebepler: Volume desteği (0.80x)
+2025-09-13 14:28:01,038 - modules.signal_pool - INFO - ✅ Havuz onayı: BTC/USDT - SHORT (Onay: 100%)
+2025-09-13 14:28:01,038 - modules.signal_pool - INFO - 🎯 Havuzdan 6 onaylı sinyal çıktı
+2025-09-13 14:28:01,038 - __main__ - INFO - 📊 Tarama tamamlandı: 5 yeni sinyal
+2025-09-13 14:28:01,038 - __main__ - INFO - 🎯 Havuz doğrulama: 6 onaylı sinyal
+2025-09-13 14:28:01,039 - modules.signal_pool - INFO - Havuzda güncellendi: ETH/USDT - SHORT
+2025-09-13 14:28:01,039 - modules.signal_pool - INFO - Havuzda güncellendi: SOMI/USDT - LONG
+2025-09-13 14:28:01,039 - modules.signal_pool - INFO - Havuzda güncellendi: LINK/USDT - SHORT
+2025-09-13 14:28:01,039 - modules.signal_pool - INFO - Havuzda güncellendi: PEPE/USDT - SHORT
+2025-09-13 14:28:01,039 - modules.signal_pool - INFO - Havuzda güncellendi: UNI/USDT - SHORT
+2025-09-13 14:28:01,204 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8484153893:AAEybdOXrMvpDEjAg-o2KiCFYWtDSL1PxH4/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 14:28:01,205 - modules.telegram_notifier - INFO - Sinyal gönderildi: HYPE/USDT - SHORT
+2025-09-13 14:28:01,205 - modules.market_data - INFO - Cache'den veri alındı: HYPE/USDT
+2025-09-13 14:28:01,207 - modules.trade_memory - INFO - Trade kaydı oluşturuldu: HYPE/USDT_1757773677
+2025-09-13 14:28:01,207 - modules.trade_memory - INFO - TP/SL Seviyeleri: TP1=54.952000, TP2=54.578500, TP3=54.205000, SL=56.446000
+2025-09-13 14:28:01,208 - modules.trade_memory - INFO - Trade hafızaya eklendi: HYPE/USDT_1757773677
+2025-09-13 14:28:01,208 - modules.trade_tracker - INFO - İşlem takibe eklendi: HYPE/USDT_1757773677 - HYPE/USDT SHORT
+2025-09-13 14:28:01,208 - modules.trade_tracker - INFO - Seviyeler: TP1=54.952000, TP2=54.578500, TP3=54.205000, SL=56.446000
+2025-09-13 14:28:01,208 - __main__ - INFO - 🤖 AI sistemi: HYPE/USDT işlemi takibe alındı!
+2025-09-13 14:28:01,318 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8484153893:AAEybdOXrMvpDEjAg-o2KiCFYWtDSL1PxH4/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 14:28:01,467 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8484153893:AAEybdOXrMvpDEjAg-o2KiCFYWtDSL1PxH4/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 14:28:01,468 - modules.telegram_notifier - INFO - Sinyal gönderildi: AVAX/USDT - SHORT
+2025-09-13 14:28:01,468 - modules.market_data - INFO - Cache'den veri alındı: AVAX/USDT
+2025-09-13 14:28:01,469 - modules.trade_memory - INFO - Trade kaydı oluşturuldu: AVAX/USDT_1757773677
+2025-09-13 14:28:01,469 - modules.trade_memory - INFO - TP/SL Seviyeleri: TP1=29.596286, TP2=29.416929, TP3=29.237571, SL=30.313714
+2025-09-13 14:28:01,470 - modules.trade_memory - INFO - Trade hafızaya eklendi: AVAX/USDT_1757773677
+2025-09-13 14:28:01,470 - modules.trade_tracker - INFO - İşlem takibe eklendi: AVAX/USDT_1757773677 - AVAX/USDT SHORT
+2025-09-13 14:28:01,470 - modules.trade_tracker - INFO - Seviyeler: TP1=29.596286, TP2=29.416929, TP3=29.237571, SL=30.313714
+2025-09-13 14:28:01,470 - __main__ - INFO - 🤖 AI sistemi: AVAX/USDT işlemi takibe alındı!
+2025-09-13 14:28:01,625 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8484153893:AAEybdOXrMvpDEjAg-o2KiCFYWtDSL1PxH4/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 14:28:01,756 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8484153893:AAEybdOXrMvpDEjAg-o2KiCFYWtDSL1PxH4/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 14:28:01,757 - modules.telegram_notifier - INFO - Sinyal gönderildi: SUI/USDT - SHORT
+2025-09-13 14:28:01,757 - modules.market_data - INFO - Cache'den veri alındı: SUI/USDT
+2025-09-13 14:28:01,758 - modules.trade_memory - INFO - Trade kaydı oluşturuldu: SUI/USDT_1757773677
+2025-09-13 14:28:01,759 - modules.trade_memory - INFO - TP/SL Seviyeleri: TP1=3.737471, TP2=3.709007, TP3=3.680543, SL=3.851329
+2025-09-13 14:28:01,760 - modules.trade_memory - INFO - Trade hafızaya eklendi: SUI/USDT_1757773677
+2025-09-13 14:28:01,760 - modules.trade_tracker - INFO - İşlem takibe eklendi: SUI/USDT_1757773677 - SUI/USDT SHORT
+2025-09-13 14:28:01,760 - modules.trade_tracker - INFO - Seviyeler: TP1=3.737471, TP2=3.709007, TP3=3.680543, SL=3.851329
+2025-09-13 14:28:01,760 - __main__ - INFO - 🤖 AI sistemi: SUI/USDT işlemi takibe alındı!
+2025-09-13 14:28:01,841 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8484153893:AAEybdOXrMvpDEjAg-o2KiCFYWtDSL1PxH4/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 14:28:01,923 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8484153893:AAEybdOXrMvpDEjAg-o2KiCFYWtDSL1PxH4/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 14:28:01,924 - modules.telegram_notifier - INFO - Sinyal gönderildi: ADA/USDT - SHORT
+2025-09-13 14:28:01,924 - modules.market_data - INFO - Cache'den veri alındı: ADA/USDT
+2025-09-13 14:28:01,926 - modules.trade_memory - INFO - Trade kaydı oluşturuldu: ADA/USDT_1757773677
+2025-09-13 14:28:01,926 - modules.trade_memory - INFO - TP/SL Seviyeleri: TP1=0.924800, TP2=0.918350, TP3=0.911900, SL=0.950600
+2025-09-13 14:28:01,927 - modules.trade_memory - INFO - Trade hafızaya eklendi: ADA/USDT_1757773677
+2025-09-13 14:28:01,927 - modules.trade_tracker - INFO - İşlem takibe eklendi: ADA/USDT_1757773677 - ADA/USDT SHORT
+2025-09-13 14:28:01,927 - modules.trade_tracker - INFO - Seviyeler: TP1=0.924800, TP2=0.918350, TP3=0.911900, SL=0.950600
+2025-09-13 14:28:01,927 - __main__ - INFO - 🤖 AI sistemi: ADA/USDT işlemi takibe alındı!
+2025-09-13 14:28:01,992 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8484153893:AAEybdOXrMvpDEjAg-o2KiCFYWtDSL1PxH4/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 14:28:02,079 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8484153893:AAEybdOXrMvpDEjAg-o2KiCFYWtDSL1PxH4/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 14:28:02,080 - modules.telegram_notifier - INFO - Sinyal gönderildi: DOT/USDT - SHORT
+2025-09-13 14:28:02,080 - modules.market_data - INFO - Cache'den veri alındı: DOT/USDT
+2025-09-13 14:28:02,083 - modules.trade_memory - INFO - Trade kaydı oluşturuldu: DOT/USDT_1757773677
+2025-09-13 14:28:02,084 - modules.trade_memory - INFO - TP/SL Seviyeleri: TP1=4.459514, TP2=4.418721, TP3=4.377929, SL=4.622686
+2025-09-13 14:28:02,086 - modules.trade_memory - INFO - Trade hafızaya eklendi: DOT/USDT_1757773677
+2025-09-13 14:28:02,086 - modules.trade_tracker - INFO - İşlem takibe eklendi: DOT/USDT_1757773677 - DOT/USDT SHORT
+2025-09-13 14:28:02,086 - modules.trade_tracker - INFO - Seviyeler: TP1=4.459514, TP2=4.418721, TP3=4.377929, SL=4.622686
+2025-09-13 14:28:02,087 - __main__ - INFO - 🤖 AI sistemi: DOT/USDT işlemi takibe alındı!
+2025-09-13 14:28:02,117 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8484153893:AAEybdOXrMvpDEjAg-o2KiCFYWtDSL1PxH4/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 14:28:02,164 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8484153893:AAEybdOXrMvpDEjAg-o2KiCFYWtDSL1PxH4/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 14:28:02,164 - modules.telegram_notifier - INFO - Sinyal gönderildi: BTC/USDT - SHORT
+2025-09-13 14:28:02,165 - modules.market_data - INFO - Cache'den veri alındı: BTC/USDT
+2025-09-13 14:28:02,166 - modules.trade_memory - INFO - Trade kaydı oluşturuldu: BTC/USDT_1757773677
+2025-09-13 14:28:02,166 - modules.trade_memory - INFO - TP/SL Seviyeleri: TP1=115522.971429, TP2=115415.257143, TP3=115307.542857, SL=115953.828571
+2025-09-13 14:28:02,168 - modules.trade_memory - INFO - Trade hafızaya eklendi: BTC/USDT_1757773677
+2025-09-13 14:28:02,168 - modules.trade_tracker - INFO - İşlem takibe eklendi: BTC/USDT_1757773677 - BTC/USDT SHORT
+2025-09-13 14:28:02,168 - modules.trade_tracker - INFO - Seviyeler: TP1=115522.971429, TP2=115415.257143, TP3=115307.542857, SL=115953.828571
+2025-09-13 14:28:02,168 - __main__ - INFO - 🤖 AI sistemi: BTC/USDT işlemi takibe alındı!
+2025-09-13 14:28:02,203 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8484153893:AAEybdOXrMvpDEjAg-o2KiCFYWtDSL1PxH4/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 14:28:02,238 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8484153893:AAEybdOXrMvpDEjAg-o2KiCFYWtDSL1PxH4/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 14:28:02,238 - __main__ - INFO - 📊 Yeni tarama: 5 sinyal
+2025-09-13 14:28:02,238 - __main__ - INFO - 🎯 Havuza eklenen: 5
+2025-09-13 14:28:02,238 - __main__ - INFO - ✅ Onaylı gönderilen: 6
+2025-09-13 14:28:02,239 - __main__ - INFO - 🔄 Havuzda bekleyen: 5
+2025-09-13 14:28:02,239 - __main__ - INFO - 📊 Havuz durumu: BEKLEMEDE: 5
+2025-09-13 14:28:02,239 - __main__ - INFO - 🕐 Döngü tamamlandı: 11.10s
+2025-09-13 14:28:02,239 - __main__ - INFO - Sonraki kontrol: 300 saniye...
+2025-09-13 14:28:57,705 - modules.market_data - INFO - Veri çekildi: LTC/USDT - 1 adet 1m mum
+2025-09-13 14:28:57,983 - modules.market_data - INFO - Veri çekildi: BCH/USDT - 1 adet 1m mum
+2025-09-13 14:28:58,248 - modules.market_data - INFO - Veri çekildi: HOLO/USDT - 1 adet 1m mum
+2025-09-13 14:28:58,520 - modules.market_data - INFO - Veri çekildi: HYPE/USDT - 1 adet 1m mum
+2025-09-13 14:28:58,780 - modules.market_data - INFO - Veri çekildi: AVAX/USDT - 1 adet 1m mum
+2025-09-13 14:28:59,033 - modules.market_data - INFO - Veri çekildi: SUI/USDT - 1 adet 1m mum
+2025-09-13 14:28:59,299 - modules.market_data - INFO - Veri çekildi: ADA/USDT - 1 adet 1m mum
+2025-09-13 14:28:59,569 - modules.market_data - INFO - Veri çekildi: DOT/USDT - 1 adet 1m mum
+2025-09-13 14:28:59,857 - modules.market_data - INFO - Veri çekildi: BTC/USDT - 1 adet 1m mum
+2025-09-13 14:30:00,180 - modules.market_data - INFO - Veri çekildi: LTC/USDT - 1 adet 1m mum
+2025-09-13 14:30:00,454 - modules.market_data - WARNING - Veri bulunamadı: BCH/USDT
+2025-09-13 14:30:00,454 - modules.market_data - WARNING - Ana provider başarısız, alternatif deneniyor: BCH/USDT
+2025-09-13 14:30:00,754 - modules.market_data - INFO - KuCoin API'den veri çekildi: BCH/USDT - 1 adet
+2025-09-13 14:30:01,028 - modules.market_data - WARNING - Veri bulunamadı: HOLO/USDT
+2025-09-13 14:30:01,028 - modules.market_data - WARNING - Ana provider başarısız, alternatif deneniyor: HOLO/USDT
+2025-09-13 14:30:01,312 - modules.market_data - INFO - KuCoin API'den veri çekildi: HOLO/USDT - 1 adet
+2025-09-13 14:30:01,567 - modules.market_data - WARNING - Veri bulunamadı: HYPE/USDT
+2025-09-13 14:30:01,567 - modules.market_data - WARNING - Ana provider başarısız, alternatif deneniyor: HYPE/USDT
+2025-09-13 14:30:01,840 - modules.market_data - INFO - KuCoin API'den veri çekildi: HYPE/USDT - 1 adet
+2025-09-13 14:30:02,159 - modules.market_data - INFO - Veri çekildi: AVAX/USDT - 1 adet 1m mum
+2025-09-13 14:30:02,437 - modules.market_data - WARNING - Veri bulunamadı: SUI/USDT
+2025-09-13 14:30:02,437 - modules.market_data - WARNING - Ana provider başarısız, alternatif deneniyor: SUI/USDT
+2025-09-13 14:30:02,792 - modules.market_data - INFO - KuCoin API'den veri çekildi: SUI/USDT - 1 adet
+2025-09-13 14:30:03,059 - modules.market_data - INFO - Veri çekildi: ADA/USDT - 1 adet 1m mum
+2025-09-13 14:30:03,320 - modules.market_data - INFO - Veri çekildi: DOT/USDT - 1 adet 1m mum
+2025-09-13 14:30:03,595 - modules.market_data - INFO - Veri çekildi: BTC/USDT - 1 adet 1m mum
+2025-09-13 14:31:03,906 - modules.market_data - WARNING - Veri bulunamadı: LTC/USDT
+2025-09-13 14:31:03,906 - modules.market_data - WARNING - Ana provider başarısız, alternatif deneniyor: LTC/USDT
+2025-09-13 14:31:04,191 - modules.market_data - INFO - KuCoin API'den veri çekildi: LTC/USDT - 1 adet
+2025-09-13 14:31:04,462 - modules.market_data - WARNING - Veri bulunamadı: BCH/USDT
+2025-09-13 14:31:04,462 - modules.market_data - WARNING - Ana provider başarısız, alternatif deneniyor: BCH/USDT
+2025-09-13 14:31:04,751 - modules.market_data - INFO - KuCoin API'den veri çekildi: BCH/USDT - 1 adet
+2025-09-13 14:31:05,011 - modules.market_data - INFO - Veri çekildi: HOLO/USDT - 1 adet 1m mum
+2025-09-13 14:31:05,262 - modules.market_data - INFO - Veri çekildi: HYPE/USDT - 1 adet 1m mum
+2025-09-13 14:31:05,529 - modules.market_data - WARNING - Veri bulunamadı: AVAX/USDT
+2025-09-13 14:31:05,529 - modules.market_data - WARNING - Ana provider başarısız, alternatif deneniyor: AVAX/USDT
+2025-09-13 14:31:05,811 - modules.market_data - INFO - KuCoin API'den veri çekildi: AVAX/USDT - 1 adet
+2025-09-13 14:31:06,059 - modules.market_data - INFO - Veri çekildi: SUI/USDT - 1 adet 1m mum
+2025-09-13 14:31:06,320 - modules.market_data - INFO - Veri çekildi: ADA/USDT - 1 adet 1m mum
+2025-09-13 14:31:06,571 - modules.market_data - WARNING - Veri bulunamadı: DOT/USDT
+2025-09-13 14:31:06,571 - modules.market_data - WARNING - Ana provider başarısız, alternatif deneniyor: DOT/USDT
+2025-09-13 14:31:06,847 - modules.market_data - INFO - KuCoin API'den veri çekildi: DOT/USDT - 1 adet
+2025-09-13 14:31:07,104 - modules.market_data - INFO - Veri çekildi: BTC/USDT - 1 adet 1m mum
+2025-09-13 14:32:07,410 - modules.market_data - INFO - Veri çekildi: LTC/USDT - 1 adet 1m mum
+2025-09-13 14:32:07,751 - modules.market_data - WARNING - Veri bulunamadı: BCH/USDT
+2025-09-13 14:32:07,751 - modules.market_data - WARNING - Ana provider başarısız, alternatif deneniyor: BCH/USDT
+2025-09-13 14:32:08,031 - modules.market_data - INFO - KuCoin API'den veri çekildi: BCH/USDT - 1 adet
+2025-09-13 14:32:08,296 - modules.market_data - INFO - Veri çekildi: HOLO/USDT - 1 adet 1m mum
+2025-09-13 14:32:08,549 - modules.market_data - INFO - Veri çekildi: HYPE/USDT - 1 adet 1m mum
+2025-09-13 14:32:08,818 - modules.market_data - INFO - Veri çekildi: AVAX/USDT - 1 adet 1m mum
+2025-09-13 14:32:09,074 - modules.market_data - INFO - Veri çekildi: SUI/USDT - 1 adet 1m mum
+2025-09-13 14:32:09,334 - modules.market_data - INFO - Veri çekildi: ADA/USDT - 1 adet 1m mum
+2025-09-13 14:32:09,604 - modules.market_data - INFO - Veri çekildi: DOT/USDT - 1 adet 1m mum
+2025-09-13 14:32:09,860 - modules.market_data - INFO - Veri çekildi: BTC/USDT - 1 adet 1m mum
+2025-09-13 14:33:02,292 - __main__ - INFO - 🔄 Yeni havuz döngüsü başlıyor...
+2025-09-13 14:33:02,292 - __main__ - INFO - 📊 15dk tarama başlatılıyor: 20 coin...
+2025-09-13 14:33:02,549 - modules.market_data - INFO - Veri çekildi: BTC/USDT - 100 adet 15m mum
+2025-09-13 14:33:02,566 - modules.smc_analyzer - INFO - Order Block sinyali tespit edildi BTC/USDT: 2 adet
+2025-09-13 14:33:02,823 - modules.market_data - INFO - Veri çekildi: HYPE/USDT - 100 adet 15m mum
+2025-09-13 14:33:03,094 - modules.market_data - INFO - Veri çekildi: ETH/USDT - 100 adet 15m mum
+2025-09-13 14:33:03,111 - modules.smc_analyzer - INFO - Liquidity Hunt sinyali tespit edildi ETH/USDT: 2 adet
+2025-09-13 14:33:03,373 - modules.market_data - INFO - Veri çekildi: SOMI/USDT - 100 adet 15m mum
+2025-09-13 14:33:03,383 - modules.smc_analyzer - INFO - FVG sinyali tespit edildi SOMI/USDT: 1 adet
+2025-09-13 14:33:03,655 - modules.market_data - INFO - Veri çekildi: HIFI/USDT - 100 adet 15m mum
+2025-09-13 14:33:03,931 - modules.market_data - INFO - Veri çekildi: LTC/USDT - 100 adet 15m mum
+2025-09-13 14:33:04,202 - modules.market_data - INFO - Veri çekildi: BCH/USDT - 100 adet 15m mum
+2025-09-13 14:33:04,219 - modules.smc_analyzer - INFO - Liquidity Hunt sinyali tespit edildi BCH/USDT: 2 adet
+2025-09-13 14:33:04,474 - modules.market_data - INFO - Veri çekildi: LINK/USDT - 100 adet 15m mum
+2025-09-13 14:33:04,498 - modules.market_data - ERROR - Veri çekme hatası MATIC/USDT: kucoin does not have market symbol MATIC/USDT
+2025-09-13 14:33:04,498 - modules.market_data - WARNING - Ana provider başarısız, alternatif deneniyor: MATIC/USDT
+2025-09-13 14:33:04,766 - modules.market_data - INFO - Veri çekildi: AVAX/USDT - 100 adet 15m mum
+2025-09-13 14:33:05,039 - modules.market_data - INFO - Veri çekildi: SHIB/USDT - 100 adet 15m mum
+2025-09-13 14:33:05,345 - modules.market_data - INFO - Veri çekildi: HOLO/USDT - 100 adet 15m mum
+2025-09-13 14:33:05,629 - modules.market_data - INFO - Veri çekildi: SUI/USDT - 100 adet 15m mum
+2025-09-13 14:33:05,900 - modules.market_data - INFO - Veri çekildi: ADA/USDT - 100 adet 15m mum
+2025-09-13 14:33:05,931 - modules.smc_analyzer - INFO - Liquidity Hunt sinyali tespit edildi ADA/USDT: 2 adet
+2025-09-13 14:33:06,198 - modules.market_data - INFO - Veri çekildi: DOGE/USDT - 100 adet 15m mum
+2025-09-13 14:33:06,496 - modules.market_data - INFO - Veri çekildi: UB/USDT - 100 adet 15m mum
+2025-09-13 14:33:06,764 - modules.market_data - INFO - Veri çekildi: DOT/USDT - 100 adet 15m mum
+2025-09-13 14:33:07,050 - modules.market_data - INFO - Veri çekildi: PEPE/USDT - 100 adet 15m mum
+2025-09-13 14:33:07,066 - modules.smc_analyzer - INFO - Order Block sinyali tespit edildi PEPE/USDT: 1 adet
+2025-09-13 14:33:07,327 - modules.market_data - INFO - Veri çekildi: UNI/USDT - 100 adet 15m mum
+2025-09-13 14:33:07,343 - modules.smc_analyzer - INFO - Order Block sinyali tespit edildi UNI/USDT: 2 adet
+2025-09-13 14:33:07,629 - modules.market_data - INFO - Veri çekildi: XMR/USDT - 100 adet 15m mum
+2025-09-13 14:33:07,918 - modules.market_data - ERROR - KuCoin API veri hatası: {'msg': 'Unsupported trading pair.', 'code': '400100'}
+2025-09-13 14:33:07,919 - __main__ - WARNING - Yetersiz veri: MATIC/USDT
+2025-09-13 14:33:07,919 - __main__ - INFO - 🎯 Havuz doğrulama döngüsü başlatılıyor...
+2025-09-13 14:33:08,184 - modules.market_data - INFO - Veri çekildi: ETH/USDT - 20 adet 5m mum
+2025-09-13 14:33:08,194 - modules.signal_pool - INFO - Doğrulama sonucu ETH/USDT: Skor=1, Onay=True
+2025-09-13 14:33:08,194 - modules.signal_pool - INFO - Sebepler: Volume desteği (0.42x)
+2025-09-13 14:33:08,194 - modules.signal_pool - INFO - ⏳ Doğrulama devam: ETH/USDT (1/3)
+2025-09-13 14:33:08,451 - modules.market_data - INFO - Veri çekildi: SOMI/USDT - 20 adet 5m mum
+2025-09-13 14:33:08,461 - modules.signal_pool - INFO - Doğrulama sonucu SOMI/USDT: Skor=-1, Onay=False
+2025-09-13 14:33:08,461 - modules.signal_pool - INFO - Sebepler: Negatif momentum (-0.31%) | Volume desteği (0.68x) | Orta volatilite (2.31%)
+2025-09-13 14:33:08,461 - modules.signal_pool - INFO - ⏳ Doğrulama devam: SOMI/USDT (1/3)
+2025-09-13 14:33:08,728 - modules.market_data - INFO - Veri çekildi: LINK/USDT - 20 adet 5m mum
+2025-09-13 14:33:08,738 - modules.signal_pool - INFO - Doğrulama sonucu LINK/USDT: Skor=4, Onay=True
+2025-09-13 14:33:08,738 - modules.signal_pool - INFO - Sebepler: Negatif momentum (-0.12%) | RSI doğruluyor (38.2, trend: -3.7) | Volume desteği (0.41x)
+2025-09-13 14:33:08,738 - modules.signal_pool - INFO - ⏳ Doğrulama devam: LINK/USDT (1/3)
+2025-09-13 14:33:08,998 - modules.market_data - INFO - Veri çekildi: PEPE/USDT - 20 adet 5m mum
+2025-09-13 14:33:09,008 - modules.signal_pool - INFO - Doğrulama sonucu PEPE/USDT: Skor=3, Onay=True
+2025-09-13 14:33:09,008 - modules.signal_pool - INFO - Sebepler: Negatif momentum (-0.18%) | RSI doğruluyor (35.6, trend: -3.5)
+2025-09-13 14:33:09,008 - modules.signal_pool - INFO - ⏳ Doğrulama devam: PEPE/USDT (1/3)
+2025-09-13 14:33:09,275 - modules.market_data - INFO - Veri çekildi: UNI/USDT - 20 adet 5m mum
+2025-09-13 14:33:09,285 - modules.signal_pool - INFO - Doğrulama sonucu UNI/USDT: Skor=3, Onay=True
+2025-09-13 14:33:09,286 - modules.signal_pool - INFO - Sebepler: Negatif momentum (-0.13%) | RSI doğruluyor (39.0, trend: -5.1)
+2025-09-13 14:33:09,286 - modules.signal_pool - INFO - ⏳ Doğrulama devam: UNI/USDT (1/3)
+2025-09-13 14:33:09,286 - __main__ - INFO - 📊 Tarama tamamlandı: 0 yeni sinyal
+2025-09-13 14:33:09,286 - __main__ - INFO - 🎯 Havuz doğrulama: 0 onaylı sinyal
+2025-09-13 14:33:09,286 - __main__ - INFO - 📊 Yeni tarama: 0 sinyal
+2025-09-13 14:33:09,286 - __main__ - INFO - 🎯 Havuza eklenen: 0
+2025-09-13 14:33:09,286 - __main__ - INFO - ✅ Onaylı gönderilen: 0
+2025-09-13 14:33:09,286 - __main__ - INFO - 🔄 Havuzda bekleyen: 5
+2025-09-13 14:33:09,286 - __main__ - INFO - 📊 Havuz durumu: BEKLEMEDE: 5
+2025-09-13 14:33:09,286 - __main__ - INFO - 🕐 Döngü tamamlandı: 6.99s
+2025-09-13 14:33:09,286 - __main__ - INFO - Sonraki kontrol: 300 saniye...
+2025-09-13 14:33:10,163 - modules.market_data - INFO - Veri çekildi: LTC/USDT - 1 adet 1m mum
+2025-09-13 14:33:10,448 - modules.market_data - INFO - Veri çekildi: BCH/USDT - 1 adet 1m mum
+2025-09-13 14:33:10,697 - modules.market_data - INFO - Veri çekildi: HOLO/USDT - 1 adet 1m mum
+2025-09-13 14:33:10,975 - modules.market_data - INFO - Veri çekildi: HYPE/USDT - 1 adet 1m mum
+2025-09-13 14:33:11,227 - modules.market_data - INFO - Veri çekildi: AVAX/USDT - 1 adet 1m mum
+2025-09-13 14:33:11,503 - modules.market_data - INFO - Veri çekildi: SUI/USDT - 1 adet 1m mum
+2025-09-13 14:33:11,755 - modules.market_data - INFO - Veri çekildi: ADA/USDT - 1 adet 1m mum
+2025-09-13 14:33:12,015 - modules.market_data - INFO - Veri çekildi: DOT/USDT - 1 adet 1m mum
+2025-09-13 14:33:12,299 - modules.market_data - INFO - Veri çekildi: BTC/USDT - 1 adet 1m mum
+2025-09-13 14:34:12,592 - modules.market_data - INFO - Veri çekildi: LTC/USDT - 1 adet 1m mum
+2025-09-13 14:34:12,848 - modules.market_data - WARNING - Veri bulunamadı: BCH/USDT
+2025-09-13 14:34:12,848 - modules.market_data - WARNING - Ana provider başarısız, alternatif deneniyor: BCH/USDT
+2025-09-13 14:34:13,129 - modules.market_data - INFO - KuCoin API'den veri çekildi: BCH/USDT - 1 adet
+2025-09-13 14:34:13,387 - modules.market_data - INFO - Veri çekildi: HOLO/USDT - 1 adet 1m mum
+2025-09-13 14:34:13,644 - modules.market_data - INFO - Veri çekildi: HYPE/USDT - 1 adet 1m mum
+2025-09-13 14:34:13,909 - modules.market_data - INFO - Veri çekildi: AVAX/USDT - 1 adet 1m mum
+2025-09-13 14:34:14,205 - modules.market_data - INFO - Veri çekildi: SUI/USDT - 1 adet 1m mum
+2025-09-13 14:34:14,467 - modules.market_data - INFO - Veri çekildi: ADA/USDT - 1 adet 1m mum
+2025-09-13 14:34:14,720 - modules.market_data - INFO - Veri çekildi: DOT/USDT - 1 adet 1m mum
+2025-09-13 14:34:14,992 - modules.market_data - INFO - Veri çekildi: BTC/USDT - 1 adet 1m mum
+2025-09-13 14:35:15,265 - modules.market_data - INFO - Veri çekildi: LTC/USDT - 1 adet 1m mum
+2025-09-13 14:35:15,525 - modules.market_data - WARNING - Veri bulunamadı: BCH/USDT
+2025-09-13 14:35:15,525 - modules.market_data - WARNING - Ana provider başarısız, alternatif deneniyor: BCH/USDT
+2025-09-13 14:35:15,789 - modules.market_data - INFO - KuCoin API'den veri çekildi: BCH/USDT - 1 adet
+2025-09-13 14:35:16,056 - modules.market_data - INFO - Veri çekildi: HOLO/USDT - 1 adet 1m mum
+2025-09-13 14:35:16,325 - modules.market_data - INFO - Veri çekildi: HYPE/USDT - 1 adet 1m mum
+2025-09-13 14:35:16,582 - modules.market_data - INFO - Veri çekildi: AVAX/USDT - 1 adet 1m mum
+2025-09-13 14:35:16,847 - modules.market_data - INFO - Veri çekildi: SUI/USDT - 1 adet 1m mum
+2025-09-13 14:35:17,112 - modules.market_data - INFO - Veri çekildi: ADA/USDT - 1 adet 1m mum
+2025-09-13 14:35:17,377 - modules.market_data - INFO - Veri çekildi: DOT/USDT - 1 adet 1m mum
+2025-09-13 14:35:17,634 - modules.market_data - INFO - Veri çekildi: BTC/USDT - 1 adet 1m mum
+2025-09-13 14:36:17,958 - modules.market_data - INFO - Veri çekildi: LTC/USDT - 1 adet 1m mum
+2025-09-13 14:36:18,220 - modules.market_data - WARNING - Veri bulunamadı: BCH/USDT
+2025-09-13 14:36:18,221 - modules.market_data - WARNING - Ana provider başarısız, alternatif deneniyor: BCH/USDT
+2025-09-13 14:36:18,509 - modules.market_data - INFO - KuCoin API'den veri çekildi: BCH/USDT - 1 adet
+2025-09-13 14:36:18,769 - modules.market_data - INFO - Veri çekildi: HOLO/USDT - 1 adet 1m mum
+2025-09-13 14:36:19,032 - modules.market_data - INFO - Veri çekildi: HYPE/USDT - 1 adet 1m mum
+2025-09-13 14:36:19,298 - modules.market_data - INFO - Veri çekildi: AVAX/USDT - 1 adet 1m mum
+2025-09-13 14:36:19,549 - modules.market_data - INFO - Veri çekildi: SUI/USDT - 1 adet 1m mum
+2025-09-13 14:36:19,813 - modules.market_data - INFO - Veri çekildi: ADA/USDT - 1 adet 1m mum
+2025-09-13 14:36:20,072 - modules.market_data - INFO - Veri çekildi: DOT/USDT - 1 adet 1m mum
+2025-09-13 14:36:20,326 - modules.market_data - INFO - Veri çekildi: BTC/USDT - 1 adet 1m mum
