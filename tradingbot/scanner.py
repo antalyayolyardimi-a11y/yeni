@@ -63,6 +63,15 @@ class Scanner:
         """
         # Telegram botu varsa onu da başlat
         if self.alert_manager.dp and self.alert_manager.bot:
+            # Test mesajı gönder
+            try:
+                # Config'ten chat ID'yi al (eğer varsa)
+                if config.TELEGRAM_CHAT_ID:
+                    self.alert_manager.cached_chat_id = config.TELEGRAM_CHAT_ID
+                    log(f"📱 Telegram Chat ID ayarlandı: {config.TELEGRAM_CHAT_ID}")
+            except:
+                pass
+                
             await asyncio.gather(
                 self.alert_manager.dp.start_polling(self.alert_manager.bot),
                 self.run_scanner()

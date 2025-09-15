@@ -147,7 +147,7 @@ class SignalValidator:
                 
             # Devam eden analiz için log
             elif validation_result["action"] == "continue":
-                need_bars = getattr(config, 'VALIDATION_MIN_BARS', 3)
+                need_bars = config.VALIDATION_MIN_BARS
                 log(f"🔍 {symbol} 5m analiz devam ediyor ({pending.bar_count}/{need_bars} mum)")
         
         # Tamamlanmış sinyalleri temizle
@@ -201,11 +201,11 @@ class SignalValidator:
         except Exception:
             pass
         
-        if len(future_bars) < getattr(config, 'VALIDATION_MIN_BARS', 3):
+        if len(future_bars) < config.VALIDATION_MIN_BARS:
             return {"action": "continue", "details": {"bars_available": len(future_bars)}}
         
         # Son N mumu analiz et
-        analysis_bars = future_bars.tail(getattr(config, 'VALIDATION_MIN_BARS', 3))
+        analysis_bars = future_bars.tail(config.VALIDATION_MIN_BARS)
         
         # Geniş 5m seriden hacim MA10 ve RSI(14) hesapla
         try:

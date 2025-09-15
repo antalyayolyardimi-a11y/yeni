@@ -146,7 +146,7 @@ PENALTY_DECAY = 2
 
 # Sinyal doğrulama sistemi
 SIGNAL_VALIDATION_ENABLED = True
-VALIDATION_TIMEOUT_SEC = 600   # 10 dakika
+VALIDATION_TIMEOUT_SEC = 720   # 12 dakika (2 mum x 5dk + buffer)
 VALIDATION_MIN_BARS = 2        # Minimum 2 mum analizi
 VALIDATION_BODY_STRENGTH_MIN = 0.60  # Güçlü mum kriteri
 VALIDATION_VOLUME_MULTIPLIER = 1.1   # Hacim çarpanı

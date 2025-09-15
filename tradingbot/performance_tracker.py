@@ -17,6 +17,7 @@ from datetime import datetime, timezone
 
 from . import config
 from .utils import log, now_utc
+from .ai_optimizer import optimize_parameters, get_optimizer_stats
 
 @dataclass
 class SignalRecord:
@@ -46,6 +47,9 @@ class SignalRecord:
     sl_reason: Optional[str] = None
     market_condition: Optional[str] = None
     volatility_at_entry: Optional[float] = None
+    volume_at_entry: Optional[float] = None
+    rsi_at_entry: Optional[float] = None
+    adx_at_entry: Optional[float] = None
     
     def to_dict(self) -> Dict:
         """Dict'e dönüştür."""
@@ -243,7 +247,8 @@ class PerformanceTracker:
             
             # SL sebep analizi
             if new_status == "SL":
-                record.sl_reason = self._analyze_sl_reason(exchange, symbol, record)
+                record.sl_reason = self._analyze_sl_reason(exchange, symbol, record, df)
+                record.market_condition = self._detect_market_condition(df)
                 record.market_condition = self._get_market_condition(exchange, symbol)
             
             # Stats güncelle
@@ -693,6 +698,105 @@ class PerformanceTracker:
 • Win Rate: {recent_rate:.1f}% ({recent_wins}/{len(recent)})
 • Son performans: {'🟢' if recent_rate > 50 else '🔴' if recent_rate < 40 else '🟡'}
 
+🧠 **AI Optimizer Aktif!**
 🔥 **SMC V2 Aktif!**"""
         
+        # AI Optimization trigger
+        if closed_signals >= 10:  # Yeterli veri olunca AI'yı çalıştır
+            signal_dicts = [s.to_dict() for s in self.signals.values()]
+            optimize_parameters(signal_dicts)
+        
         return summary
+    
+    def _analyze_sl_reason(self, exchange, symbol: str, record: 'SignalRecord', df) -> str:
+        """
+        SL çarpmasının sebebini analiz et.
+        
+        Args:
+            exchange: Exchange instance
+            symbol: Trading pair
+            record: Signal record
+            df: OHLCV dataframe
+            
+        Returns:
+            str: SL sebep kodu
+        """
+        try:
+            # Temel veriler
+            bars_held = record.bars_held
+            entry_time = record.created_at
+            
+            # Immediate reversal check
+            if bars_held <= 2:
+                return "IMMEDIATE_REVERSAL"
+            
+            # Volatility analysis
+            if len(df) >= 14:
+                from .indicators import atr_wilder
+                atr = atr_wilder(df["h"], df["l"], df["c"], 14).iloc[-1]
+                avg_price = (df["h"].iloc[-1] + df["l"].iloc[-1]) / 2
+                volatility = atr / avg_price
+                
+                if volatility > 0.05:  # %5+ volatility
+                    return "HIGH_VOLATILITY"
+            
+            # Volume spike check
+            if len(df) >= 10:
+                vol_ma = df["v"].rolling(10).mean().iloc[-1]
+                recent_vol = df["v"].iloc[-1]
+                
+                if recent_vol > vol_ma * 2:
+                    return "VOLUME_SPIKE"
+            
+            # Trend analysis
+            if len(df) >= 20:
+                short_ma = df["c"].rolling(5).mean().iloc[-1]
+                long_ma = df["c"].rolling(20).mean().iloc[-1]
+                
+                if record.side == "LONG" and short_ma < long_ma:
+                    return "TREND_REVERSAL"
+                elif record.side == "SHORT" and short_ma > long_ma:
+                    return "TREND_REVERSAL"
+            
+            # Default
+            return "WEAK_MOMENTUM"
+            
+        except Exception as e:
+            log(f"SL reason analysis error for {symbol}: {e}")
+            return "ANALYSIS_ERROR"
+    
+    def _detect_market_condition(self, df) -> str:
+        """
+        Market koşulunu tespit et.
+        
+        Args:
+            df: OHLCV dataframe
+            
+        Returns:
+            str: Market condition
+        """
+        try:
+            if len(df) < 20:
+                return "INSUFFICIENT_DATA"
+                
+            # Volatility
+            high_low_pct = ((df["h"] - df["l"]) / df["c"] * 100).rolling(10).mean().iloc[-1]
+            
+            if high_low_pct > 4:
+                return "HIGH_VOLATILITY"
+            elif high_low_pct < 1.5:
+                return "LOW_VOLATILITY"
+                
+            # Trend detection
+            short_ma = df["c"].rolling(5).mean().iloc[-1]
+            long_ma = df["c"].rolling(20).mean().iloc[-1]
+            
+            if short_ma > long_ma * 1.02:
+                return "BULLISH_TREND"
+            elif short_ma < long_ma * 0.98:
+                return "BEARISH_TREND"
+            else:
+                return "SIDEWAYS"
+                
+        except Exception:
+            return "UNKNOWN"
