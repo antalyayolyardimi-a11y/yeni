@@ -31,7 +31,7 @@ class AIOptimizer:
         
         # Optimizable parameters with their safe ranges
         self.optimizable_params = {
-            'ATRSTOPMULT': (1.2, 3.0, 'float'),
+            'ATR_STOP_MULT': (1.0, 3.0, 'float'),
             'BASE_MIN_SCORE': (30, 60, 'int'),
             'TOP_N_PER_SCAN': (1, 5, 'int'),
             'VALIDATION_TIMEOUT_SEC': (300, 1800, 'int'),
@@ -184,29 +184,90 @@ class AIOptimizer:
             Dict: Önerilen parametre değişiklikleri
         """
         suggestions = {}
+        log(f"🧠 AI ANALYSIS BAŞLADI:")
+        log(f"   📊 Win Rate: {performance_metrics['win_rate']:.1%}")
+        log(f"   📊 SL Hit Rate: {performance_metrics['sl_hit_rate']:.1%}")
+        log(f"   📊 TP1 Hit Rate: {performance_metrics['tp1_hit_rate']:.1%}")
+        log(f"   📊 Avg Profit: {performance_metrics['avg_profit']:.2f}%")
+        log(f"   📊 Avg Loss: {performance_metrics['avg_loss']:.2f}%")
+        log(f"   📊 Sharpe Ratio: {performance_metrics['sharpe_ratio']:.2f}")
+        
+        if failure_reasons:
+            log(f"   🔍 SL Sebepleri: {failure_reasons}")
         
         # Win rate düşükse
         if performance_metrics['win_rate'] < 0.4:
-            suggestions['BASE_MIN_SCORE'] = min(config.BASE_MIN_SCORE + 5, 60)
-            suggestions['VALIDATION_MIN_BARS'] = min(config.VALIDATION_MIN_BARS + 1, 4)
+            old_score = config.BASE_MIN_SCORE
+            new_score = min(config.BASE_MIN_SCORE + 5, 60)
+            suggestions['BASE_MIN_SCORE'] = new_score
+            log(f"   🎯 Win rate düşük (%{performance_metrics['win_rate']*100:.1f}) → BASE_MIN_SCORE {old_score} → {new_score}")
+            
+            old_bars = config.VALIDATION_MIN_BARS
+            new_bars = min(config.VALIDATION_MIN_BARS + 1, 4)
+            suggestions['VALIDATION_MIN_BARS'] = new_bars
+            log(f"   🎯 Daha fazla doğrulama → VALIDATION_MIN_BARS {old_bars} → {new_bars}")
         
         # SL çok sık çarpıyorsa
         if performance_metrics['sl_hit_rate'] > 0.6:
-            suggestions['ATRSTOPMULT'] = min(config.ATRSTOPMULT + 0.2, 3.0)
+            old_atr = config.ATR_STOP_MULT
+            new_atr = min(config.ATR_STOP_MULT + 0.2, 3.0)
+            suggestions['ATR_STOP_MULT'] = new_atr
+            log(f"   🛑 SL çok sık çarpıyor (%{performance_metrics['sl_hit_rate']*100:.1f}) → ATR_STOP_MULT {old_atr} → {new_atr}")
             
         # Immediate reversal çoksa
         if failure_reasons.get('immediate_reversal', 0) > 3:
-            suggestions['VALIDATION_BODY_STRENGTH_MIN'] = min(config.VALIDATION_BODY_STRENGTH_MIN + 0.1, 0.8)
-            suggestions['VALIDATION_VOLUME_MULTIPLIER'] = min(config.VALIDATION_VOLUME_MULTIPLIER + 0.1, 2.0)
+            old_body = config.VALIDATION_BODY_STRENGTH_MIN
+            new_body = min(config.VALIDATION_BODY_STRENGTH_MIN + 0.1, 0.8)
+            suggestions['VALIDATION_BODY_STRENGTH_MIN'] = new_body
+            log(f"   ⚡ Immediate reversal çok ({failure_reasons.get('immediate_reversal')}) → BODY_STRENGTH {old_body:.2f} → {new_body:.2f}")
+            
+            old_vol = config.VALIDATION_VOLUME_MULTIPLIER
+            new_vol = min(config.VALIDATION_VOLUME_MULTIPLIER + 0.1, 2.0)
+            suggestions['VALIDATION_VOLUME_MULTIPLIER'] = new_vol
+            log(f"   ⚡ Volume filtreleme güçlendirildi → VOLUME_MULTIPLIER {old_vol:.1f} → {new_vol:.1f}")
         
         # High volatility failures
         if failure_reasons.get('high_volatility', 0) > 2:
-            suggestions['MIN_VOLVALUE_USDT'] = max(config.MIN_VOLVALUE_USDT - 500000, 1000000)
-            suggestions['ADX_TREND_MIN'] = min(config.ADX_TREND_MIN + 2, 30)
+            old_vol = config.MIN_VOLVALUE_USDT
+            new_vol = max(config.MIN_VOLVALUE_USDT - 500000, 1000000)
+            suggestions['MIN_VOLVALUE_USDT'] = new_vol
+            log(f"   🌪️ High volatility failures ({failure_reasons.get('high_volatility')}) → MIN_VOLVALUE {old_vol/1000000:.1f}M → {new_vol/1000000:.1f}M")
+            
+            old_adx = config.ADX_TREND_MIN
+            new_adx = min(config.ADX_TREND_MIN + 2, 30)
+            suggestions['ADX_TREND_MIN'] = new_adx
+            log(f"   🌪️ Trend filtreleme güçlendirildi → ADX_TREND_MIN {old_adx} → {new_adx}")
+        
+        # Trend reversal çoksa
+        if failure_reasons.get('trend_reversal', 0) > 3:
+            old_adx = config.ADX_TREND_MIN
+            new_adx = min(config.ADX_TREND_MIN + 3, 30)
+            suggestions['ADX_TREND_MIN'] = new_adx
+            log(f"   🔄 Trend reversal çok ({failure_reasons.get('trend_reversal')}) → ADX_TREND_MIN {old_adx} → {new_adx}")
+            
+            old_atr = config.ATR_STOP_MULT
+            new_atr = min(config.ATR_STOP_MULT + 0.3, 3.0)
+            suggestions['ATR_STOP_MULT'] = new_atr
+            log(f"   🔄 SL genişletiliyor → ATR_STOP_MULT {old_atr:.1f} → {new_atr:.1f}")
         
         # TP1 hit rate düşükse
         if performance_metrics['tp1_hit_rate'] < 0.3:
-            suggestions['VALIDATION_ATR_MOVE_MIN'] = max(config.VALIDATION_ATR_MOVE_MIN - 0.05, 0.15)
+            old_atr_move = config.VALIDATION_ATR_MOVE_MIN
+            new_atr_move = max(config.VALIDATION_ATR_MOVE_MIN - 0.05, 0.15)
+            suggestions['VALIDATION_ATR_MOVE_MIN'] = new_atr_move
+            log(f"   🎯 TP1 hit rate düşük (%{performance_metrics['tp1_hit_rate']*100:.1f}) → ATR_MOVE_MIN {old_atr_move:.2f} → {new_atr_move:.2f}")
+        
+        # Weak momentum çoksa
+        if failure_reasons.get('weak_momentum', 0) > 2:
+            old_score = config.BASE_MIN_SCORE
+            new_score = min(config.BASE_MIN_SCORE + 3, 60)
+            suggestions['BASE_MIN_SCORE'] = new_score
+            log(f"   💪 Weak momentum çok ({failure_reasons.get('weak_momentum')}) → BASE_MIN_SCORE {old_score} → {new_score}")
+        
+        if not suggestions:
+            log(f"   ✅ AI: Mevcut parametreler optimal görünüyor, değişiklik önerilmiyor")
+        else:
+            log(f"   🔧 AI: {len(suggestions)} parametre için değişiklik öneriliyor")
         
         return suggestions
     
@@ -217,7 +278,11 @@ class AIOptimizer:
         Args:
             suggestions: Önerilen değişiklikler
         """
+        if not suggestions:
+            return
+            
         applied = []
+        log(f"🧠 AI OPTIMIZER: {len(suggestions)} parametre değiştiriliyor...")
         
         for param, new_value in suggestions.items():
             if hasattr(config, param):
@@ -234,15 +299,34 @@ class AIOptimizer:
                 # Değişiklik kayda değerse uygula
                 if abs(new_value - old_value) > 0.01:
                     setattr(config, param, new_value)
-                    applied.append(f"{param}: {old_value} → {new_value}")
+                    change_desc = f"{param}: {old_value} → {new_value}"
+                    applied.append(change_desc)
+                    log(f"   ✅ {change_desc}")
+                    
+                    # Reasoning ekle
+                    if param == 'ATRSTOPMULT':
+                        log(f"      💭 Sebep: SL mesafesi genişletildi, trend reversal'a karşı koruma")
+                    elif param == 'BASE_MIN_SCORE':
+                        log(f"      💭 Sebep: Daha kaliteli sinyaller için minimum skor artırıldı")
+                    elif param == 'ADX_TREND_MIN':
+                        log(f"      💭 Sebep: Güçlü trend koşulu, zayıf trendlerde trading azaltıldı")
+                    elif param == 'VALIDATION_BODY_STRENGTH_MIN':
+                        log(f"      💭 Sebep: Güçlü mum kriteri, zayıf momentum filtrelendi")
+                    elif param == 'VALIDATION_MIN_BARS':
+                        log(f"      💭 Sebep: Daha fazla confirmation bar, erken giriş azaltıldı")
+                else:
+                    log(f"   ⏸️ {param}: Değişim çok küçük ({old_value} ≈ {new_value:.3f}), atlandı")
         
         if applied:
-            log(f"🧠 AI Optimizasyon uygulandı: {', '.join(applied)}")
+            log(f"🧠 ✅ AI OPTIMIZASYON TAMAMLANDI: {len(applied)} parametre güncellendi")
             self.optimization_history.append({
                 'timestamp': time.time(),
                 'changes': dict(suggestions),
-                'metrics': dict(self.metrics)
+                'metrics': dict(self.metrics),
+                'reasoning': applied
             })
+        else:
+            log(f"🧠 ⚠️ AI: Önerilen değişiklikler çok küçük, hiçbiri uygulanmadı")
     
     def should_optimize(self) -> bool:
         """
@@ -268,29 +352,32 @@ class AIOptimizer:
             return
             
         if len(signal_records) < 10:
+            log(f"🧠 AI: Yeterli veri yok ({len(signal_records)}/10), optimizasyon bekliyor...")
             return
             
+        log(f"🧠 🔍 AI OPTIMIZER ÇALIŞIYOR...")
+        log(f"   📊 Analiz edilen sinyal sayısı: {len(signal_records)}")
+        log(f"   📊 Analysis window: Son {self.performance_window} sinyal")
+        
         # Performance analizi
         performance = self.analyze_performance(signal_records)
         
         # Başarısız sinyalleri analiz et
         failed_signals = [s for s in signal_records[-self.performance_window:] 
                          if s.get('status') == 'SL']
+        log(f"   📊 Başarısız sinyal sayısı: {len(failed_signals)}")
+        
         failure_reasons = self.identify_failure_reasons(failed_signals)
         
         # Optimizasyon önerilerini al
         suggestions = self.suggest_optimizations(performance, failure_reasons)
         
         if suggestions:
-            log(f"🧠 AI analiz sonucu: Win Rate: {performance['win_rate']:.1%}, "
-                f"SL Rate: {performance['sl_hit_rate']:.1%}")
-            log(f"🧠 Başarısızlık sebepleri: {failure_reasons}")
-            
             # Optimizasyonları uygula
             self.apply_optimizations(suggestions)
             self.last_optimization = time.time()
-        else:
-            log("🧠 AI: Mevcut parametreler optimal, değişiklik önerilmiyor")
+        
+        log(f"🧠 ✅ AI OPTIMIZER TMAMLANDİ (Cooldown: {self.optimization_cooldown//60} dakika)")
     
     def get_stats(self) -> Dict[str, Any]:
         """

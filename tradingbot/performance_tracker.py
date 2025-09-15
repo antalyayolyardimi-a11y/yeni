@@ -249,6 +249,7 @@ class PerformanceTracker:
             if new_status == "SL":
                 record.sl_reason = self._analyze_sl_reason(exchange, symbol, record, df)
                 record.market_condition = self._detect_market_condition(df)
+                log(f"📊 SL Analizi - {symbol}: Sebep='{record.sl_reason}', Market='{record.market_condition}', Bars={bars_since_entry}")
                 record.market_condition = self._get_market_condition(exchange, symbol)
             
             # Stats güncelle
@@ -301,54 +302,6 @@ class PerformanceTracker:
                 self._try_auto_optimization()
         
         return new_status
-    
-    def _analyze_sl_reason(self, exchange, symbol: str, record: SignalRecord) -> str:
-        """
-        SL sebebini analiz et.
-        
-        Args:
-            exchange: Exchange nesnesi
-            symbol: Sembol
-            record: Sinyal kaydı
-            
-        Returns:
-            str: SL sebebi
-        """
-        try:
-            df = exchange.get_ohlcv(symbol, "15min", 20)
-            if df is None or len(df) < 10:
-                return "INSUFFICIENT_DATA"
-            
-            # Volatility analizi
-            from .indicators import atr_wilder
-            atr_now = float(atr_wilder(df["h"], df["l"], df["c"], 14).iloc[-1])
-            atr_pct_now = atr_now / float(df["c"].iloc[-1])
-            
-            if record.volatility_at_entry and atr_pct_now > record.volatility_at_entry * 1.5:
-                return "HIGH_VOLATILITY"
-            
-            # Trend değişimi
-            current_trend = "UP" if df["c"].iloc[-1] > df["c"].iloc[-5] else "DOWN"
-            expected_trend = "UP" if record.side == "LONG" else "DOWN"
-            
-            if current_trend != expected_trend:
-                return "TREND_REVERSAL"
-            
-            # Gap/shock
-            max_gap = 0
-            for i in range(len(df) - 5, len(df)):
-                if i > 0:
-                    gap = abs(df["o"].iloc[i] - df["c"].iloc[i-1]) / df["c"].iloc[i-1]
-                    max_gap = max(max_gap, gap)
-            
-            if max_gap > 0.02:  # %2+ gap
-                return "MARKET_GAP"
-            
-            return "NORMAL_SL"
-            
-        except Exception as e:
-            log(f"SL analiz hatası: {e}")
-            return "ANALYSIS_ERROR"
     
     def _get_market_condition(self, exchange, symbol: str) -> str:
         """Market durumunu analiz et."""
