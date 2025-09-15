@@ -37,20 +37,20 @@ def clip_value(value: float, lower: float, upper: float) -> float:
 
 def to_df_klines(raw):
     """
-    KuCoin ham mum verilerini pandas DataFrame'e dönüştür.
+    CCXT OHLCV verilerini pandas DataFrame'e dönüştür.
     
     Args:
-        raw: KuCoin API'sinden dönen ham mum verileri
+        raw: CCXT API'sinden dönen OHLCV verileri (timestamp, open, high, low, close, volume formatında)
         
     Returns:
         pd.DataFrame veya None: Dönüştürülmüş DataFrame veya veri yoksa None
     """
-    # KuCoin: [time, open, close, high, low, volume, turnover]
+    # CCXT: [timestamp, open, high, low, close, volume]
     if not raw: 
         return None
     
-    df = pd.DataFrame(raw, columns=["time", "o", "c", "h", "l", "v", "turnover"])
-    for col in ["time", "o", "c", "h", "l", "v", "turnover"]:
+    df = pd.DataFrame(raw, columns=["time", "o", "h", "l", "c", "v"])
+    for col in ["time", "o", "h", "l", "c", "v"]:
         df[col] = pd.to_numeric(df[col], errors="coerce")
     
     df.dropna(inplace=True)

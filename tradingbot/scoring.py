@@ -252,43 +252,22 @@ def pick_best_candidate(symbol: str, df15: pd.DataFrame, df1h: pd.DataFrame,
     Returns:
         En iyi aday sinyal veya None
     """
-    from .strategies.smc import SMCStrategy
-    from .strategies.trend_range import TrendRangeStrategy
-    from .strategies.momentum import MomentumStrategy
+    from .strategies.smc_v2 import SMCv2Strategy, preprocess_dataframe
     
-    best = None
-    
-    # legacy (SMC + TREND/RANGE)
-    smc = tr = None
-    
+    # SADECE SMC V2 - PROFESYONEL TRADING MANTIK
+    signal = None
     try:
-        smc = SMCStrategy(symbol).analyze(df15, df1h)
+        # Dataframe'leri SMC için hazırla
+        df15_processed = preprocess_dataframe(df15.copy())
+        df1h_processed = preprocess_dataframe(df1h.copy())
+        signal = SMCv2Strategy(symbol).analyze(df15_processed, df1h_processed)
     except Exception as e:
-        pass
-        
-    try:
-        tr = TrendRangeStrategy(symbol).analyze(df15, df1h)
-    except Exception as e:
-        pass
-        
-    for c in [smc, tr]:
-        if c:
-            c = apply_scoring(symbol, df15, df1h, c, {"vol_pct": vol_pct_cache.get(symbol, 0.5) if vol_pct_cache else 0.5})
-            if c and ((best is None) or (c["score"] > best["score"])):
-                best = c
+        log(f"SMC V2 analiz hatası {symbol}: {e}")
+        return None
     
-    # momentum-breakout (erken fırsat)
-    mo = None
-    try:
-        mo = MomentumStrategy(symbol).analyze(df15, df1h)
-    except Exception as e:
-        pass
-        
-    if mo:
-        mo = apply_scoring(symbol, df15, df1h, mo, {"vol_pct": vol_pct_cache.get(symbol, 0.5) if vol_pct_cache else 0.5})
-        if mo:
-            mo["score"] = max(mo["score"], config.BASE_MIN_SCORE - 4)
-            if (best is None) or (mo["score"] > best["score"]):
-                best = mo
-            
-    return best
+    if signal:
+        signal = apply_scoring(symbol, df15, df1h, signal, {"vol_pct": vol_pct_cache.get(symbol, 0.5) if vol_pct_cache else 0.5})
+        return signal
+    
+    # SMC V2 sinyal bulamazsa None döndür
+    return None

@@ -9,6 +9,8 @@ TP/SL takibi, analiz ve otomatik optimizasyon.
 import time
 import json
 import math
+import os
+from pathlib import Path
 from dataclasses import dataclass, asdict, field
 from typing import Dict, List, Optional, Any, Tuple
 from datetime import datetime, timezone
@@ -88,13 +90,25 @@ class PerformanceTracker:
         """Performance tracker'ı başlat."""
         self.signals: Dict[str, SignalRecord] = {}
         self.stats = PerformanceStats()
-        self.data_file = "/tmp/trading_performance.json"
+        # Kalıcı veri klasörü
+        data_dir = Path(os.environ.get("TRADING_DATA_DIR", Path(__file__).resolve().parent.parent / "data"))
+        try:
+            data_dir.mkdir(parents=True, exist_ok=True)
+        except Exception:
+            pass
+        self.data_file = str(data_dir / "trading_performance.json")
         self.load_data()
         
         # Optimization settings
         self.last_optimization = time.time()
         self.optimization_interval = 3600  # 1 saat
         self.min_signals_for_optimization = 10
+        # Telegram entegrasyonu
+        self.alert_manager = None
+
+    def set_alert_manager(self, alert_manager):
+        """TP/SL olaylarını Telegram'a bildirmek için AlertManager'ı bağla."""
+        self.alert_manager = alert_manager
         
     def add_signal(self, signal_data: Dict[str, Any]) -> str:
         """
@@ -108,19 +122,29 @@ class PerformanceTracker:
         """
         signal_id = f"{signal_data['symbol']}_{signal_data['side']}_{int(time.time())}"
         
+        # Güvenli alan çıkarımı ve 3 TP garanti
+        entry = float(signal_data.get('entry', signal_data.get('entry_price', 0.0)))
+        sl = float(signal_data.get('sl', signal_data.get('stop_loss', 0.0)))
+        tps_raw = list(signal_data.get('tps', []))
+        if len(tps_raw) == 0:
+            tps_raw = [entry, entry, entry]
+        elif len(tps_raw) == 1:
+            tps_raw = [tps_raw[0], tps_raw[0], tps_raw[0]]
+        elif len(tps_raw) == 2:
+            tps_raw = [tps_raw[0], tps_raw[1], tps_raw[1]]
         record = SignalRecord(
             symbol=signal_data['symbol'],
             side=signal_data['side'],
-            entry=signal_data['entry'],
-            sl=signal_data['sl'],
-            tp1=signal_data['tps'][0],
-            tp2=signal_data['tps'][1],
-            tp3=signal_data['tps'][2],
-            score=signal_data['score'],
+            entry=entry,
+            sl=sl,
+            tp1=float(tps_raw[0]),
+            tp2=float(tps_raw[1]),
+            tp3=float(tps_raw[2]),
+            score=float(signal_data.get('score', 0)),
             regime=signal_data.get('regime', 'UNKNOWN'),
             reason=signal_data.get('reason', ''),
             created_at=time.time(),
-            volatility_at_entry=signal_data.get('_explain', {}).get('atr_pct', 0.0)
+            volatility_at_entry=float(signal_data.get('_explain', {}).get('atr_pct', 0.0))
         )
         
         self.signals[signal_id] = record
@@ -239,6 +263,33 @@ class PerformanceTracker:
             
             log(f"📊 {symbol} {side} → {new_status} | PnL: {record.pnl_pct:.2f}%")
             self.save_data()
+
+            # Telegram bildirimi (varsa)
+            try:
+                if self.alert_manager:
+                    status_emoji = {
+                        "TP1": "🎯",
+                        "TP2": "🎯🎯",
+                        "TP3": "🏆",
+                        "SL": "⛔",
+                        "CANCELLED": "🗑️"
+                    }.get(new_status, "ℹ️")
+                    msg = (
+                        f"{status_emoji} {symbol} {side} → {new_status}\n"
+                        f"• Entry: {record.entry:.6f}  SL: {record.sl:.6f}\n"
+                        f"• TP1/TP2/TP3: {record.tp1:.6f} / {record.tp2:.6f} / {record.tp3:.6f}\n"
+                        f"• Close: {close_price:.6f}  PnL: {record.pnl_pct:.2f}%\n"
+                        f"• Yaş: {(record.closed_at - record.created_at)/3600:.1f} saat"
+                    )
+                    # Fire and forget
+                    import asyncio
+                    if asyncio.get_event_loop().is_running():
+                        asyncio.create_task(self.alert_manager.send_message(msg))
+                    else:
+                        # Senkron ortamda log'a yaz
+                        pass
+            except Exception as e:
+                log(f"TP/SL bildirim hatası: {e}")
             
             # Auto-optimization kontrolü
             if time.time() - self.last_optimization > self.optimization_interval:
@@ -549,19 +600,8 @@ class PerformanceTracker:
             log(f"Veri yükleme hatası: {e}")
     
     def update_signal_statuses(self):
-        """Aktif sinyallerin durumlarını güncelle."""
-        # Bu metod exchange'den fiyat bilgilerini alıp
-        # sinyallerin TP/SL durumlarını kontrol edecek
-        # Şimdilik basit implementasyon
-        updated_count = 0
-        for signal in self.signals.values():
-            if signal.status == "ACTIVE":
-                # Burada gerçek exchange kontrolü yapılacak
-                updated_count += 1
-        
-        if updated_count > 0:
-            self._update_stats()
-            self.save_data()
+        """UYARI: Kullanımdan kalktı. Lütfen update_all_signals(exchange) kullanın."""
+        return
     
     def _update_stats(self):
         """İstatistikleri güncelle."""
@@ -607,3 +647,52 @@ class PerformanceTracker:
             return {"ATR_STOP_MULT": new_mult, "reason": f"Low win rate: {win_rate:.2%}"}
             
         return None
+    
+    def get_signal_history_summary(self) -> str:
+        """
+        Sinyal geçmişi özeti döndür (Telegram /durum komutu için)
+        
+        Returns:
+            str: Formatted summary
+        """
+        if not self.signals:
+            return "📊 Henüz sinyal kaydı yok."
+        
+        total_signals = len(self.signals)
+        active_signals = len([s for s in self.signals.values() if s.status == "ACTIVE"])
+        closed_signals = total_signals - active_signals
+        
+        if closed_signals == 0:
+            return f"📊 Toplam {total_signals} sinyal (Hepsi aktif)"
+        
+        # Closed signals stats
+        closed = [s for s in self.signals.values() if s.status != "ACTIVE"]
+        wins = len([s for s in closed if s.status in ["TP1", "TP2", "TP3"]])
+        losses = len([s for s in closed if s.status == "SL"])
+        
+        win_rate = (wins / closed_signals * 100) if closed_signals > 0 else 0
+        
+        # PnL calculation
+        total_pnl = sum(s.pnl_pct for s in closed if s.pnl_pct is not None)
+        avg_pnl = total_pnl / len([s for s in closed if s.pnl_pct is not None]) if closed else 0
+        
+        # Recent performance (last 10 signals)
+        recent = sorted(closed, key=lambda x: x.created_at, reverse=True)[:10]
+        recent_wins = len([s for s in recent if s.status in ["TP1", "TP2", "TP3"]])
+        recent_rate = (recent_wins / len(recent) * 100) if recent else 0
+        
+        summary = f"""📊 **SİNYAL PERFORMANSI**
+        
+🎯 **Genel:**
+• Toplam: {total_signals} sinyal
+• Aktif: {active_signals} | Kapanan: {closed_signals}
+• Win Rate: {win_rate:.1f}% ({wins}W/{losses}L)
+• Ortalama PnL: {avg_pnl:.2f}%
+
+⚡ **Son 10 Sinyal:**
+• Win Rate: {recent_rate:.1f}% ({recent_wins}/{len(recent)})
+• Son performans: {'🟢' if recent_rate > 50 else '🔴' if recent_rate < 40 else '🟡'}
+
+🔥 **SMC V2 Aktif!**"""
+        
+        return summary

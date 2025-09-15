@@ -41,10 +41,61 @@ class AlertManager:
         self.signals_store = {}  # Sinyal depolama
         self.cached_chat_id = None  # Telegram chat ID
         self.sid_counter = 1  # Sinyal ID sayacı
+        self.exchange = None  # Exchange instance
+
+    def _normalize_tps(self, sig: Dict[str, Any]) -> tuple:
+        """TP'leri güvenli hale getirip 3 değere tamamla.
+        Öncelik: verilenleri kullan; eksikse entry/SL ve RR ile türet; yine de mümkün değilse pad et.
+        """
+        try:
+            tps = list(sig.get("tps", []))
+        except Exception:
+            tps = []
+        # Zaten 3 ya da daha fazlaysa ilk 3'ü döndür
+        if len(tps) >= 3:
+            return (float(tps[0]), float(tps[1]), float(tps[2]))
+        # Entry/SL yoksa mevcutları pad et
+        entry_raw = sig.get("entry")
+        sl_raw = sig.get("sl")
+        try:
+            entry = float(entry_raw) if entry_raw is not None else None
+            sl = float(sl_raw) if sl_raw is not None else None
+        except Exception:
+            entry, sl = None, None
+        if entry is None or sl is None:
+            if len(tps) == 0:
+                base = float(entry_raw) if entry_raw is not None else 0.0
+                return (base, base, base)
+            if len(tps) == 1:
+                v = float(tps[0])
+                return (v, v, v)
+            if len(tps) == 2:
+                return (float(tps[0]), float(tps[1]), float(tps[1]))
+        # RR'den üret
+        side = sig.get("side", "LONG")
+        rr_tuple = getattr(config, "TPS_R", (1.0, 1.6, 2.2))
+        # Güvenlik: entry/sl None ise fallback
+        if entry is None or sl is None:
+            base = float(entry_raw) if entry_raw is not None else 0.0
+            v1 = float(tps[0]) if len(tps) > 0 else base
+            v2 = float(tps[1]) if len(tps) > 1 else v1
+            return (v1, v2, v2)
+        risk = abs(entry - sl)
+        def rr_to_price(rr: float) -> float:
+            return entry + risk * rr if side == "LONG" else entry - risk * rr
+        gen_tps = [rr_to_price(rr) for rr in rr_tuple]
+        # Mevcutları koru ve kalanları doldur
+        for i in range(min(3, len(tps))):
+            gen_tps[i] = float(tps[i])
+        return (float(gen_tps[0]), float(gen_tps[1]), float(gen_tps[2]))
     
     def set_performance_tracker(self, performance_tracker):
         """Performance tracker'ı ayarla."""
         self.performance_tracker = performance_tracker
+    
+    def set_exchange(self, exchange):
+        """Exchange instance'ını ayarla."""
+        self.exchange = exchange
     
     def setup_handlers(self):
         """Telegram komut handler'larını ayarla."""
@@ -147,16 +198,19 @@ class AlertManager:
         await m.answer("AI ağırlıkları sıfırlandı.")
         return {"reset_ai": True}
     
-    async def analiz_cmd(self, m: Message, exchange):
+    async def analiz_cmd(self, m: Message):
         """
         /analiz komutuna yanıt ver.
         
         Args:
             m: Telegram mesajı
-            exchange: Exchange nesnesi
         """
         if m.text is None:
             await m.answer("Geçersiz komut.")
+            return None
+            
+        if not self.exchange:
+            await m.answer("❌ Exchange bağlantısı yok")
             return None
             
         parts = m.text.strip().split()
@@ -165,7 +219,7 @@ class AlertManager:
             return None
             
         raw = parts[1].upper()
-        norm = exchange.normalize_symbol_to_kucoin(raw)
+        norm = self.exchange.normalize_symbol_to_kucoin(raw)
         
         if not norm:
             await m.answer(f"❗ '{raw}' KuCoin'de bulunamadı. Örn: WIFUSDT → WIF-USDT")
@@ -174,7 +228,7 @@ class AlertManager:
         await m.answer(f"⏳ Analiz ediliyor: {norm}")
         
         try:
-            text = self._analyze_symbol_text(norm, exchange)
+            text = self._analyze_symbol_text(norm, self.exchange)
             await m.answer(text, parse_mode="Markdown")
         except Exception as e:
             await m.answer(f"Analiz hatası ({norm}): {e}")
@@ -217,6 +271,10 @@ class AlertManager:
                     report += "• İlk sinyaller tamamlandıktan sonra detaylı rapor gelecek\n\n"
                 else:
                     report += perf_report + "\n\n"
+                    
+                # Sinyal geçmişi ekle
+                history = self.performance_tracker.get_signal_history_summary()
+                report += f"📋 **Son Sinyaller**\n{history}\n\n"
             else:
                 report += "� **Performance**\n• Performance tracker başlatılmadı\n\n"
             
@@ -282,52 +340,64 @@ class AlertManager:
         self.sid_counter += 1
         self.signals_store[sid] = {"sig": sig, "ts": time.time()}
         
-        t1, t2, t3 = sig["tps"]
-        
-        # Ek bilgileri hesapla
-        rr1 = ((t1 - sig["entry"]) / max(1e-9, sig["entry"] - sig["sl"])) if sig["side"] == "LONG" else ((sig["entry"] - t1) / max(1e-9, sig["sl"] - sig["entry"]))
-        ex = sig.get("_explain", {})
-        reason_text = self.human_reason_text(sig)
-        htf = ex.get("b1h", "-")
-        
-        # Mesaj başlığı
-        title = f"🔔 {sig['symbol']} • {sig['side']} • {sig.get('regime','-')} • Mode: {config.MODE}"
-        
-        # Seviyeler bölümü
-        levels = (
-            f"• Entry : `{fmt(sig['entry'])}`\n"
-            f"• SL    : `{fmt(sig['sl'])}`\n"
-            f"• TP1   : `{fmt(t1)}`\n"
-            f"• TP2   : `{fmt(t2)}`\n"
-            f"• TP3   : `{fmt(t3)}`"
-        )
-        
-        # Kısa özet
-        quick = f"• 1H Bias: *{htf}*\n• Neden: {reason_text}\n• R (TP1'e): *{rr1:.2f}*"
-        
-        # Notlar
-        notes = (
-            "- *SL (Stop Loss)*: Zarar durdur.\n"
-            "- *TP (Take Profit)*: Kar al seviyeleri.\n"
-            "- *R*: ATR_STOP_MULT × ATR; *1.0R* = SL mesafesi."
-        )
-        
-        # Tam mesaj
-        text = (
-            f"*{title}*\n\n"
-            f"*Özet*\n{quick}\n\n"
-            f"*Seviyeler*\n{levels}\n\n"
-            f"*Notlar*\n{notes}"
-        )
-        
         try:
+            # Girdi kontrolü ve TPS güvenli çıkarım
+            if sig.get("entry") is None or sig.get("sl") is None:
+                log("Sinyal gönderme: entry veya SL eksik")
+                return False
+            t1, t2, t3 = self._normalize_tps(sig)
+            entry = float(sig["entry"])  # rr ve formatlama için
+            sl = float(sig["sl"])        
+            
+            # Ek bilgileri hesapla
+            if sig["side"] == "LONG":
+                rr1 = (t1 - entry) / max(1e-9, entry - sl)
+            else:
+                rr1 = (entry - t1) / max(1e-9, sl - entry)
+            ex = sig.get("_explain", {})
+            reason_text = self.human_reason_text(sig)
+            htf = ex.get("b1h", "-")
+            
+            # Mesaj başlığı
+            title = f"🔔 {sig['symbol']} • {sig['side']} • {sig.get('regime','-')} • Mode: {config.MODE}"
+            
+            # Seviyeler bölümü
+            levels = (
+                f"• Entry : `{fmt(entry)}`\n"
+                f"• SL    : `{fmt(sl)}`\n"
+                f"• TP1   : `{fmt(t1)}`\n"
+                f"• TP2   : `{fmt(t2)}`\n"
+                f"• TP3   : `{fmt(t3)}`"
+            )
+            
+            # Kısa özet
+            quick = f"• 1H Bias: *{htf}*\n• Neden: {reason_text}\n• R (TP1'e): *{rr1:.2f}*"
+            
+            # Notlar
+            notes = (
+                "- *SL (Stop Loss)*: Zarar durdur.\n"
+                "- *TP (Take Profit)*: Kar al seviyeleri.\n"
+                "- *R*: ATR_STOP_MULT × ATR; *1.0R* = SL mesafesi."
+            )
+            
+            # Tam mesaj
+            text = (
+                f"*{title}*\n\n"
+                f"*Özet*\n{quick}\n\n"
+                f"*Seviyeler*\n{levels}\n\n"
+                f"*Notlar*\n{notes}"
+            )
+            
             if self.bot:
                 await self.bot.send_message(chat_id=self.cached_chat_id, text=text, parse_mode="Markdown")
             else:
-                log(f"📱 SIGNAL: {sig['symbol']} {sig['side']} | Entry={sig['entry']:.6f} TP1={sig['tps'][0]:.6f} SL={sig['sl']:.6f}")
+                log(f"📱 SIGNAL: {sig['symbol']} {sig['side']} | Entry={entry:.6f} TP1={t1:.6f} SL={sl:.6f}")
             return True
         except (TelegramBadRequest, TelegramForbiddenError) as e:
             log("Telegram:", e)
+            return False
+        except Exception as e:
+            log(f"Sinyal gönderme hatası: {e}")
             return False
     
     async def send_message(self, text: str, parse_mode: Optional[str] = None) -> bool:

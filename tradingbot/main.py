@@ -79,7 +79,9 @@ async def test_telegram():
     from .alerts import AlertManager
     
     log("Telegram bağlantısı test ediliyor...")
+    exchange = Exchange()
     alert_mgr = AlertManager()
+    alert_mgr.set_exchange(exchange)  # Exchange'i AlertManager'a bağla
     
     try:
         await alert_mgr.send_message("🔌 Bot bağlantı testi başarılı!")

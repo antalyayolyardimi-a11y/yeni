@@ -7,12 +7,12 @@ Strateji modülleri paketi.
 
 from .base import BaseStrategy
 from .trend_range import TrendRangeStrategy
-from .smc import SMCStrategy
+from .smc_v2 import SMCv2Strategy
 from .momentum import MomentumStrategy
 
 __all__ = [
     "BaseStrategy",
     "TrendRangeStrategy", 
-    "SMCStrategy",
+    "SMCv2Strategy",
     "MomentumStrategy"
 ]

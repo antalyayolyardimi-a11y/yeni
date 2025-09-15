@@ -31,8 +31,11 @@ class Scanner:
         """
         self.exchange = Exchange()
         self.alert_manager = AlertManager()
+        self.alert_manager.set_exchange(self.exchange)  # Exchange'i AlertManager'a bağla
         self.signal_validator = SignalValidator(self.exchange)  # Yeni doğrulama sistemi
         self.performance_tracker = PerformanceTracker()  # Performans takip sistemi
+        # İki yönlü bağla: TP/SL bildirimleri için
+        self.performance_tracker.set_alert_manager(self.alert_manager)
         
         # Performance tracker'ı alert manager'a bağla
         self.alert_manager.set_performance_tracker(self.performance_tracker)
@@ -94,8 +97,11 @@ class Scanner:
             self.resolve_open_signals()
             self.state = auto_tune_now(self.state, self.state["signals_history"])
             
-            # Performance tracker güncellemelerini yap
-            self.performance_tracker.update_signal_statuses()
+            # Performance tracker güncellemelerini yap (gerçek zamanlı fiyatla)
+            try:
+                self.performance_tracker.update_all_signals(self.exchange)
+            except Exception as e:
+                log(f"Performance update hatası: {e}")
             
             # Auto-optimization kontrolü
             optimization_result = self.performance_tracker.check_auto_optimization()
@@ -120,17 +126,8 @@ class Scanner:
                 )
                 await self.alert_manager.send_signal(confirmed)
                 
-                # Performance tracker'a sinyali kaydet
-                signal_data = {
-                    "symbol": confirmed["symbol"],
-                    "side": confirmed["side"],
-                    "entry_price": confirmed["entry"],
-                    "take_profit": confirmed["tps"][0],
-                    "stop_loss": confirmed["sl"],
-                    "score": int(confirmed["score"]),
-                    "signal_reason": confirmed["reason"]
-                }
-                self.performance_tracker.add_signal(signal_data)
+                # Performance tracker'a sinyali kaydet (beklenen alan adlarıyla)
+                self.performance_tracker.add_signal(confirmed)
                 
                 # Durum bilgilerini güncelle
                 self.state["last_signal_ts"][confirmed["symbol"]] = time.time()
@@ -180,7 +177,12 @@ class Scanner:
             
             # Tarama süresini hesapla ve logla
             dt_scan = time.time() - t0
-            pending_count = self.signal_validator.get_pending_count()
+            # Bekleyen doğrulama sayısı
+            if hasattr(self.signal_validator, "get_pending_count"):
+                pending_count = self.signal_validator.get_pending_count()
+            else:
+                pending = getattr(self.signal_validator, "pending_signals", {})
+                pending_count = len([p for p in pending.values() if not getattr(p, 'cancelled', False) and not getattr(p, 'confirmed', False)])
             log(f"♻️ Tarama tamam ({dt_scan:.1f}s). Havuza eklenen: {sent}. Bekleyen doğrulama: {pending_count}. DynMinScore={self.state['dyn_MIN_SCORE']} | Mode={self.state['MODE']}")
             
             # Adaptif gevşetme (sinyal yoksa geçici yumuşatma)

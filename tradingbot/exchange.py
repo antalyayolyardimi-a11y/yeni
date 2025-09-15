@@ -6,17 +6,18 @@ Borsa iletişimi ve işlemleri.
 """
 
 import time
+import ccxt
 from typing import Dict, List, Optional, Set, Tuple, Union, Any
-from kucoin.client import Market
 
 from . import config
 from .utils import log, to_df_klines
 
 class Exchange:
     def __init__(self):
-        """KuCoin API client'ını başlat"""
-        self.market_client = Market(url="https://api.kucoin.com")
-        self.client = self.market_client  # Geriye uyumluluk için alias
+        """CCXT KuCoin client'ını başlat"""
+        self.client = ccxt.kucoin({
+            'enableRateLimit': True,
+        })
         self._symbols_set = None
     
     def _load_symbols_set(self):
@@ -24,8 +25,8 @@ class Exchange:
         if self._symbols_set is not None:
             return
         try:
-            symbols = self._api_call_with_retry(self.client.get_symbol_list)
-            self._symbols_set = {sym.get("symbol", "") for sym in symbols or []}
+            markets = self._api_call_with_retry(self.client.load_markets)
+            self._symbols_set = set(self.client.symbols) if self.client.symbols else set()
         except Exception as e:
             log(f"Sembol listesi yüklenirken hata: {e}")
             self._symbols_set = set()
@@ -105,6 +106,20 @@ class Exchange:
                 
         return None
     
+    def _convert_interval_to_ccxt(self, interval: str) -> str:
+        """KuCoin interval formatını CCXT formatına dönüştür"""
+        mapping = {
+            "1min": "1m",
+            "5min": "5m", 
+            "15min": "15m",
+            "30min": "30m",
+            "1hour": "1h",
+            "4hour": "4h",
+            "1day": "1d",
+            "1week": "1w"
+        }
+        return mapping.get(interval, interval)
+        
     def get_ohlcv(self, symbol: str, interval: str, limit: int):
         """
         Belirtilen sembolün mum verilerini al.
@@ -118,11 +133,12 @@ class Exchange:
             pd.DataFrame veya None: OHLCV verileri içeren DataFrame veya hata durumunda None
         """
         try:
-            raw = self._api_call_with_retry(self.client.get_kline, symbol, interval, limit=limit)
+            ccxt_interval = self._convert_interval_to_ccxt(interval)
+            raw = self._api_call_with_retry(self.client.fetch_ohlcv, symbol, ccxt_interval, limit=limit)
             return to_df_klines(raw)
         except Exception as e:
             msg = str(e)
-            if "Unsupported trading pair" in msg or '"code":"400100"' in msg:
+            if "does not exist" in msg or "not found" in msg:
                 log(f"❗ Desteklenmeyen parite: {symbol} (KuCoin formatı 'BASE-QUOTE' olmalı, örn. WIF-USDT)")
             else:
                 log(f"{symbol} {interval} veri hatası:", e)
@@ -136,35 +152,40 @@ class Exchange:
             List[str]: Hacim koşulunu sağlayan semboller listesi
         """
         try:
-            syms = self._api_call_with_retry(self.client.get_symbol_list)
+            # Markets'ı yükle
+            markets = self._api_call_with_retry(self.client.load_markets)
+            
+            # USDT çiftlerini filtrele
+            symbols = self.client.symbols or []
+            usdt_pairs = [symbol for symbol in symbols 
+                         if symbol.endswith('/USDT')]
+            
+            # 24h ticker verilerini al
+            tickers = self._api_call_with_retry(self.client.fetch_tickers) or {}
+            
+            # Hacim filtrelemesi (USDT cinsinden)
+            filtered = []
+            for symbol in usdt_pairs:
+                ticker = tickers.get(symbol, {})
+                quote_volume = ticker.get('quoteVolume', 0.0) or 0.0
+                if quote_volume >= config.MIN_VOLVALUE_USDT:
+                    # CCXT formatından KuCoin formatına dönüştür (BTC/USDT -> BTC-USDT)
+                    kucoin_symbol = symbol.replace('/', '-')
+                    filtered.append(kucoin_symbol)
+            
+            if not filtered:
+                # Fallback - tüm USDT çiftleri
+                filtered = [symbol.replace('/', '-') for symbol in usdt_pairs[:50]]
+            
+            return filtered
+            
         except Exception as e:
-            log(f"Sembol listesi alınamadı: {e}")
-            return []
-            
-        if syms is None:
-            return []
-        pairs = [s["symbol"] for s in syms if s.get("quoteCurrency") == "USDT"]
-        
-        try:
-            tickers_response = self._api_call_with_retry(self.client.get_all_tickers)
-        except Exception as e:
-            log(f"Ticker verileri alınamadı: {e}")
-            return pairs[:50]  # Default fallback
-            
-        if tickers_response is None:
-            return pairs[:50]  # Default fallback
-        tickers = tickers_response.get("ticker", [])
-        volmap = {t.get("symbol"): float(t.get("volValue", 0.0)) for t in tickers}
-        
-        filt = [s for s in pairs if volmap.get(s, 0.0) >= config.MIN_VOLVALUE_USDT]
-        if not filt:
-            filt = pairs
-            
-        return filt
+            log(f"Filtered symbols hatası: {e}")
+            return ["BTC-USDT", "ETH-USDT", "SOL-USDT"]  # Safe fallback
     
-    def build_vol_pct_cache(self, symbols: List[str]) -> Dict[str, float]:
+    def get_volume_percentiles(self, symbols: List[str]) -> Dict[str, float]:
         """
-        Semboller için hacim yüzdelik oranlarını hesapla.
+        Sembollerin hacim yüzdeliklerini hesapla.
         
         Args:
             symbols: Semboller listesi
@@ -173,15 +194,18 @@ class Exchange:
             Dict: {sembol: hacim_yüzdelik} eşleşmesi
         """
         try:
-            tickers_response = self._api_call_with_retry(self.client.get_all_tickers)
+            # 24h ticker verilerini al
+            tickers = self._api_call_with_retry(self.client.fetch_tickers) or {}
         except Exception as e:
             log(f"Ticker verileri alınamadı: {e}")
             return {sym: 0.0 for sym in symbols}
-            
-        if tickers_response is None:
-            return {s: 0.0 for s in symbols}
-        tickers = tickers_response.get("ticker", [])
-        volmap = {t.get("symbol"): float(t.get("volValue", 0.0)) for t in tickers}
+        
+        # KuCoin formatından CCXT formatına dönüştür ve hacim map'i oluştur
+        volmap = {}
+        for symbol in symbols:
+            ccxt_symbol = symbol.replace('-', '/')  # BTC-USDT -> BTC/USDT
+            ticker = tickers.get(ccxt_symbol, {})
+            volmap[symbol] = ticker.get('quoteVolume', 0.0) or 0.0
         
         vals = [volmap.get(s, 0.0) for s in symbols]
         if not vals:
@@ -197,3 +221,16 @@ class Exchange:
             cache[s] = rank / n
             
         return cache
+    
+    def build_vol_pct_cache(self, symbols: List[str]) -> Dict[str, float]:
+        """
+        Sembol listesi için hacim percentile cache'i oluştur.
+        Geriye uyumluluk için get_volume_percentiles'a yönlendir.
+        
+        Args:
+            symbols: Semboller listesi
+            
+        Returns:
+            Dict: {sembol: hacim_yüzdelik} eşleşmesi
+        """
+        return self.get_volume_percentiles(symbols)

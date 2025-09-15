@@ -19,8 +19,8 @@ SCAN_LIMIT = 1000  # Yüksek limit, pratikte tüm sembolleri tarar
 # Çalışma modu ve ayarlar
 MODE = "aggressive"
 MIN_VOLVALUE_USDT = 2_000_000
-BASE_MIN_SCORE = 52  # Colab versiyonu ile eşitlendi
-FALLBACK_MIN_SCORE = 50  # Düşürüldü (62'den 50'ye)
+BASE_MIN_SCORE = 42  # SMC V2 için çok daha makul
+FALLBACK_MIN_SCORE = 45  # Daha düşük fallback
 TOP_N_PER_SCAN = 3  # Artırıldı (2'den 3'e)
 COOLDOWN_SEC = 1800
 OPPOSITE_MIN_BARS = 2
@@ -48,6 +48,16 @@ BOS_EPS = 0.0005
 FVG_LOOKBACK = 20
 OTE_LOW, OTE_HIGH = 0.62, 0.79
 SMC_REQUIRE_FVG = True
+
+# SMC V2 (Smart Money Concepts) - 15M İçin GEVŞEK ama KALİTELİ
+SMC_STRUCTURE_LOOKBACK = 30  # Daha kısa lookback (7.5 saat)
+SMC_MIN_STRUCTURE_POINTS = 2  # Sadece 2 swing point yeterli
+SMC_LIQUIDITY_BUFFER = 0.003  # %0.3 gevşek buffer 
+SMC_RETEST_CANDLES = 5  # Daha uzun retest süresi (1.25 saat)
+SMC_CONFIRMATION_STRENGTH = 0.45  # Daha gevşek onay mumu
+SMC_OTE_RETEST_MIN = 0.3  # 30% minimum retest (gevşek)
+SMC_OTE_RETEST_MAX = 0.85  # 85% maximum retest (çok gevşek)
+SMC_VOLUME_FACTOR = 1.05  # Minimal volume gerekli
 
 ATR_PERIOD = 14
 SWING_WIN = 10
@@ -136,12 +146,14 @@ PENALTY_DECAY = 2
 
 # Sinyal doğrulama sistemi
 SIGNAL_VALIDATION_ENABLED = True
-VALIDATION_TIMEOUT_SEC = 1200  # 20 dakika
-VALIDATION_MIN_BARS = 3  # Minimum 3 mum analizi
+VALIDATION_TIMEOUT_SEC = 600   # 10 dakika
+VALIDATION_MIN_BARS = 2        # Minimum 2 mum analizi
 VALIDATION_BODY_STRENGTH_MIN = 0.60  # Güçlü mum kriteri
-VALIDATION_VOLUME_MULTIPLIER = 1.1  # Hacim çarpanı
-VALIDATION_RSI_OVERBOUGHT = 75  # RSI aşırı alım
-VALIDATION_RSI_OVERSOLD = 25   # RSI aşırı satım
+VALIDATION_VOLUME_MULTIPLIER = 1.1   # Hacim çarpanı
+VALIDATION_RSI_OVERBOUGHT = 75       # RSI aşırı alım
+VALIDATION_RSI_OVERSOLD = 25         # RSI aşırı satım
+# Ek filtre: 2 mum için ATR-normalize momentum eşiği (|Δclose|/ATR5 ≥ eşik)
+VALIDATION_ATR_MOVE_MIN = 0.25  # aggressive: 0.20, balanced: 0.25, conservative: 0.30 öneri
 
 # AI ayarları
 AI_ENABLED = True
