@@ -32,7 +32,7 @@ class AIOptimizer:
         # Optimizable parameters with their safe ranges
         self.optimizable_params = {
             'ATR_STOP_MULT': (1.0, 3.0, 'float'),
-            'BASE_MIN_SCORE': (30, 60, 'int'),
+            'BASE_MIN_SCORE': (35, 65, 'int'),  # ✅ DÜZELTİLDİ: Mevcut değer (42) uyumlu range
             'TOP_N_PER_SCAN': (1, 5, 'int'),
             'VALIDATION_TIMEOUT_SEC': (300, 1800, 'int'),
             'MIN_VOLVALUE_USDT': (1000000, 5000000, 'int'),

@@ -39,7 +39,7 @@ class SMCStrategy(BaseStrategy):
         Returns:
             Dict veya None: Sinyal veya sinyal yoksa None
         """
-        bias = htf_bias_only(df1h)
+        bias = self._get_htf_bias_simple(df1h)  # ✅ DÜZELTİLDİ: Undefined function düzeltildi
 
         o, c, h, l, v = df15["o"], df15["c"], df15["h"], df15["l"], df15["v"]
         atrv = float(atr_wilder(h, l, c, config.ATR_PERIOD).iloc[-1])
@@ -48,6 +48,21 @@ class SMCStrategy(BaseStrategy):
         
         if len(sh_idx) < 2 and len(sl_idx) < 2:
             return None
+
+    def _get_htf_bias_simple(self, df1h: pd.DataFrame) -> str:
+        """
+        ✅ DÜZELTİLDİ: Basit HTF bias hesaplama fonksiyonu eklendi
+        """
+        if len(df1h) < 20:
+            return "LONG"  # Default
+            
+        close = df1h["c"]
+        ema20 = ema(close, 20)
+        
+        if close.iloc[-1] > ema20.iloc[-1]:
+            return "LONG"
+        else:
+            return "SHORT"
             
         last_close = c.iloc[-1]
         

@@ -123,8 +123,9 @@ class TrendRangeStrategy(BaseStrategy):
             
             bs_last = float(body_strength(o, c, h, l).iloc[-1])
             
-            VOL_MULT_REQ = config.VOL_MULT_REQ_GLOBAL
-            vol_ok = float(v.iloc[-1]) > float(v.rolling(20).mean().iloc[-1]) * VOL_MULT_REQ
+            # ✅ DÜZELTİLDİ: Volume çarpanı belirsizliği düzeltildi
+            vol_mult = getattr(config, 'VOL_MULT_REQ_GLOBAL', 1.40)  # Config'den al, yoksa default
+            vol_ok = float(v.iloc[-1]) > float(v.rolling(20).mean().iloc[-1]) * vol_mult
             RSI_LONG_TH = 36
             RSI_SHORT_TH = 64
             bs_last_req = 0.62

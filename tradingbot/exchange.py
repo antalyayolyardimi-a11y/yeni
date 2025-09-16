@@ -38,7 +38,7 @@ class Exchange:
     def _retry_request(self, func, *args, **kwargs):
         """API isteğini retry logic ile gerçekleştir"""
         max_retries = 3
-        retry_delays = [5, 15, 30]  # Her denemede daha uzun bekle
+        retry_delays = getattr(config, 'DEFAULT_RETRY_DELAYS', [5, 15, 30])  # ✅ DÜZELTİLDİ: Magic number config'den
         
         for attempt in range(max_retries):
             try:

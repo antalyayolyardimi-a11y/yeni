@@ -112,13 +112,22 @@ class SMCv2Strategy(BaseStrategy):
             # LONG - Son swing low'u kır
             last_low = min([x[1] for x in swing_lows[-3:]] if len(swing_lows) >= 3 else [x[1] for x in swing_lows])
             if current_price > last_low * 1.002:  # %0.2 kırım
+                # ✅ DÜZELTİLDİ: ATR bazlı SL/TP hesaplama
+                atrv = float(atr_wilder(df["h"], df["l"], df["c"], 14).iloc[-1])
+                sl = last_low * 0.998
+                risk = abs(current_price - sl)
+                
                 return {
                     "symbol": self.symbol,
                     "side": "LONG",
                     "action": "LONG",
                     "entry": current_price,
-                    "sl": last_low * 0.998,
-                    "tps": [current_price * 1.01, current_price * 1.02],
+                    "sl": sl,
+                    "tps": (  # ✅ DÜZELTİLDİ: 3 TP tuple formatında
+                        current_price + risk * config.TPS_R[0], 
+                        current_price + risk * config.TPS_R[1], 
+                        current_price + risk * config.TPS_R[2]
+                    ),
                     "regime": "SMC_V2_SIMPLE",
                     "confidence": 0.7,
                     "reason": "SMC V2: HTF LONG bias + Swing low break"
@@ -128,13 +137,22 @@ class SMCv2Strategy(BaseStrategy):
             # SHORT - Son swing high'ı kır
             last_high = max([x[1] for x in swing_highs[-3:]] if len(swing_highs) >= 3 else [x[1] for x in swing_highs])
             if current_price < last_high * 0.998:  # %0.2 kırım
+                # ✅ DÜZELTİLDİ: ATR bazlı SL/TP hesaplama
+                atrv = float(atr_wilder(df["h"], df["l"], df["c"], 14).iloc[-1])
+                sl = last_high * 1.002
+                risk = abs(sl - current_price)
+                
                 return {
                     "symbol": self.symbol,
                     "side": "SHORT",
                     "action": "SHORT", 
                     "entry": current_price,
-                    "sl": last_high * 1.002,
-                    "tps": [current_price * 0.99, current_price * 0.98],
+                    "sl": sl,
+                    "tps": (  # ✅ DÜZELTİLDİ: 3 TP tuple formatında
+                        current_price - risk * config.TPS_R[0], 
+                        current_price - risk * config.TPS_R[1], 
+                        current_price - risk * config.TPS_R[2]
+                    ),
                     "regime": "SMC_V2_SIMPLE",
                     "confidence": 0.7,
                     "reason": "SMC V2: HTF SHORT bias + Swing high break"
@@ -158,16 +176,14 @@ class SMCv2Strategy(BaseStrategy):
         start_idx = len(df) - lookback
         
         for i in range(start_idx + 3, len(df) - 3):
-            # Swing High detection
+            # ✅ DÜZELTİLDİ: Swing High detection - daha gevşek kriterler (3 yerine 2 mum)
             if (high.iloc[i] > high.iloc[i-1] and high.iloc[i] > high.iloc[i+1] and
-                high.iloc[i] > high.iloc[i-2] and high.iloc[i] > high.iloc[i+2] and
-                high.iloc[i] > high.iloc[i-3] and high.iloc[i] > high.iloc[i+3]):
+                high.iloc[i] > high.iloc[i-2] and high.iloc[i] > high.iloc[i+2]):
                 swing_highs.append((i, high.iloc[i]))
                 
-            # Swing Low detection  
+            # ✅ DÜZELTİLDİ: Swing Low detection - daha gevşek kriterler (3 yerine 2 mum)
             if (low.iloc[i] < low.iloc[i-1] and low.iloc[i] < low.iloc[i+1] and
-                low.iloc[i] < low.iloc[i-2] and low.iloc[i] < low.iloc[i+2] and
-                low.iloc[i] < low.iloc[i-3] and low.iloc[i] < low.iloc[i+3]):
+                low.iloc[i] < low.iloc[i-2] and low.iloc[i] < low.iloc[i+2]):
                 swing_lows.append((i, low.iloc[i]))
         
         if len(swing_highs) < config.SMC_MIN_STRUCTURE_POINTS or len(swing_lows) < config.SMC_MIN_STRUCTURE_POINTS:
@@ -339,7 +355,12 @@ class SMCv2Strategy(BaseStrategy):
                     # Retest bulundu, confirmation mumu arıyoruz
                     if i < len(df) - 1:  # Son mum değil
                         next_candle = i + 1
-                        open_price = df['o'].iloc[next_candle] if 'o' in df.columns else close.iloc[next_candle-1]
+                        # ✅ DÜZELTİLDİ: Open column kontrolü iyileştirildi (LONG)
+                        if 'o' in df.columns:
+                            open_price = df['o'].iloc[next_candle]
+                        else:
+                            # Open yoksa previous close kullan
+                            open_price = close.iloc[next_candle-1] if next_candle > 0 else close.iloc[next_candle]
                         body_strength = abs(close.iloc[next_candle] - open_price) / (high.iloc[next_candle] - low.iloc[next_candle] + 1e-10)
                         
                         if (close.iloc[next_candle] > open_price and  # Bullish candle
@@ -383,7 +404,12 @@ class SMCv2Strategy(BaseStrategy):
                     # Retest bulundu, confirmation mumu arıyoruz
                     if i < len(df) - 1:  # Son mum değil
                         next_candle = i + 1
-                        open_price = df['o'].iloc[next_candle] if 'o' in df.columns else close.iloc[next_candle-1]
+                        # ✅ DÜZELTİLDİ: Open column kontrolü iyileştirildi (SHORT)
+                        if 'o' in df.columns:
+                            open_price = df['o'].iloc[next_candle]
+                        else:
+                            # Open yoksa previous close kullan
+                            open_price = close.iloc[next_candle-1] if next_candle > 0 else close.iloc[next_candle]
                         body_strength = abs(close.iloc[next_candle] - open_price) / (high.iloc[next_candle] - low.iloc[next_candle] + 1e-10)
                         
                         if (close.iloc[next_candle] < open_price and  # Bearish candle

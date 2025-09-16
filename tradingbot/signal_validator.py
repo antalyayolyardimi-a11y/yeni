@@ -110,7 +110,8 @@ class SignalValidator:
                 continue
                 
             # Timeout kontrolü (config)
-            if time.time() - pending.created_at > max(300, getattr(config, 'VALIDATION_TIMEOUT_SEC', 1200)):
+            timeout_sec = getattr(config, 'VALIDATION_TIMEOUT_SEC', 720)  # ✅ DÜZELTİLDİ: Config default uyumlu
+            if time.time() - pending.created_at > max(config.MIN_TIMEOUT_SEC, timeout_sec):  # ✅ DÜZELTİLDİ: Magic number kaldırıldı
                 pending.cancelled = True
                 symbols_to_remove.append(symbol)
                 log(f"⏰ {symbol} sinyali zaman aşımı nedeniyle iptal edildi")

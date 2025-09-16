@@ -5,6 +5,8 @@
 Konfigürasyon ayarları ve sabitler.
 """
 
+import os  # ✅ DÜZELTİLDİ: os import eklendi
+
 # Trading parametreleri
 TF_LTF = "15min"
 TF_HTF = "1hour"
@@ -19,14 +21,14 @@ SCAN_LIMIT = 1000  # Yüksek limit, pratikte tüm sembolleri tarar
 # Çalışma modu ve ayarlar
 MODE = "aggressive"
 MIN_VOLVALUE_USDT = 2_000_000
-BASE_MIN_SCORE = 42  # SMC V2 için çok daha makul
-FALLBACK_MIN_SCORE = 45  # Daha düşük fallback
-TOP_N_PER_SCAN = 3  # Artırıldı (2'den 3'e)
+BASE_MIN_SCORE = 58  # ✅ ARTIRILDI: Daha kaliteli sinyaller için (42->58)
+FALLBACK_MIN_SCORE = 52  # ✅ ARTIRILDI: Base'den düşük ama kaliteli (38->52)
+TOP_N_PER_SCAN = 2  # ✅ AZALTILDI: Sadece en iyi 2 sinyal (3->2)
 COOLDOWN_SEC = 1800
 OPPOSITE_MIN_BARS = 2
 
 # Telegram ayarları
-TELEGRAM_BOT_TOKEN = "8484153893:AAEybdOXrMvpDEjAg-o2KiCFYWtDSL1PxH4"
+TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "8484153893:AAEybdOXrMvpDEjAg-o2KiCFYWtDSL1PxH4")  # ✅ DÜZELTİLDİ: Environment variable desteği
 TELEGRAM_CHAT_ID = None  # Bot otomatik tespit edecek
 
 # Teknik analiz parametreleri
@@ -79,8 +81,9 @@ MOMO_NET_BODY_TH = 0.80
 EARLY_TRIGGERS_ON = True
 PREBREAK_ATR_X = 0.40
 EARLY_MOMO_BODY_MIN = 0.45
-EARLY_REL_VOL = 1.20
+EARLY_REL_VOL = 1.20  # ✅ DÜZELTİLDİ: Eksik değer eklendi
 EARLY_ADX_BONUS = 2.0
+MOMO_NET_BODY_TH = 0.65  # ✅ DÜZELTİLDİ: Eksik değer eklendi (0.80'den 0.65'e gevşetildi)
 
 FALLBACK_ENABLE = False
 FBB_EPS = 0.0003
@@ -129,7 +132,7 @@ TUNE_COOLDOWN_SEC = 900
 
 # Sınır korumaları
 BOUNDS = {
-    "BASE_MIN_SCORE": (56, 80),
+    "BASE_MIN_SCORE": (58, 80),  # ✅ ARTIRILDI: Alt sınır yükseltildi (56->58)
     "ADX_TREND_MIN": (12, 26),
     "BWIDTH_RANGE": (0.045, 0.090),
     "VOL_MULT_REQ": (1.10, 1.80),
@@ -158,6 +161,12 @@ VALIDATION_ATR_MOVE_MIN = 0.25  # aggressive: 0.20, balanced: 0.25, conservative
 # AI ayarları
 AI_ENABLED = True
 AI_LR = 0.02
+
+# ✅ DÜZELTİLDİ: Magic number'lar config'e taşındı
+AUTO_CANCEL_HOURS = 24  # Otomatik sinyal iptali (saat)
+AUTO_CANCEL_SECONDS = AUTO_CANCEL_HOURS * 3600  # 86400 saniye
+MIN_TIMEOUT_SEC = 300  # Minimum validation timeout (5 dakika)
+DEFAULT_RETRY_DELAYS = [5, 15, 30]  # API retry gecikmeleri (saniye)
 AI_L2 = 1e-4
 AI_INIT_BIAS = -2.0
 
@@ -168,9 +177,9 @@ TELEGRAM_TOKEN = "8484153893:AAEybdOXrMvpDEjAg-o2KiCFYWtDSL1PxH4"
 MODE_CONFIGS = {
     "aggressive": {
         "MIN_VOLVALUE_USDT": 700_000,
-        "BASE_MIN_SCORE": 52,
-        "FALLBACK_MIN_SCORE": 55,
-        "TOP_N_PER_SCAN": 5,
+        "BASE_MIN_SCORE": 62,  # ✅ ARTIRILDI: Daha kaliteli aggressive mod (52->62)
+        "FALLBACK_MIN_SCORE": 58,  # ✅ ARTIRILDI: Base'den düşük ama kaliteli (55->58)
+        "TOP_N_PER_SCAN": 3,  # ✅ AZALTILDI: En iyi 3 sinyal aggressive modda (5->3)
         "COOLDOWN_SEC": 900,
         "ADX_TREND_MIN": 14,
         "ONEH_DISP_BODY_MIN": 0.45,

@@ -417,10 +417,22 @@ class AlertManager:
             
         try:
             if self.bot:
-                await self.bot.send_message(chat_id=self.cached_chat_id, text=text, parse_mode=parse_mode)
+                # ✅ DÜZELTİLDİ: DNS hatası için retry mekanizması
+                for attempt in range(3):
+                    try:
+                        await self.bot.send_message(chat_id=self.cached_chat_id, text=text, parse_mode=parse_mode)
+                        return True
+                    except Exception as e:
+                        log(f"Telegram deneme {attempt+1}/3 hatası: {e}")
+                        if attempt < 2:
+                            import asyncio
+                            await asyncio.sleep(2 * (attempt + 1))
+                        else:
+                            log("⚠️ Telegram gönderim başarısız - DNS/Network sorunu")
+                            return False
             else:
                 log(f"📱 MESSAGE: {text}")
-            return True
+                return True
         except (TelegramBadRequest, TelegramForbiddenError) as e:
             log("Telegram:", e)
             return False

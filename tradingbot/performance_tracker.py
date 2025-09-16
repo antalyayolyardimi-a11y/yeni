@@ -228,7 +228,7 @@ class PerformanceTracker:
                 close_price = record.tp1
         
         # Auto-cancel çok eski sinyaller (24 saat)
-        if time.time() - record.created_at > 86400:
+        if time.time() - record.created_at > config.AUTO_CANCEL_SECONDS:  # ✅ DÜZELTİLDİ: Magic number config'den alınıyor
             new_status = "CANCELLED"
             close_price = current_price
         
