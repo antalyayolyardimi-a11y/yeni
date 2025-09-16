@@ -267,22 +267,22 @@ class AlertManager:
             if self.performance_tracker:
                 perf_report = self.performance_tracker.get_status_report()
                 if "Toplam Sinyal: `0`" in perf_report:
-                    report += "📈 **Performance**\n• Henüz tamamlanmış sinyal yok\n"
+                    report += "📈 *Performance*\n• Henüz tamamlanmış sinyal yok\n"
                     report += "• İlk sinyaller tamamlandıktan sonra detaylı rapor gelecek\n\n"
                 else:
                     report += perf_report + "\n\n"
                     
                 # Sinyal geçmişi ekle
                 history = self.performance_tracker.get_signal_history_summary()
-                report += f"📋 **Son Sinyaller**\n{history}\n\n"
+                report += f"📋 *Son Sinyaller*\n{history}\n\n"
             else:
-                report += "� **Performance**\n• Performance tracker başlatılmadı\n\n"
+                report += "📈 *Performance*\n• Performance tracker başlatılmadı\n\n"
             
             # Sistem durumu
             import time
             from datetime import datetime
             now = datetime.now()
-            report += f"⏰ **Sistem**\n"
+            report += f"⏰ *Sistem*\n"
             report += f"• Zaman: `{now.strftime('%H:%M:%S')}`\n"
             report += f"• Durum: `Aktif ve taranıyor`\n"
             

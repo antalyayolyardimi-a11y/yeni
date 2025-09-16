@@ -21,8 +21,8 @@ SCAN_LIMIT = 1000  # Yüksek limit, pratikte tüm sembolleri tarar
 # Çalışma modu ve ayarlar
 MODE = "aggressive"
 MIN_VOLVALUE_USDT = 2_000_000
-BASE_MIN_SCORE = 58  # ✅ ARTIRILDI: Daha kaliteli sinyaller için (42->58)
-FALLBACK_MIN_SCORE = 52  # ✅ ARTIRILDI: Base'den düşük ama kaliteli (38->52)
+BASE_MIN_SCORE = 75  # ✅ ARTIRILDI: Daha kaliteli sinyaller için (58->75)
+FALLBACK_MIN_SCORE = 68  # ✅ ARTIRILDI: Base'den düşük ama kaliteli (52->68)
 TOP_N_PER_SCAN = 2  # ✅ AZALTILDI: Sadece en iyi 2 sinyal (3->2)
 COOLDOWN_SEC = 1800
 OPPOSITE_MIN_BARS = 2
@@ -32,7 +32,7 @@ TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "8484153893:AAEybdOXrM
 TELEGRAM_CHAT_ID = None  # Bot otomatik tespit edecek
 
 # Teknik analiz parametreleri
-ADX_TREND_MIN = 18
+ADX_TREND_MIN = 22
 ONEH_DISP_BODY_MIN = 0.55
 ONEH_DISP_LOOKBACK = 2
 
@@ -69,7 +69,7 @@ TPS_R = (1.0, 1.6, 2.2)
 
 # ATR+R risk ayarları
 USE_ATR_R_RISK = True
-ATR_STOP_MULT = 1.2
+ATR_STOP_MULT = 1.5
 
 # Momentum onay ayarları
 MOMO_CONFIRM_MODE = "2of3"
@@ -96,8 +96,8 @@ ADAPT_WINDOW = 60
 ADAPT_UP_THRESH = 0.55
 ADAPT_DN_THRESH = 0.35
 ADAPT_STEP = 2
-MIN_SCORE_FLOOR = 58
-MIN_SCORE_CEIL = 78
+MIN_SCORE_FLOOR = 75
+MIN_SCORE_CEIL = 85
 
 PRINT_PREFIX = "📟"
 
